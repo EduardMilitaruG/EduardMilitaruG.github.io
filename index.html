@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -505,6 +505,27 @@
       }
     }
 
+    /* Language Toggle */
+    .lang-toggle {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      padding: 0.375rem 0.75rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: 'Inter', sans-serif;
+      letter-spacing: 0.05em;
+      flex-shrink: 0;
+    }
+
+    .lang-toggle:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
     /* Topographic Background */
     #topographic-canvas {
       position: fixed;
@@ -524,10 +545,11 @@
     <div class="header-content">
       <a href="#" class="logo">Eduard.dev</a>
       <nav id="nav">
-        <a href="#projects">Proyectos</a>
-        <a href="#about">Sobre mi</a>
-        <a href="#contact">Contacto</a>
+        <a href="#projects" data-i18n="nav.projects">Projects</a>
+        <a href="#about" data-i18n="nav.about">About</a>
+        <a href="#contact" data-i18n="nav.contact">Contact</a>
       </nav>
+      <button class="lang-toggle" onclick="toggleLang()" aria-label="Toggle language"><span id="lang-label">ES</span></button>
       <button class="mobile-menu-btn" onclick="toggleMenu()" aria-label="Menu">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <line x1="3" y1="12" x2="21" y2="12"></line>
@@ -542,15 +564,15 @@
     <div class="hero-content">
       <h1>Gheorghe Eduard Militaru</h1>
       <p class="subtitle">QA Engineer & Frontend Developer</p>
-      <p>Automatización de pruebas con Playwright y Cypress. Interfaces modernas con React y TypeScript. 2+ años entregando software de calidad en producción.</p>
+      <p data-i18n="hero.description">Test automation with Playwright and Cypress. Modern interfaces with React and TypeScript. 2+ years delivering quality software in production.</p>
       <div class="hero-buttons">
         <a href="#projects" class="btn btn-primary">
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"></path><polygon points="18 2 22 6 12 16 8 16 8 12 18 2"></polygon></svg>
-          Ver proyectos
+          <span data-i18n="hero.cta.projects">View projects</span>
         </a>
         <a href="#contact" class="btn btn-secondary">
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-          Contactar
+          <span data-i18n="hero.cta.contact">Contact</span>
         </a>
       </div>
     </div>
@@ -562,14 +584,14 @@
   </section>
 
     <section id="projects" class="fade-in">
-    <h2 class="section-title">Proyectos</h2>
-    <p class="section-subtitle">Una selección de proyectos personales y profesionales que muestran mis habilidades técnicas.</p>
+    <h2 class="section-title" data-i18n="projects.title">Projects</h2>
+    <p class="section-subtitle" data-i18n="projects.subtitle">A selection of personal and professional projects showcasing my technical skills.</p>
 
     <div class="projects-grid">
       <div class="project-card">
         <div class="project-content">
           <h3>JobFy v2</h3>
-          <p>Full-stack job scraper dashboard. Monorepo TypeScript con React 19, Node.js, PostgreSQL y Prisma. Scraping asíncrono multi-fuente, polling en tiempo real, stats dashboard y CI/CD con GitHub Actions.</p>
+          <p data-i18n="project.jobfy2.desc">Full-stack job scraper dashboard. TypeScript monorepo with React 19, Node.js, PostgreSQL and Prisma. Async multi-source scraping, real-time status polling, stats dashboard and CI/CD pipeline with GitHub Actions.</p>
           <div class="tech-stack">
             <span class="tech-badge">React 19</span>
             <span class="tech-badge">TypeScript</span>
@@ -591,7 +613,7 @@
       <div class="project-card">
         <div class="project-content">
           <h3>JobFy Test Suite</h3>
-          <p>Suite de automatización QA standalone para JobFy v2. 204 tests con Playwright E2E (4 navegadores), Jest unitarios y Supertest de integración. Cubre contratos API, flujos UI, diseño responsive y manejo de errores.</p>
+          <p data-i18n="project.testSuite.desc">Standalone QA automation suite for JobFy v2. 204 tests across Playwright E2E (4 browsers), Jest unit tests and Supertest integration tests. Covers API contracts, UI flows, responsive design and error handling.</p>
           <div class="tech-stack">
             <span class="tech-badge">Playwright</span>
             <span class="tech-badge">Jest</span>
@@ -614,7 +636,7 @@
         </div>
         <div class="project-content">
           <h3>FinByt</h3>
-          <p>Dashboard full-stack para gestionar inversiones en criptomonedas, acciones y ETFs con precios en tiempo real de CoinGecko. CRUD completo, gráficos P/L interactivos. TypeScript end-to-end.</p>
+          <p data-i18n="project.finbyt.desc">Full-stack investment dashboard for managing crypto, stocks and ETFs with live CoinGecko prices. Full CRUD, interactive P/L charts. TypeScript end-to-end.</p>
           <div class="tech-stack">
             <span class="tech-badge">React</span>
             <span class="tech-badge">TypeScript</span>
@@ -635,7 +657,7 @@
       <div class="project-card">
         <div class="project-content">
           <h3>Archive Scout</h3>
-          <p>Bot de automatización Python que monitoriza marketplaces japoneses de segunda mano (Yahoo Auctions vía ZenMarket) en busca de moda de archivo infravalorada. Motor de scoring de deals, bypass de Cloudflare y alertas en tiempo real por Telegram y Discord.</p>
+          <p data-i18n="project.archiveScout.desc">Python automation bot monitoring Japanese secondhand marketplaces (Yahoo Auctions via ZenMarket) for underpriced archive fashion. Deal scoring engine, Cloudflare bypass and real-time Telegram & Discord alerts.</p>
           <div class="tech-stack">
             <span class="tech-badge">Python</span>
             <span class="tech-badge">AsyncIO</span>
@@ -656,7 +678,7 @@
       <div class="project-card">
         <div class="project-content">
           <h3>Fitness Tracker</h3>
-          <p>PWA mobile-first para seguimiento de fitness. Registro de entrenamientos, nutrición y macros, ingesta de agua, gráficos de progreso y recordatorios de creatina. Funciona offline.</p>
+          <p data-i18n="project.fitnessTracker.desc">Mobile-first PWA for fitness tracking. Workout logging, nutrition and macro tracking, water intake, progress charts and creatine reminders. Works offline.</p>
           <div class="tech-stack">
             <span class="tech-badge">React</span>
             <span class="tech-badge">TypeScript</span>
@@ -676,18 +698,18 @@
   </section>
 
     <section id="about" class="fade-in">
-    <h2 class="section-title">Sobre mi</h2>
-    <p class="section-subtitle">QA Engineer y Frontend Developer con pasión por la calidad del software y las interfaces bien construidas.</p>
+    <h2 class="section-title" data-i18n="about.title">About</h2>
+    <p class="section-subtitle" data-i18n="about.subtitle">QA Engineer and Frontend Developer passionate about software quality and well-crafted interfaces.</p>
 
     <div class="about-content">
       <div class="about-text">
-        <p>Soy QA Engineer y Frontend Developer con 2+ años de experiencia entregando software de calidad en producción.</p>
-        <p>Especializado en automatización de pruebas con Playwright y Cypress, y en construir interfaces modernas con React y TypeScript.</p>
-        <p>Disponible en Valencia, Madrid o en remoto — abierto a oportunidades internacionales.</p>
+        <p data-i18n="about.bio1">I'm a QA Engineer and Frontend Developer with 2+ years of experience delivering quality software in production.</p>
+        <p data-i18n="about.bio2">Specialised in test automation with Playwright and Cypress, and building modern interfaces with React and TypeScript.</p>
+        <p data-i18n="about.bio3">Available in Valencia, Madrid or remote — open to international opportunities.</p>
       </div>
 
       <div class="skills-section">
-        <h3 style="margin-bottom: 1.5rem; font-size: 1.25rem;">Tecnologías</h3>
+        <h3 style="margin-bottom: 1.5rem; font-size: 1.25rem;" data-i18n="about.skills.title">Technologies</h3>
         <div class="skills-grid">
           <div class="skill-item">Playwright / Cypress</div>
           <div class="skill-item">Jest / Supertest</div>
@@ -701,12 +723,12 @@
   </section>
 
     <section id="contact" class="fade-in">
-    <h2 class="section-title">Contacto</h2>
+    <h2 class="section-title" data-i18n="contact.title">Contact</h2>
     <div class="contact-content">
-      <p>¿Tienes un proyecto en mente o quieres colaborar? No dudes en contactarme.</p>
+      <p data-i18n="contact.desc">Have a project in mind or want to collaborate? Feel free to reach out.</p>
       <a href="mailto:eduardmilitarug@gmail.com" class="btn btn-primary">
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-        Enviar email
+        <span data-i18n="contact.email">Send email</span>
       </a>
 
       <div class="social-links">
@@ -724,10 +746,80 @@
   </section>
 
     <footer>
-    <p>&copy; <span id="year"></span> Eduard Militaru. Diseñado y desarrollado con cuidado.</p>
+    <p>&copy; <span id="year"></span> Eduard Militaru. <span data-i18n="footer.text">Designed and built with care.</span></p>
   </footer>
 
   <script>
+    // Translations
+    const translations = {
+      en: {
+        'nav.projects': 'Projects',
+        'nav.about': 'About',
+        'nav.contact': 'Contact',
+        'hero.description': 'Test automation with Playwright and Cypress. Modern interfaces with React and TypeScript. 2+ years delivering quality software in production.',
+        'hero.cta.projects': 'View projects',
+        'hero.cta.contact': 'Contact',
+        'projects.title': 'Projects',
+        'projects.subtitle': 'A selection of personal and professional projects showcasing my technical skills.',
+        'project.jobfy2.desc': 'Full-stack job scraper dashboard. TypeScript monorepo with React 19, Node.js, PostgreSQL and Prisma. Async multi-source scraping, real-time status polling, stats dashboard and CI/CD pipeline with GitHub Actions.',
+        'project.testSuite.desc': 'Standalone QA automation suite for JobFy v2. 204 tests across Playwright E2E (4 browsers), Jest unit tests and Supertest integration tests. Covers API contracts, UI flows, responsive design and error handling.',
+        'project.finbyt.desc': 'Full-stack investment dashboard for managing crypto, stocks and ETFs with live CoinGecko prices. Full CRUD, interactive P/L charts. TypeScript end-to-end.',
+        'project.archiveScout.desc': 'Python automation bot monitoring Japanese secondhand marketplaces (Yahoo Auctions via ZenMarket) for underpriced archive fashion. Deal scoring engine, Cloudflare bypass and real-time Telegram & Discord alerts.',
+        'project.fitnessTracker.desc': 'Mobile-first PWA for fitness tracking. Workout logging, nutrition and macro tracking, water intake, progress charts and creatine reminders. Works offline.',
+        'about.title': 'About',
+        'about.subtitle': 'QA Engineer and Frontend Developer passionate about software quality and well-crafted interfaces.',
+        'about.bio1': "I'm a QA Engineer and Frontend Developer with 2+ years of experience delivering quality software in production.",
+        'about.bio2': 'Specialised in test automation with Playwright and Cypress, and building modern interfaces with React and TypeScript.',
+        'about.bio3': 'Available in Valencia, Madrid or remote — open to international opportunities.',
+        'about.skills.title': 'Technologies',
+        'contact.title': 'Contact',
+        'contact.desc': 'Have a project in mind or want to collaborate? Feel free to reach out.',
+        'contact.email': 'Send email',
+        'footer.text': 'Designed and built with care.',
+      },
+      es: {
+        'nav.projects': 'Proyectos',
+        'nav.about': 'Sobre mi',
+        'nav.contact': 'Contacto',
+        'hero.description': 'Automatización de pruebas con Playwright y Cypress. Interfaces modernas con React y TypeScript. 2+ años entregando software de calidad en producción.',
+        'hero.cta.projects': 'Ver proyectos',
+        'hero.cta.contact': 'Contactar',
+        'projects.title': 'Proyectos',
+        'projects.subtitle': 'Una selección de proyectos personales y profesionales que muestran mis habilidades técnicas.',
+        'project.jobfy2.desc': 'Full-stack job scraper dashboard. Monorepo TypeScript con React 19, Node.js, PostgreSQL y Prisma. Scraping asíncrono multi-fuente, polling en tiempo real, stats dashboard y CI/CD con GitHub Actions.',
+        'project.testSuite.desc': 'Suite de automatización QA standalone para JobFy v2. 204 tests con Playwright E2E (4 navegadores), Jest unitarios y Supertest de integración. Cubre contratos API, flujos UI, diseño responsive y manejo de errores.',
+        'project.finbyt.desc': 'Dashboard full-stack para gestionar inversiones en criptomonedas, acciones y ETFs con precios en tiempo real de CoinGecko. CRUD completo, gráficos P/L interactivos. TypeScript end-to-end.',
+        'project.archiveScout.desc': 'Bot de automatización Python que monitoriza marketplaces japoneses de segunda mano (Yahoo Auctions vía ZenMarket) en busca de moda de archivo infravalorada. Motor de scoring de deals, bypass de Cloudflare y alertas en tiempo real por Telegram y Discord.',
+        'project.fitnessTracker.desc': 'PWA mobile-first para seguimiento de fitness. Registro de entrenamientos, nutrición y macros, ingesta de agua, gráficos de progreso y recordatorios de creatina. Funciona offline.',
+        'about.title': 'Sobre mi',
+        'about.subtitle': 'QA Engineer y Frontend Developer con pasión por la calidad del software y las interfaces bien construidas.',
+        'about.bio1': 'Soy QA Engineer y Frontend Developer con 2+ años de experiencia entregando software de calidad en producción.',
+        'about.bio2': 'Especializado en automatización de pruebas con Playwright y Cypress, y en construir interfaces modernas con React y TypeScript.',
+        'about.bio3': 'Disponible en Valencia, Madrid o en remoto — abierto a oportunidades internacionales.',
+        'about.skills.title': 'Tecnologías',
+        'contact.title': 'Contacto',
+        'contact.desc': '¿Tienes un proyecto en mente o quieres colaborar? No dudes en contactarme.',
+        'contact.email': 'Enviar email',
+        'footer.text': 'Diseñado y desarrollado con cuidado.',
+      }
+    };
+
+    let currentLang = 'en';
+
+    function applyLang(lang) {
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[lang][key]) el.textContent = translations[lang][key];
+      });
+      document.documentElement.lang = lang;
+      document.getElementById('lang-label').textContent = lang === 'en' ? 'ES' : 'EN';
+      currentLang = lang;
+    }
+
+    function toggleLang() {
+      applyLang(currentLang === 'en' ? 'es' : 'en');
+    }
+
     // Set current year
     document.getElementById('year').textContent = new Date().getFullYear();
 
