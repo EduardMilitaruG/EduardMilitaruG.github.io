@@ -284,6 +284,34 @@
       transform: scale(1.05);
     }
 
+    .project-image img[data-lightbox] {
+      cursor: zoom-in;
+    }
+
+    .lightbox-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.88);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      cursor: zoom-out;
+    }
+
+    .lightbox-overlay.active {
+      display: flex;
+    }
+
+    .lightbox-overlay img {
+      max-width: 92vw;
+      max-height: 88vh;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
+    }
+
     .project-content {
       padding: 1.5rem;
       display: flex;
@@ -594,7 +622,7 @@
     <div class="projects-grid">
       <div class="project-card">
         <div class="project-image project-image--tall">
-          <img src="flipscout-demo.gif" alt="FlipScout - Japanese Arbitrage Dashboard">
+          <img src="flipscout-demo.gif" alt="FlipScout - Japanese Arbitrage Dashboard" data-lightbox>
         </div>
         <div class="project-content">
           <h3>FlipScout</h3>
@@ -1174,6 +1202,27 @@
 
       const renderer = createTopographicRenderer(canvas);
       renderer.start();
+    })();
+
+    (function initLightbox() {
+      const overlay = document.createElement('div');
+      overlay.className = 'lightbox-overlay';
+      const img = document.createElement('img');
+      overlay.appendChild(img);
+      document.body.appendChild(overlay);
+
+      document.querySelectorAll('img[data-lightbox]').forEach(el => {
+        el.addEventListener('click', () => {
+          img.src = el.src;
+          overlay.classList.add('active');
+        });
+      });
+
+      overlay.addEventListener('click', () => overlay.classList.remove('active'));
+
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') overlay.classList.remove('active');
+      });
     })();
   </script>
 </body>
