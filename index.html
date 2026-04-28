@@ -3,68 +3,62 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Eduard Militaru | QA Engineer & Frontend Developer</title>
-  <meta name="description" content="Portfolio de Gheorghe Eduard Militaru - QA Engineer y Frontend Developer especializado en Playwright, Cypress, React y TypeScript.">
-  <meta name="author" content="Gheorghe Eduard Militaru">
+  <title>Eduard Militaru | QA Automation Engineer | Playwright | Frontend Developer</title>
+  <meta name="description" content="QA Automation Engineer with Frontend background. Playwright, Cypress, React, TypeScript. Open to remote opportunities in Spain and Europe.">
+  <meta name="author" content="Eduard Militaru">
+  <meta name="keywords" content="QA Automation, Playwright, Cypress, Jest, React, TypeScript, SDET, Frontend Developer, Spain, Remote">
 
-    <meta property="og:title" content="Eduard Militaru | QA Engineer & Frontend Developer">
-  <meta property="og:description" content="QA Engineer y Frontend Developer. Automatización con Playwright y Cypress. Interfaces modernas con React y TypeScript.">
+  <meta property="og:title" content="Eduard Militaru | QA Automation Engineer">
+  <meta property="og:description" content="QA Automation Engineer with Frontend background. Playwright, Cypress, React, TypeScript. Open to remote in Spain and Europe.">
   <meta property="og:type" content="website">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <style>
-    *, *::before, *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
       --bg-primary: #0a0a0b;
       --bg-secondary: #111113;
       --bg-card: #18181b;
+      --bg-card-hover: #1c1c20;
       --text-primary: #fafafa;
       --text-secondary: #a1a1aa;
+      --text-muted: #71717a;
       --accent: #3b82f6;
       --accent-hover: #60a5fa;
+      --accent-subtle: rgba(59, 130, 246, 0.1);
+      --accent-green: #22c55e;
       --border: #27272a;
+      --radius: 12px;
+      --radius-sm: 8px;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
       font-family: 'Inter', sans-serif;
       background-color: var(--bg-primary);
       color: var(--text-primary);
       line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
     }
 
-    h1, h2, h3, h4 {
-      font-family: 'Space Grotesk', sans-serif;
-    }
+    h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; }
+    a { color: inherit; text-decoration: none; }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    /* Heade */
+    /* ===== HEADER ===== */
     header {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
+      top: 0; left: 0; right: 0;
       z-index: 100;
       padding: 1rem 2rem;
-      background: rgba(10, 10, 11, 0.8);
-      backdrop-filter: blur(12px);
+      background: rgba(10, 10, 11, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
-      transition: all 0.3s ease;
     }
 
     .header-content {
@@ -73,29 +67,29 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 1rem;
     }
 
     .logo {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.25rem;
-      font-weight: 600;
+      font-size: 1.1rem;
+      font-weight: 700;
       color: var(--text-primary);
     }
 
-    nav {
-      display: flex;
-      gap: 2rem;
-    }
+    .logo span { color: var(--accent); }
+
+    nav { display: flex; align-items: center; gap: 2rem; }
 
     nav a {
       color: var(--text-secondary);
-      font-size: 0.9rem;
+      font-size: 0.875rem;
       transition: color 0.2s ease;
     }
 
-    nav a:hover {
-      color: var(--text-primary);
-    }
+    nav a:hover { color: var(--text-primary); }
+
+    .header-actions { display: flex; align-items: center; gap: 0.75rem; }
 
     .mobile-menu-btn {
       display: none;
@@ -106,7 +100,77 @@
       padding: 0.5rem;
     }
 
-    /* Hero Section */
+    /* ===== BUTTONS ===== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius-sm);
+      font-weight: 500;
+      font-size: 0.875rem;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border: 1px solid transparent;
+      white-space: nowrap;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      border-color: var(--accent-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text-primary);
+      border-color: var(--border);
+    }
+
+    .btn-secondary:hover {
+      background: var(--bg-card);
+      border-color: var(--text-secondary);
+      transform: translateY(-1px);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-secondary);
+      border-color: var(--border);
+    }
+
+    .btn-ghost:hover {
+      color: var(--text-primary);
+      background: var(--bg-card);
+      transform: translateY(-1px);
+    }
+
+    /* ===== LANG TOGGLE ===== */
+    .lang-toggle {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      padding: 0.375rem 0.625rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: 'Inter', sans-serif;
+      letter-spacing: 0.05em;
+    }
+
+    .lang-toggle:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ===== HERO ===== */
     .hero {
       min-height: 100vh;
       display: flex;
@@ -114,7 +178,7 @@
       justify-content: center;
       align-items: center;
       text-align: center;
-      padding: 6rem 2rem 4rem;
+      padding: 7rem 2rem 5rem;
       position: relative;
       overflow: hidden;
     }
@@ -122,11 +186,8 @@
     .hero::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: radial-gradient(ellipse at center, rgba(59, 130, 246, 0.08) 0%, transparent 70%);
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse at 50% 40%, rgba(59, 130, 246, 0.07) 0%, transparent 65%);
       pointer-events: none;
     }
 
@@ -134,514 +195,853 @@
       position: relative;
       z-index: 1;
       max-width: 800px;
-      animation: fadeInUp 0.8s ease-out;
+      animation: fadeInUp 0.8s ease-out both;
     }
 
-    .hero h1 {
-      font-size: clamp(2.5rem, 6vw, 4rem);
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--accent-subtle);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      color: var(--accent);
+      padding: 0.35rem 0.875rem;
+      border-radius: 9999px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      margin-bottom: 1.75rem;
+      letter-spacing: 0.02em;
+    }
+
+    .hero-tag-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--accent-green);
+      border-radius: 50%;
+      animation: blink 2s ease-in-out infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .hero-name {
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-bottom: 0.875rem;
+      font-family: 'Inter', sans-serif;
+      letter-spacing: 0.01em;
+    }
+
+    .hero-headline {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2.25rem, 5.5vw, 3.75rem);
       font-weight: 700;
-      margin-bottom: 1rem;
-      background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(150deg, #fafafa 0%, #a1a1aa 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
 
-    .hero .subtitle {
-      font-size: clamp(1.25rem, 3vw, 1.75rem);
-      color: var(--accent);
-      margin-bottom: 1.5rem;
-      font-weight: 500;
-    }
-
-    .hero p {
-      font-size: 1.125rem;
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.125rem);
       color: var(--text-secondary);
-      max-width: 600px;
+      max-width: 560px;
       margin: 0 auto 2.5rem;
+      line-height: 1.75;
     }
 
     .hero-buttons {
       display: flex;
-      gap: 1rem;
+      gap: 0.875rem;
       justify-content: center;
       flex-wrap: wrap;
     }
 
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.875rem 1.75rem;
-      border-radius: 8px;
-      font-weight: 500;
-      font-size: 0.95rem;
-      transition: all 0.2s ease;
-      cursor: pointer;
-      border: none;
-    }
-
-    .btn-primary {
-      background: var(--accent);
-      color: white;
-    }
-
-    .btn-primary:hover {
-      background: var(--accent-hover);
-      transform: translateY(-2px);
-    }
-
-    .btn-secondary {
-      background: transparent;
-      color: var(--text-primary);
-      border: 1px solid var(--border);
-    }
-
-    .btn-secondary:hover {
-      background: var(--bg-secondary);
-      border-color: var(--text-secondary);
-    }
-
     .scroll-indicator {
       position: absolute;
-      bottom: 2rem;
+      bottom: 2.5rem;
       left: 50%;
       transform: translateX(-50%);
-      animation: bounce 2s infinite;
+      animation: bounce 2.5s ease-in-out infinite;
+      color: var(--text-muted);
     }
 
-    .scroll-indicator svg {
-      width: 24px;
-      height: 24px;
-      color: var(--text-secondary);
+    /* ===== SNAPSHOT ===== */
+    .snapshot {
+      padding: 0 2rem 5rem;
+      max-width: 1200px;
+      margin: 0 auto;
     }
 
-    /* Sections */
+    .snapshot-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.875rem;
+    }
+
+    .snapshot-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.125rem 1.375rem;
+      display: flex;
+      align-items: center;
+      gap: 0.875rem;
+      transition: all 0.2s ease;
+    }
+
+    .snapshot-card:hover {
+      border-color: rgba(59, 130, 246, 0.3);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    }
+
+    .snapshot-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      background: var(--accent-subtle);
+      border: 1px solid rgba(59, 130, 246, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--accent);
+    }
+
+    .snapshot-icon svg { width: 16px; height: 16px; }
+
+    .snapshot-label {
+      display: block;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 0.15rem;
+    }
+
+    .snapshot-value {
+      display: block;
+      font-size: 0.875rem;
+      color: var(--text-primary);
+      font-weight: 500;
+      line-height: 1.35;
+    }
+
+    /* ===== SECTIONS ===== */
     section {
       padding: 6rem 2rem;
       max-width: 1200px;
       margin: 0 auto;
     }
 
+    .section-label {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.625rem;
+      text-align: center;
+    }
+
     .section-title {
-      font-size: 2.25rem;
+      font-size: clamp(1.75rem, 4vw, 2.25rem);
       margin-bottom: 1rem;
       text-align: center;
+      letter-spacing: -0.025em;
     }
 
     .section-subtitle {
       color: var(--text-secondary);
       text-align: center;
-      margin-bottom: 3rem;
-      max-width: 600px;
+      margin-bottom: 3.5rem;
+      max-width: 520px;
       margin-left: auto;
       margin-right: auto;
+      font-size: 1rem;
+      line-height: 1.7;
     }
 
-    /* Projects */
+    /* ===== PROJECTS ===== */
     .projects-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 2rem;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
     }
 
     .project-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: var(--radius);
       overflow: hidden;
       transition: all 0.3s ease;
       display: flex;
       flex-direction: column;
-      height: 100%;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.3);
     }
 
     .project-card:hover {
       transform: translateY(-4px);
-      border-color: var(--accent);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      border-color: rgba(59, 130, 246, 0.35);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.35);
     }
 
-    .project-image {
-      width: 100%;
-      height: 200px;
-      background: var(--bg-secondary);
-      overflow: hidden;
+    /* Flagship spans full width */
+    .project-card--flagship {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      flex-direction: unset;
+      border-color: rgba(59, 130, 246, 0.2);
+      background: linear-gradient(135deg, var(--bg-card) 0%, rgba(59, 130, 246, 0.025) 100%);
     }
 
-    .project-image--tall {
-      height: 320px;
+    .project-card--flagship:hover {
+      border-color: rgba(59, 130, 246, 0.45);
+      box-shadow: 0 12px 48px rgba(59, 130, 246, 0.1), 0 4px 16px rgba(0,0,0,0.3);
     }
+
+    /* Terminal panel inside flagship */
+    .flagship-terminal {
+      background: #0d1117;
+      border-right: 1px solid #21262d;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      font-size: 0.775rem;
+      line-height: 1.55;
+    }
+
+    .terminal-header {
+      display: flex;
+      align-items: center;
+      gap: 0.375rem;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.875rem;
+      border-bottom: 1px solid #21262d;
+    }
+
+    .terminal-dot { width: 11px; height: 11px; border-radius: 50%; }
+    .terminal-dot--red   { background: #ff5f57; }
+    .terminal-dot--yellow { background: #febc2e; }
+    .terminal-dot--green { background: #28c840; }
+
+    .terminal-title {
+      color: #6e7681;
+      font-size: 0.7rem;
+      margin-left: 0.5rem;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .terminal-line { margin-bottom: 0.3rem; }
+
+    .t-info   { color: #6e7681; }
+    .t-pass   { color: #3fb950; }
+    .t-cmd    { color: #e6edf3; }
+    .t-suite  { color: #d2a8ff; }
+
+    .terminal-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.625rem;
+      margin-top: auto;
+      padding-top: 1rem;
+      border-top: 1px solid #21262d;
+    }
+
+    .terminal-stat {
+      text-align: center;
+      padding: 0.5rem 0.25rem;
+      background: rgba(255,255,255,0.03);
+      border-radius: 6px;
+      border: 1px solid #21262d;
+    }
+
+    .terminal-stat-number {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #3fb950;
+      display: block;
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .terminal-stat-label {
+      font-size: 0.6rem;
+      color: #6e7681;
+      font-family: 'Inter', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      display: block;
+      margin-top: 0.1rem;
+    }
+
+    .project-image { width: 100%; height: 200px; background: var(--bg-secondary); overflow: hidden; }
+    .project-image--tall { height: 260px; }
 
     .project-image img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.3s ease;
+      transition: transform 0.4s ease;
     }
 
-    .project-card:hover .project-image img {
-      transform: scale(1.05);
+    .project-card:hover .project-image img { transform: scale(1.04); }
+    .project-image img[data-lightbox] { cursor: zoom-in; }
+
+    .project-content {
+      padding: 1.625rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
     }
 
-    .project-image img[data-lightbox] {
-      cursor: zoom-in;
+    .project-badges { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.75rem; }
+
+    .badge-flagship {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      background: rgba(59, 130, 246, 0.12);
+      color: var(--accent);
+      border: 1px solid rgba(59, 130, 246, 0.25);
+      padding: 0.2rem 0.6rem;
+      border-radius: 9999px;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
     }
 
+    .wip-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: rgba(245, 158, 11, 0.08);
+      color: #f59e0b;
+      border: 1px solid rgba(245, 158, 11, 0.2);
+      padding: 0.2rem 0.6rem;
+      border-radius: 9999px;
+      font-size: 0.68rem;
+      font-weight: 600;
+    }
+
+    .project-content h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.625rem;
+      letter-spacing: -0.02em;
+    }
+
+    .project-content p {
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      margin-bottom: 1.125rem;
+      line-height: 1.7;
+    }
+
+    .tech-stack { display: flex; flex-wrap: wrap; gap: 0.375rem; margin-bottom: 1.375rem; }
+
+    .tech-badge {
+      background: var(--bg-secondary);
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+      padding: 0.2rem 0.6rem;
+      border-radius: 9999px;
+      font-size: 0.71rem;
+      font-weight: 500;
+      transition: all 0.15s ease;
+    }
+
+    .tech-badge:hover { color: var(--accent); border-color: rgba(59, 130, 246, 0.3); }
+
+    .project-links { display: flex; gap: 1rem; margin-top: auto; flex-wrap: wrap; }
+
+    .project-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      color: var(--text-secondary);
+      font-size: 0.825rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .project-links a:hover { color: var(--accent); }
+    .project-links svg { width: 15px; height: 15px; flex-shrink: 0; }
+
+    /* ===== LIGHTBOX ===== */
     .lightbox-overlay {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.88);
+      background: rgba(0, 0, 0, 0.92);
       z-index: 1000;
       align-items: center;
       justify-content: center;
       padding: 2rem;
       cursor: zoom-out;
+      backdrop-filter: blur(4px);
     }
 
-    .lightbox-overlay.active {
-      display: flex;
-    }
+    .lightbox-overlay.active { display: flex; }
 
     .lightbox-overlay img {
       max-width: 92vw;
       max-height: 88vh;
       object-fit: contain;
       border-radius: 8px;
-      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.7);
     }
 
-    .project-content {
-      padding: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-    }
-
-    .project-content h3 {
-      font-size: 1.25rem;
-      margin-bottom: 0.75rem;
-    }
-
-    .project-content p {
-      color: var(--text-secondary);
-      font-size: 0.9rem;
-      margin-bottom: 1rem;
-      line-height: 1.6;
-    }
-
-    .tech-stack {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 1.25rem;
-    }
-
-    .tech-badge {
-      background: var(--bg-secondary);
-      color: var(--accent);
-      padding: 0.25rem 0.75rem;
-      border-radius: 9999px;
-      font-size: 0.75rem;
-      font-weight: 500;
-    }
-
-    .project-links {
-      display: flex;
-      gap: 1rem;
-      margin-top: auto;
-    }
-
-    .project-links a {
-      display: flex;
-      align-items: center;
-      gap: 0.375rem;
-      color: var(--text-secondary);
-      font-size: 0.875rem;
-      transition: color 0.2s ease;
-    }
-
-    .project-links a:hover {
-      color: var(--accent);
-    }
-
-    .wip-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.375rem;
-      background: rgba(245, 158, 11, 0.12);
-      color: #f59e0b;
-      border: 1px solid rgba(245, 158, 11, 0.3);
-      padding: 0.2rem 0.625rem;
-      border-radius: 9999px;
-      font-size: 0.7rem;
-      font-weight: 500;
-      margin-bottom: 0.75rem;
-      width: fit-content;
-    }
-
-    .project-links svg {
-      width: 18px;
-      height: 18px;
-    }
-
-    /* About */
+    /* ===== ABOUT ===== */
     .about-content {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 4rem;
+      gap: 5rem;
       align-items: start;
     }
 
     .about-text p {
       color: var(--text-secondary);
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.25rem;
+      font-size: 1.025rem;
+      line-height: 1.8;
+    }
+
+    .about-text p:last-child { margin-bottom: 0; }
+
+    .skills-section h3 {
       font-size: 1.05rem;
+      margin-bottom: 1.125rem;
+      color: var(--text-primary);
     }
 
     .skills-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 1rem;
+      gap: 0.5rem;
     }
 
     .skill-item {
       background: var(--bg-card);
       border: 1px solid var(--border);
-      padding: 1rem 1.25rem;
-      border-radius: 8px;
-      font-size: 0.9rem;
+      padding: 0.7rem 1rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.84rem;
+      font-weight: 500;
+      color: var(--text-secondary);
       transition: all 0.2s ease;
     }
 
     .skill-item:hover {
-      border-color: var(--accent);
+      border-color: rgba(59, 130, 246, 0.3);
+      color: var(--text-primary);
       background: var(--bg-secondary);
     }
 
-    /* Contact */
-    #contact {
-      text-align: center;
+    /* ===== CTA CLOSING SECTION ===== */
+    .cta-section {
+      padding: 0 2rem 6rem;
+      max-width: 1200px;
+      margin: 0 auto;
     }
 
+    .cta-inner {
+      background: linear-gradient(135deg, var(--bg-card) 0%, rgba(59, 130, 246, 0.04) 100%);
+      border: 1px solid rgba(59, 130, 246, 0.18);
+      border-radius: 18px;
+      padding: 4rem 3rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-glow {
+      position: absolute;
+      top: -80px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 500px;
+      height: 250px;
+      background: radial-gradient(ellipse, rgba(59, 130, 246, 0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .cta-inner h2 {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      margin-bottom: 0.875rem;
+      letter-spacing: -0.03em;
+      position: relative;
+    }
+
+    .cta-inner > p {
+      color: var(--text-secondary);
+      font-size: 1.025rem;
+      margin-bottom: 2rem;
+      max-width: 460px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.7;
+      position: relative;
+    }
+
+    .cta-tags {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 2.25rem;
+      position: relative;
+    }
+
+    .cta-tag {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      padding: 0.3rem 0.8rem;
+      border-radius: 9999px;
+      font-size: 0.78rem;
+      font-weight: 500;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      position: relative;
+    }
+
+    /* ===== CONTACT ===== */
+    #contact { text-align: center; }
+
     .contact-content {
-      max-width: 500px;
+      max-width: 460px;
       margin: 0 auto;
     }
 
     .contact-content p {
       color: var(--text-secondary);
       margin-bottom: 2rem;
-      font-size: 1.1rem;
+      font-size: 1.05rem;
+      line-height: 1.7;
     }
 
-    .social-links {
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      margin-top: 2rem;
-    }
+    .social-links { display: flex; justify-content: center; gap: 0.875rem; margin-top: 2rem; }
 
     .social-link {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 48px;
-      height: 48px;
+      width: 44px;
+      height: 44px;
       background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: var(--radius-sm);
       color: var(--text-secondary);
       transition: all 0.2s ease;
     }
 
     .social-link:hover {
-      border-color: var(--accent);
+      border-color: rgba(59, 130, 246, 0.4);
       color: var(--accent);
       transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(59, 130, 246, 0.12);
     }
 
-    .social-link svg {
-      width: 22px;
-      height: 22px;
-    }
+    .social-link svg { width: 20px; height: 20px; }
 
-    /* Footer */
+    /* ===== FOOTER ===== */
     footer {
       text-align: center;
       padding: 2rem;
       border-top: 1px solid var(--border);
-      color: var(--text-secondary);
-      font-size: 0.875rem;
+      color: var(--text-muted);
+      font-size: 0.8rem;
     }
 
-    /* Animations */
+    /* ===== CANVAS ===== */
+    #topographic-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    /* ===== ANIMATIONS ===== */
     @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
     @keyframes bounce {
-      0%, 20%, 50%, 80%, 100% {
-        transform: translateX(-50%) translateY(0);
-      }
-      40% {
-        transform: translateX(-50%) translateY(-10px);
-      }
-      60% {
-        transform: translateX(-50%) translateY(-5px);
-      }
+      0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+      40% { transform: translateX(-50%) translateY(-8px); }
+      60% { transform: translateX(-50%) translateY(-4px); }
     }
 
     .fade-in {
       opacity: 0;
       transform: translateY(20px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
+      transition: opacity 0.65s ease, transform 0.65s ease;
     }
 
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 1024px) {
+      .snapshot-grid { grid-template-columns: repeat(2, 1fr); }
+      .project-card--flagship { grid-template-columns: 1fr; }
+      .flagship-terminal { border-right: none; border-bottom: 1px solid #21262d; }
+      .terminal-stats { grid-template-columns: repeat(4, 1fr); }
     }
 
-    /* Responsive */
     @media (max-width: 768px) {
-      nav {
-        display: none;
-      }
-
-      .mobile-menu-btn {
-        display: block;
-      }
+      nav { display: none; }
+      .mobile-menu-btn { display: block; }
 
       nav.active {
         display: flex;
         flex-direction: column;
         position: absolute;
         top: 100%;
-        left: 0;
-        right: 0;
+        left: 0; right: 0;
         background: var(--bg-primary);
-        padding: 1rem 2rem;
+        padding: 1rem 2rem 1.5rem;
         border-bottom: 1px solid var(--border);
         gap: 1rem;
       }
 
-      .about-content {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-      }
+      .projects-grid { grid-template-columns: 1fr; }
+      .project-card--flagship { grid-column: 1; }
+      .about-content { grid-template-columns: 1fr; gap: 2.5rem; }
+      .snapshot-grid { grid-template-columns: 1fr; }
 
-      .skills-grid {
-        grid-template-columns: 1fr;
-      }
-
-      section {
-        padding: 4rem 1.5rem;
-      }
-
-      .hero {
-        padding: 5rem 1.5rem 3rem;
-      }
+      section { padding: 4rem 1.25rem; }
+      .hero { padding: 5.5rem 1.25rem 4rem; }
+      .snapshot { padding: 0 1.25rem 4rem; }
+      .cta-section { padding: 0 1.25rem 4rem; }
+      .cta-inner { padding: 2.5rem 1.5rem; }
     }
 
-    /* Language Toggle */
-    .lang-toggle {
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--text-secondary);
-      padding: 0.375rem 0.75rem;
-      border-radius: 6px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      font-family: 'Inter', sans-serif;
-      letter-spacing: 0.05em;
-      flex-shrink: 0;
-    }
-
-    .lang-toggle:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-    }
-
-    /* Topographic Background */
-    #topographic-canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: -1;
+    @media (max-width: 480px) {
+      .hero-buttons { flex-direction: column; align-items: stretch; }
+      .hero-buttons .btn { justify-content: center; }
+      .cta-buttons { flex-direction: column; align-items: stretch; }
+      .cta-buttons .btn { justify-content: center; }
+      .terminal-stats { grid-template-columns: repeat(2, 1fr); }
+      .skills-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
-    <canvas id="topographic-canvas" aria-hidden="true"></canvas>
+  <canvas id="topographic-canvas" aria-hidden="true"></canvas>
 
-    <header>
+  <header>
     <div class="header-content">
-      <a href="#" class="logo">Eduard.dev</a>
+      <a href="#" class="logo">Eduard<span>.</span>dev</a>
       <nav id="nav">
         <a href="#projects" data-i18n="nav.projects">Projects</a>
         <a href="#about" data-i18n="nav.about">About</a>
         <a href="#contact" data-i18n="nav.contact">Contact</a>
       </nav>
-      <button class="lang-toggle" onclick="toggleLang()" aria-label="Toggle language"><span id="lang-label">ES</span></button>
-      <button class="mobile-menu-btn" onclick="toggleMenu()" aria-label="Menu">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="3" y1="12" x2="21" y2="12"></line>
-          <line x1="3" y1="6" x2="21" y2="6"></line>
-          <line x1="3" y1="18" x2="21" y2="18"></line>
-        </svg>
-      </button>
+      <div class="header-actions">
+        <button class="lang-toggle" onclick="toggleLang()" aria-label="Toggle language"><span id="lang-label">ES</span></button>
+        <button class="mobile-menu-btn" onclick="toggleMenu()" aria-label="Menu">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/>
+          </svg>
+        </button>
+      </div>
     </div>
   </header>
 
-    <section class="hero">
+  <!-- HERO -->
+  <section class="hero">
     <div class="hero-content">
-      <h1>Gheorghe Eduard Militaru</h1>
-      <p class="subtitle">QA Engineer & Frontend Developer</p>
-      <p data-i18n="hero.description">Test automation with Playwright and Cypress. Modern interfaces with React and TypeScript. 1+ years delivering quality software in production.</p>
+      <div class="hero-tag">
+        <span class="hero-tag-dot"></span>
+        <span data-i18n="hero.tag">Open to new opportunities</span>
+      </div>
+      <p class="hero-name" data-i18n="hero.name">Eduard Militaru</p>
+      <h1 class="hero-headline">
+        <span data-i18n="hero.headline.l1">QA Automation Engineer</span><br>
+        <span data-i18n="hero.headline.l2">with Frontend Background</span>
+      </h1>
+      <p class="hero-sub" data-i18n="hero.description">I build reliable web products, reduce release risk, and automate repetitive testing workflows using Playwright, TypeScript and React.</p>
       <div class="hero-buttons">
         <a href="#projects" class="btn btn-primary">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"></path><polygon points="18 2 22 6 12 16 8 16 8 12 18 2"></polygon></svg>
-          <span data-i18n="hero.cta.projects">View projects</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          <span data-i18n="hero.cta.projects">View Projects</span>
         </a>
-        <a href="#contact" class="btn btn-secondary">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-          <span data-i18n="hero.cta.contact">Contact</span>
+        <a href="Eduard_Militaru_CV.pdf" download class="btn btn-secondary">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span data-i18n="hero.cta.cv">Download CV</span>
+        </a>
+        <a href="#contact" class="btn btn-ghost">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <span data-i18n="hero.cta.contact">Contact Me</span>
         </a>
       </div>
     </div>
-    <div class="scroll-indicator">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="6 9 12 15 18 9"></polyline>
-      </svg>
+    <div class="scroll-indicator" aria-hidden="true">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
     </div>
   </section>
 
-    <section id="projects" class="fade-in">
+  <!-- EXPERIENCE SNAPSHOT -->
+  <div class="snapshot fade-in">
+    <div class="snapshot-grid">
+      <div class="snapshot-card">
+        <div class="snapshot-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+        </div>
+        <div>
+          <span class="snapshot-label" data-i18n="snap.exp.label">Experience</span>
+          <span class="snapshot-value" data-i18n="snap.exp.value">QA + Frontend in production environments</span>
+        </div>
+      </div>
+      <div class="snapshot-card">
+        <div class="snapshot-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        </div>
+        <div>
+          <span class="snapshot-label" data-i18n="snap.testing.label">Testing</span>
+          <span class="snapshot-value">Playwright · Cypress · Jest · Postman</span>
+        </div>
+      </div>
+      <div class="snapshot-card">
+        <div class="snapshot-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        </div>
+        <div>
+          <span class="snapshot-label" data-i18n="snap.stack.label">Stack</span>
+          <span class="snapshot-value">React · TypeScript · Node.js</span>
+        </div>
+      </div>
+      <div class="snapshot-card">
+        <div class="snapshot-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <div>
+          <span class="snapshot-label" data-i18n="snap.lang.label">Languages</span>
+          <span class="snapshot-value" data-i18n="snap.lang.value">Spanish · English · Romanian</span>
+        </div>
+      </div>
+      <div class="snapshot-card">
+        <div class="snapshot-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div>
+          <span class="snapshot-label" data-i18n="snap.location.label">Location</span>
+          <span class="snapshot-value" data-i18n="snap.location.value">Castellón, Spain · Remote Ready</span>
+        </div>
+      </div>
+      <div class="snapshot-card">
+        <div class="snapshot-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        </div>
+        <div>
+          <span class="snapshot-label" data-i18n="snap.roles.label">Open To</span>
+          <span class="snapshot-value" data-i18n="snap.roles.value">QA Automation · SDET · Frontend+QA</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="fade-in">
+    <span class="section-label" data-i18n="projects.label">Work</span>
     <h2 class="section-title" data-i18n="projects.title">Projects</h2>
-    <p class="section-subtitle" data-i18n="projects.subtitle">A selection of personal and professional projects showcasing my technical skills.</p>
+    <p class="section-subtitle" data-i18n="projects.subtitle">Selected projects demonstrating QA automation, full-stack development, and real-world problem solving.</p>
 
     <div class="projects-grid">
+
+      <!-- FLAGSHIP: JobFy Test Suite -->
+      <div class="project-card project-card--flagship">
+        <div class="flagship-terminal" aria-hidden="true">
+          <div class="terminal-header">
+            <div class="terminal-dot terminal-dot--red"></div>
+            <div class="terminal-dot terminal-dot--yellow"></div>
+            <div class="terminal-dot terminal-dot--green"></div>
+            <span class="terminal-title">jobfy-tests — npx playwright test</span>
+          </div>
+          <div class="terminal-line"><span class="t-info">Running 204 tests using 4 workers</span></div>
+          <div class="terminal-line"><span class="t-suite">&nbsp;&nbsp;[chromium] › e2e/auth.spec.ts</span></div>
+          <div class="terminal-line"><span class="t-pass">&nbsp;&nbsp;✓</span> <span class="t-cmd">login with valid credentials</span> <span class="t-info">(1.2s)</span></div>
+          <div class="terminal-line"><span class="t-pass">&nbsp;&nbsp;✓</span> <span class="t-cmd">display jobs after authentication</span> <span class="t-info">(0.8s)</span></div>
+          <div class="terminal-line"><span class="t-suite">&nbsp;&nbsp;[firefox] › e2e/jobs.spec.ts</span></div>
+          <div class="terminal-line"><span class="t-pass">&nbsp;&nbsp;✓</span> <span class="t-cmd">scrape and return job results</span> <span class="t-info">(2.1s)</span></div>
+          <div class="terminal-line"><span class="t-pass">&nbsp;&nbsp;✓</span> <span class="t-cmd">handle pagination correctly</span> <span class="t-info">(0.6s)</span></div>
+          <div class="terminal-line"><span class="t-suite">&nbsp;&nbsp;[api] › integration/jobs.api.spec.ts</span></div>
+          <div class="terminal-line"><span class="t-pass">&nbsp;&nbsp;✓</span> <span class="t-cmd">POST /api/scrape returns 200</span> <span class="t-info">(0.3s)</span></div>
+          <div class="terminal-line"><span class="t-pass">&nbsp;&nbsp;✓</span> <span class="t-cmd">GET /api/jobs validates contract</span> <span class="t-info">(0.2s)</span></div>
+          <div class="terminal-line"><span class="t-pass">&nbsp;&nbsp;✓</span> <span class="t-cmd">responsive layout on mobile viewport</span> <span class="t-info">(1.0s)</span></div>
+          <div class="terminal-line" style="margin-top:0.5rem"><span class="t-info">&nbsp;&nbsp;···</span></div>
+          <div class="terminal-line"><span class="t-pass">&nbsp;&nbsp;204 passed</span> <span class="t-info">(47s)</span></div>
+          <div class="terminal-stats">
+            <div class="terminal-stat">
+              <span class="terminal-stat-number">204</span>
+              <span class="terminal-stat-label" data-i18n="flag.stat.tests">Tests</span>
+            </div>
+            <div class="terminal-stat">
+              <span class="terminal-stat-number">4</span>
+              <span class="terminal-stat-label" data-i18n="flag.stat.browsers">Browsers</span>
+            </div>
+            <div class="terminal-stat">
+              <span class="terminal-stat-number">3</span>
+              <span class="terminal-stat-label" data-i18n="flag.stat.types">Types</span>
+            </div>
+            <div class="terminal-stat">
+              <span class="terminal-stat-number">100%</span>
+              <span class="terminal-stat-label" data-i18n="flag.stat.pass">Pass Rate</span>
+            </div>
+          </div>
+        </div>
+        <div class="project-content">
+          <div class="project-badges">
+            <span class="badge-flagship">
+              <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              Flagship QA Project
+            </span>
+          </div>
+          <h3>JobFy Test Suite</h3>
+          <p data-i18n="proj.testsuite.desc">Standalone QA automation suite covering a real full-stack application. 204 automated tests across 4 browsers, reducing manual regression effort and increasing release confidence. Covers API contract validation, E2E UI flows, responsive design, and error handling — all in TypeScript.</p>
+          <div class="tech-stack">
+            <span class="tech-badge">Playwright</span>
+            <span class="tech-badge">Jest</span>
+            <span class="tech-badge">Supertest</span>
+            <span class="tech-badge">TypeScript</span>
+            <span class="tech-badge">GitHub Actions</span>
+            <span class="tech-badge">CI/CD</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/EduardMilitaruG/jobfy-playwright-tests" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+              <span data-i18n="link.github">View on GitHub</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- FlipScout -->
       <div class="project-card">
         <div class="project-image project-image--tall">
-          <img src="flipscout-demo.gif" alt="FlipScout - Japanese Arbitrage Dashboard" data-lightbox>
+          <img src="flipscout-demo.gif" alt="FlipScout arbitrage dashboard demo" data-lightbox loading="lazy">
         </div>
         <div class="project-content">
           <h3>FlipScout</h3>
-          <p data-i18n="project.flipscout.desc">Japanese arbitrage profit calculator. Monitors Yahoo Auctions JP and Mercari JP for underpriced tech, Pokémon cards and fashion — calculates real EUR margins including EMS shipping and platform fees — and snipers Wallapop/Vinted for matching resale listings.</p>
+          <p data-i18n="proj.flipscout.desc">Multi-source arbitrage intelligence dashboard. Monitors Yahoo Auctions JP and Mercari JP for underpriced tech and collectibles, calculates real EUR margins including fees and EMS shipping, then cross-references Wallapop and Vinted for resale opportunities.</p>
           <div class="tech-stack">
             <span class="tech-badge">React 19</span>
             <span class="tech-badge">FastAPI</span>
@@ -652,24 +1052,25 @@
           </div>
           <div class="project-links">
             <a href="https://github.com/EduardMilitaruG/flipscout" target="_blank" rel="noopener">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
               GitHub
             </a>
             <a href="https://dashboard-two-pearl-54.vercel.app" target="_blank" rel="noopener">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
               Live Demo
             </a>
           </div>
         </div>
       </div>
 
+      <!-- JobFy v2 -->
       <div class="project-card">
         <div class="project-image project-image--tall">
-          <img src="jobfy-demo.gif" alt="JobFy v2 demo" data-lightbox>
+          <img src="jobfy-demo.gif" alt="JobFy v2 job dashboard demo" data-lightbox loading="lazy">
         </div>
         <div class="project-content">
           <h3>JobFy v2</h3>
-          <p data-i18n="project.jobfy2.desc">Full-stack job scraper dashboard. TypeScript monorepo with React 19, Node.js, PostgreSQL and Prisma. Async multi-source scraping, real-time status polling, stats dashboard and CI/CD pipeline with GitHub Actions.</p>
+          <p data-i18n="proj.jobfy2.desc">Multi-source job intelligence dashboard with real-time polling and automated CI pipelines. TypeScript monorepo with React 19, Node.js, PostgreSQL and Prisma — async multi-source scraping, stats dashboard, and full GitHub Actions CI/CD.</p>
           <div class="tech-stack">
             <span class="tech-badge">React 19</span>
             <span class="tech-badge">TypeScript</span>
@@ -681,45 +1082,26 @@
           </div>
           <div class="project-links">
             <a href="https://github.com/EduardMilitaruG/JobFy-v2" target="_blank" rel="noopener">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
               GitHub
             </a>
             <a href="https://jobfy-frontend.onrender.com/" target="_blank" rel="noopener">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
               Live Demo
             </a>
           </div>
         </div>
       </div>
 
-      <div class="project-card">
-        <div class="project-content">
-          <h3>JobFy Test Suite</h3>
-          <p data-i18n="project.testSuite.desc">Standalone QA automation suite for JobFy v2. 204 tests across Playwright E2E (4 browsers), Jest unit tests and Supertest integration tests. Covers API contracts, UI flows, responsive design and error handling.</p>
-          <div class="tech-stack">
-            <span class="tech-badge">Playwright</span>
-            <span class="tech-badge">Jest</span>
-            <span class="tech-badge">Supertest</span>
-            <span class="tech-badge">TypeScript</span>
-            <span class="tech-badge">QA Automation</span>
-          </div>
-          <div class="project-links">
-            <a href="https://github.com/EduardMilitaruG/jobfy-playwright-tests" target="_blank" rel="noopener">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-              GitHub
-            </a>
-          </div>
-        </div>
-      </div>
-
+      <!-- FinByt -->
       <div class="project-card">
         <div class="project-image">
-          <img src="finbyt.png" alt="FinByt - Crypto Portfolio Dashboard">
+          <img src="finbyt.png" alt="FinByt investment portfolio dashboard" loading="lazy">
         </div>
         <div class="project-content">
           <h3>FinByt</h3>
-          <p data-i18n="project.finbyt.desc">Full-stack investment dashboard for managing crypto, stocks and ETFs with live CoinGecko prices. JWT auth, full CRUD, interactive P/L charts. TypeScript end-to-end.</p>
-          <p style="font-size:0.8rem;color:var(--text-secondary);margin-bottom:1rem;" data-i18n="project.finbyt.demo">Demo: <code style="background:var(--bg-secondary);padding:0.1rem 0.4rem;border-radius:4px;color:var(--accent)">demo@finbyt.app</code> / <code style="background:var(--bg-secondary);padding:0.1rem 0.4rem;border-radius:4px;color:var(--accent)">demo123456</code></p>
+          <p data-i18n="proj.finbyt.desc">Full-stack investment portfolio dashboard managing crypto, stocks and ETFs with live CoinGecko prices. JWT auth, full CRUD, interactive P/L charts — TypeScript end-to-end.</p>
+          <p style="font-size:0.78rem;color:var(--text-muted);margin-bottom:1rem;">Demo: <code style="background:var(--bg-secondary);padding:0.15rem 0.4rem;border-radius:4px;color:var(--accent);font-size:0.73rem">demo@finbyt.app</code> / <code style="background:var(--bg-secondary);padding:0.15rem 0.4rem;border-radius:4px;color:var(--accent);font-size:0.73rem">demo123456</code></p>
           <div class="tech-stack">
             <span class="tech-badge">React</span>
             <span class="tech-badge">TypeScript</span>
@@ -731,25 +1113,28 @@
           </div>
           <div class="project-links">
             <a href="https://github.com/EduardMilitaruG/crypto-portfolio-dashboard" target="_blank" rel="noopener">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
               GitHub
             </a>
             <a href="https://client-eight-ebon-78.vercel.app" target="_blank" rel="noopener">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
               Live Demo
             </a>
           </div>
         </div>
       </div>
 
+      <!-- Coches Compraventa Bot -->
       <div class="project-card">
         <div class="project-content">
-          <span class="wip-badge">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-            Work in Progress
-          </span>
+          <div class="project-badges">
+            <span class="wip-badge">
+              <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+              In Progress
+            </span>
+          </div>
           <h3>Coches Compraventa Bot</h3>
-          <p>Telegram bot + web dashboard for the Spanish used car market. Monitors Wallapop and Milanuncios for underpriced listings, scores deals against market value, and sends real-time Telegram alerts with buy/pass recommendations.</p>
+          <p data-i18n="proj.cochesbot.desc">Telegram bot and web dashboard for the Spanish used car market. Monitors Wallapop and Milanuncios for underpriced listings, scores deals against market value, and sends real-time alerts with buy/pass recommendations.</p>
           <div class="tech-stack">
             <span class="tech-badge">Python</span>
             <span class="tech-badge">Telegram Bot API</span>
@@ -766,14 +1151,17 @@
         </div>
       </div>
 
+      <!-- Totalscope -->
       <div class="project-card">
         <div class="project-content">
-          <span class="wip-badge">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-            Work in Progress
-          </span>
+          <div class="project-badges">
+            <span class="wip-badge">
+              <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+              In Progress
+            </span>
+          </div>
           <h3>Totalscope Studio</h3>
-          <p>Website for a creative studio. Built with Astro for fast static delivery, featuring a project gallery, aerial photography section, and a bespoke grain texture + custom cursor aesthetic.</p>
+          <p data-i18n="proj.totalscope.desc">Website for a creative studio. Built with Astro for fast static delivery, featuring a project gallery, aerial photography section, and a bespoke grain texture aesthetic with custom cursor interactions.</p>
           <div class="tech-stack">
             <span class="tech-badge">Astro</span>
             <span class="tech-badge">TypeScript</span>
@@ -791,113 +1179,209 @@
     </div>
   </section>
 
-    <section id="about" class="fade-in">
-    <h2 class="section-title" data-i18n="about.title">About</h2>
-    <p class="section-subtitle" data-i18n="about.subtitle">QA Engineer and Frontend Developer passionate about software quality and well-crafted interfaces.</p>
+  <!-- ABOUT -->
+  <section id="about" class="fade-in">
+    <span class="section-label" data-i18n="about.label">Background</span>
+    <h2 class="section-title" data-i18n="about.title">About Me</h2>
+    <p class="section-subtitle" data-i18n="about.subtitle">QA Automation Engineer with a frontend background, focused on shipping reliable software.</p>
 
     <div class="about-content">
       <div class="about-text">
-        <p data-i18n="about.bio1">I'm a QA Engineer and Frontend Developer with 1+ years of experience delivering quality software in production.</p>
-        <p data-i18n="about.bio2">Specialised in test automation with Playwright and Cypress, and building modern interfaces with React and TypeScript.</p>
-        <p data-i18n="about.bio3">Available in Valencia, Madrid or remote — open to international opportunities.</p>
+        <p data-i18n="about.bio1">I'm a QA Automation Engineer with a frontend background, focused on building reliable software that teams can ship with confidence.</p>
+        <p data-i18n="about.bio2">I specialise in test automation with Playwright and Cypress — covering E2E flows, API contract validation, and responsive design — all in TypeScript.</p>
+        <p data-i18n="about.bio3">On the frontend side, I work with React and TypeScript to build clean, performant interfaces that are easy to maintain and test.</p>
+        <p data-i18n="about.bio4">Based in Castellón, Spain. Open to remote opportunities across Europe or relocation.</p>
       </div>
-
       <div class="skills-section">
-        <h3 style="margin-bottom: 1.5rem; font-size: 1.25rem;" data-i18n="about.skills.title">Technologies</h3>
+        <h3 data-i18n="about.skills.title">Core Technologies</h3>
         <div class="skills-grid">
           <div class="skill-item">Playwright / Cypress</div>
           <div class="skill-item">Jest / Supertest</div>
           <div class="skill-item">React / TypeScript</div>
           <div class="skill-item">Node.js / Express</div>
           <div class="skill-item">PostgreSQL / Prisma</div>
-          <div class="skill-item">Docker / GitHub Actions</div>
+          <div class="skill-item">Docker / CI/CD</div>
+          <div class="skill-item">Postman / API Testing</div>
+          <div class="skill-item">Python / FastAPI</div>
         </div>
       </div>
     </div>
   </section>
 
-    <section id="contact" class="fade-in">
-    <h2 class="section-title" data-i18n="contact.title">Contact</h2>
-    <div class="contact-content">
-      <p data-i18n="contact.desc">Have a project in mind or want to collaborate? Feel free to reach out.</p>
-      <a href="mailto:eduardmilitarug@gmail.com" class="btn btn-primary">
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-        <span data-i18n="contact.email">Send email</span>
-      </a>
+  <!-- PROFESSIONAL CTA -->
+  <div class="cta-section fade-in">
+    <div class="cta-inner">
+      <div class="cta-glow" aria-hidden="true"></div>
+      <h2 data-i18n="cta.title">Let's Build Quality Software</h2>
+      <p data-i18n="cta.desc">Looking for a QA Automation Engineer who also understands frontend? Let's talk.</p>
+      <div class="cta-tags">
+        <span class="cta-tag" data-i18n="cta.tag1">QA Automation roles</span>
+        <span class="cta-tag" data-i18n="cta.tag2">Frontend + Testing hybrid</span>
+        <span class="cta-tag" data-i18n="cta.tag3">Remote Spain / EU</span>
+        <span class="cta-tag" data-i18n="cta.tag4">SDET Junior / Mid</span>
+      </div>
+      <div class="cta-buttons">
+        <a href="mailto:eduardmilitarug@gmail.com" class="btn btn-primary">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <span data-i18n="cta.email">Email Me</span>
+        </a>
+        <a href="https://linkedin.com/in/eduardmilitaru" target="_blank" rel="noopener" class="btn btn-secondary">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+          LinkedIn
+        </a>
+        <a href="Eduard_Militaru_CV.pdf" download class="btn btn-secondary">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span data-i18n="cta.cv">Download CV</span>
+        </a>
+      </div>
+    </div>
+  </div>
 
+  <!-- CONTACT -->
+  <section id="contact" class="fade-in">
+    <span class="section-label" data-i18n="contact.label">Contact</span>
+    <h2 class="section-title" data-i18n="contact.title">Get In Touch</h2>
+    <div class="contact-content">
+      <p data-i18n="contact.desc">Have a role in mind or want to discuss a project? I'm always happy to connect.</p>
+      <a href="mailto:eduardmilitarug@gmail.com" class="btn btn-primary">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <span data-i18n="contact.email">Send Email</span>
+      </a>
       <div class="social-links">
         <a href="https://github.com/EduardMilitaruG" target="_blank" rel="noopener" class="social-link" aria-label="GitHub">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
         </a>
         <a href="https://linkedin.com/in/eduardmilitaru" target="_blank" rel="noopener" class="social-link" aria-label="LinkedIn">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
         </a>
         <a href="mailto:eduardmilitarug@gmail.com" class="social-link" aria-label="Email">
-          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
         </a>
       </div>
     </div>
   </section>
 
-    <footer>
-    <p>&copy; <span id="year"></span> Eduard Militaru. <span data-i18n="footer.text">Designed and built with care.</span></p>
+  <footer>
+    <p>&copy; <span id="year"></span> Eduard Militaru &middot; <span data-i18n="footer.text">Designed and built with care.</span></p>
   </footer>
 
   <script>
-    // Translations
+    // ===== TRANSLATIONS =====
     const translations = {
       en: {
         'nav.projects': 'Projects',
         'nav.about': 'About',
         'nav.contact': 'Contact',
-        'hero.description': 'Test automation with Playwright and Cypress. Modern interfaces with React and TypeScript. 1+ years delivering quality software in production.',
-        'hero.cta.projects': 'View projects',
-        'hero.cta.contact': 'Contact',
+        'hero.tag': 'Open to new opportunities',
+        'hero.name': 'Eduard Militaru',
+        'hero.headline.l1': 'QA Automation Engineer',
+        'hero.headline.l2': 'with Frontend Background',
+        'hero.description': 'I build reliable web products, reduce release risk, and automate repetitive testing workflows using Playwright, TypeScript and React.',
+        'hero.cta.projects': 'View Projects',
+        'hero.cta.cv': 'Download CV',
+        'hero.cta.contact': 'Contact Me',
+        'snap.exp.label': 'Experience',
+        'snap.exp.value': 'QA + Frontend in production environments',
+        'snap.testing.label': 'Testing',
+        'snap.stack.label': 'Stack',
+        'snap.lang.label': 'Languages',
+        'snap.lang.value': 'Spanish · English · Romanian',
+        'snap.location.label': 'Location',
+        'snap.location.value': 'Castellón, Spain · Remote Ready',
+        'snap.roles.label': 'Open To',
+        'snap.roles.value': 'QA Automation · SDET · Frontend+QA',
+        'projects.label': 'Work',
         'projects.title': 'Projects',
-        'projects.subtitle': 'A selection of personal and professional projects showcasing my technical skills.',
-        'project.flipscout.desc': 'Japanese arbitrage profit calculator. Monitors Yahoo Auctions JP and Mercari JP for underpriced tech, Pokémon cards and fashion — calculates real EUR margins including EMS shipping and platform fees — and snipers Wallapop/Vinted for matching resale listings.',
-        'project.jobfy2.desc': 'Full-stack job scraper dashboard. TypeScript monorepo with React 19, Node.js, PostgreSQL and Prisma. Async multi-source scraping, real-time status polling, stats dashboard and CI/CD pipeline with GitHub Actions.',
-        'project.testSuite.desc': 'Standalone QA automation suite for JobFy v2. 204 tests across Playwright E2E (4 browsers), Jest unit tests and Supertest integration tests. Covers API contracts, UI flows, responsive design and error handling.',
-        'project.finbyt.desc': 'Full-stack investment dashboard for managing crypto, stocks and ETFs with live CoinGecko prices. JWT auth, full CRUD, interactive P/L charts. TypeScript end-to-end.',
-        'project.finbyt.demo': 'Demo: demo@finbyt.app / demo123456',
-        'project.archiveScout.desc': 'Python automation bot monitoring Japanese secondhand marketplaces (Yahoo Auctions via ZenMarket) for underpriced archive fashion. Deal scoring engine, Cloudflare bypass and real-time Telegram & Discord alerts.',
-        'project.fitnessTracker.desc': 'Mobile-first PWA for fitness tracking. Workout logging, nutrition and macro tracking, water intake, progress charts and creatine reminders. Works offline.',
-        'about.title': 'About',
-        'about.subtitle': 'QA Engineer and Frontend Developer passionate about software quality and well-crafted interfaces.',
-        'about.bio1': "I'm a QA Engineer and Frontend Developer with 1+ years of experience delivering quality software in production.",
-        'about.bio2': 'Specialised in test automation with Playwright and Cypress, and building modern interfaces with React and TypeScript.',
-        'about.bio3': 'Available in Valencia, Madrid or remote — open to international opportunities.',
-        'about.skills.title': 'Technologies',
-        'contact.title': 'Contact',
-        'contact.desc': 'Have a project in mind or want to collaborate? Feel free to reach out.',
-        'contact.email': 'Send email',
+        'projects.subtitle': 'Selected projects demonstrating QA automation, full-stack development, and real-world problem solving.',
+        'flag.stat.tests': 'Tests',
+        'flag.stat.browsers': 'Browsers',
+        'flag.stat.types': 'Types',
+        'flag.stat.pass': 'Pass Rate',
+        'proj.testsuite.desc': 'Standalone QA automation suite covering a real full-stack application. 204 automated tests across 4 browsers, reducing manual regression effort and increasing release confidence. Covers API contract validation, E2E UI flows, responsive design, and error handling — all in TypeScript.',
+        'proj.flipscout.desc': 'Multi-source arbitrage intelligence dashboard. Monitors Yahoo Auctions JP and Mercari JP for underpriced tech and collectibles, calculates real EUR margins including fees and EMS shipping, then cross-references Wallapop and Vinted for resale opportunities.',
+        'proj.jobfy2.desc': 'Multi-source job intelligence dashboard with real-time polling and automated CI pipelines. TypeScript monorepo with React 19, Node.js, PostgreSQL and Prisma — async multi-source scraping, stats dashboard, and full GitHub Actions CI/CD.',
+        'proj.finbyt.desc': 'Full-stack investment portfolio dashboard managing crypto, stocks and ETFs with live CoinGecko prices. JWT auth, full CRUD, interactive P/L charts — TypeScript end-to-end.',
+        'proj.cochesbot.desc': 'Telegram bot and web dashboard for the Spanish used car market. Monitors Wallapop and Milanuncios for underpriced listings, scores deals against market value, and sends real-time alerts with buy/pass recommendations.',
+        'proj.totalscope.desc': 'Website for a creative studio. Built with Astro for fast static delivery, featuring a project gallery, aerial photography section, and a bespoke grain texture aesthetic with custom cursor interactions.',
+        'link.github': 'View on GitHub',
+        'about.label': 'Background',
+        'about.title': 'About Me',
+        'about.subtitle': 'QA Automation Engineer with a frontend background, focused on shipping reliable software.',
+        'about.bio1': "I'm a QA Automation Engineer with a frontend background, focused on building reliable software that teams can ship with confidence.",
+        'about.bio2': 'I specialise in test automation with Playwright and Cypress — covering E2E flows, API contract validation, and responsive design — all in TypeScript.',
+        'about.bio3': 'On the frontend side, I work with React and TypeScript to build clean, performant interfaces that are easy to maintain and test.',
+        'about.bio4': 'Based in Castellón, Spain. Open to remote opportunities across Europe or relocation.',
+        'about.skills.title': 'Core Technologies',
+        'cta.title': "Let's Build Quality Software",
+        'cta.desc': "Looking for a QA Automation Engineer who also understands frontend? Let's talk.",
+        'cta.tag1': 'QA Automation roles',
+        'cta.tag2': 'Frontend + Testing hybrid',
+        'cta.tag3': 'Remote Spain / EU',
+        'cta.tag4': 'SDET Junior / Mid',
+        'cta.email': 'Email Me',
+        'cta.cv': 'Download CV',
+        'contact.label': 'Contact',
+        'contact.title': 'Get In Touch',
+        'contact.desc': "Have a role in mind or want to discuss a project? I'm always happy to connect.",
+        'contact.email': 'Send Email',
         'footer.text': 'Designed and built with care.',
       },
       es: {
         'nav.projects': 'Proyectos',
-        'nav.about': 'Sobre mi',
+        'nav.about': 'Sobre mí',
         'nav.contact': 'Contacto',
-        'hero.description': 'Automatización de pruebas con Playwright y Cypress. Interfaces modernas con React y TypeScript. 1+ años entregando software de calidad en producción.',
-        'hero.cta.projects': 'Ver proyectos',
+        'hero.tag': 'Abierto a nuevas oportunidades',
+        'hero.name': 'Eduard Militaru',
+        'hero.headline.l1': 'QA Automation Engineer',
+        'hero.headline.l2': 'con Background en Frontend',
+        'hero.description': 'Construyo productos web fiables, reduzco el riesgo en cada release y automatizo workflows de testing repetitivos con Playwright, TypeScript y React.',
+        'hero.cta.projects': 'Ver Proyectos',
+        'hero.cta.cv': 'Descargar CV',
         'hero.cta.contact': 'Contactar',
+        'snap.exp.label': 'Experiencia',
+        'snap.exp.value': 'QA + Frontend en entornos de producción',
+        'snap.testing.label': 'Testing',
+        'snap.stack.label': 'Stack',
+        'snap.lang.label': 'Idiomas',
+        'snap.lang.value': 'Español · Inglés · Rumano',
+        'snap.location.label': 'Ubicación',
+        'snap.location.value': 'Castellón, España · Disponible Remoto',
+        'snap.roles.label': 'Abierto a',
+        'snap.roles.value': 'QA Automation · SDET · Frontend+QA',
+        'projects.label': 'Trabajo',
         'projects.title': 'Proyectos',
-        'projects.subtitle': 'Una selección de proyectos personales y profesionales que muestran mis habilidades técnicas.',
-        'project.flipscout.desc': 'Calculadora de arbitraje japonés. Monitoriza Yahoo Auctions JP y Mercari JP en busca de tecnología, cartas Pokémon y moda infravalorada — calcula márgenes reales en EUR incluyendo envío EMS y comisiones de plataforma — y snipers Wallapop/Vinted para encontrar listados de reventa.',
-        'project.jobfy2.desc': 'Full-stack job scraper dashboard. Monorepo TypeScript con React 19, Node.js, PostgreSQL y Prisma. Scraping asíncrono multi-fuente, polling en tiempo real, stats dashboard y CI/CD con GitHub Actions.',
-        'project.testSuite.desc': 'Suite de automatización QA standalone para JobFy v2. 204 tests con Playwright E2E (4 navegadores), Jest unitarios y Supertest de integración. Cubre contratos API, flujos UI, diseño responsive y manejo de errores.',
-        'project.finbyt.desc': 'Dashboard full-stack para gestionar inversiones en criptomonedas, acciones y ETFs con precios en tiempo real de CoinGecko. Auth JWT, CRUD completo, gráficos P/L interactivos. TypeScript end-to-end.',
-        'project.finbyt.demo': 'Demo: demo@finbyt.app / demo123456',
-        'project.archiveScout.desc': 'Bot de automatización Python que monitoriza marketplaces japoneses de segunda mano (Yahoo Auctions vía ZenMarket) en busca de moda de archivo infravalorada. Motor de scoring de deals, bypass de Cloudflare y alertas en tiempo real por Telegram y Discord.',
-        'project.fitnessTracker.desc': 'PWA mobile-first para seguimiento de fitness. Registro de entrenamientos, nutrición y macros, ingesta de agua, gráficos de progreso y recordatorios de creatina. Funciona offline.',
-        'about.title': 'Sobre mi',
-        'about.subtitle': 'QA Engineer y Frontend Developer con pasión por la calidad del software y las interfaces bien construidas.',
-        'about.bio1': 'Soy QA Engineer y Frontend Developer con 1+ años de experiencia entregando software de calidad en producción.',
-        'about.bio2': 'Especializado en automatización de pruebas con Playwright y Cypress, y en construir interfaces modernas con React y TypeScript.',
-        'about.bio3': 'Disponible en Valencia, Madrid o en remoto — abierto a oportunidades internacionales.',
-        'about.skills.title': 'Tecnologías',
-        'contact.title': 'Contacto',
-        'contact.desc': '¿Tienes un proyecto en mente o quieres colaborar? No dudes en contactarme.',
-        'contact.email': 'Enviar email',
+        'projects.subtitle': 'Proyectos seleccionados que demuestran automatización QA, desarrollo full-stack y resolución de problemas reales.',
+        'flag.stat.tests': 'Tests',
+        'flag.stat.browsers': 'Navegadores',
+        'flag.stat.types': 'Tipos',
+        'flag.stat.pass': 'Tasa Paso',
+        'proj.testsuite.desc': 'Suite de automatización QA standalone para una aplicación full-stack real. 204 tests automatizados en 4 navegadores, reduciendo el esfuerzo de regresión manual y aumentando la confianza en cada release. Cubre contratos API, flujos E2E, diseño responsive y manejo de errores — todo en TypeScript.',
+        'proj.flipscout.desc': 'Dashboard de inteligencia de arbitraje multi-fuente. Monitoriza Yahoo Auctions JP y Mercari JP buscando tecnología y coleccionables infravalorados, calcula márgenes reales en EUR incluyendo comisiones y envío EMS, y cruza datos con Wallapop y Vinted para oportunidades de reventa.',
+        'proj.jobfy2.desc': 'Dashboard de inteligencia de empleo multi-fuente con polling en tiempo real y pipelines CI automatizados. Monorepo TypeScript con React 19, Node.js, PostgreSQL y Prisma — scraping asíncrono, dashboard de estado y CI/CD completo con GitHub Actions.',
+        'proj.finbyt.desc': 'Dashboard full-stack para gestionar inversiones en criptomonedas, acciones y ETFs con precios en tiempo real de CoinGecko. Auth JWT, CRUD completo, gráficos P/L interactivos — TypeScript end-to-end.',
+        'proj.cochesbot.desc': 'Bot de Telegram y dashboard web para el mercado de coches de segunda mano en España. Monitoriza Wallapop y Milanuncios buscando listados infravalorados, puntúa ofertas contra el valor de mercado y envía alertas en tiempo real.',
+        'proj.totalscope.desc': 'Sitio web para un estudio creativo. Construido con Astro para entrega estática rápida, con galería de proyectos, sección de fotografía aérea y estética de textura grain con cursor personalizado.',
+        'link.github': 'Ver en GitHub',
+        'about.label': 'Perfil',
+        'about.title': 'Sobre Mí',
+        'about.subtitle': 'QA Automation Engineer con background en frontend, centrado en lanzar software fiable.',
+        'about.bio1': 'Soy QA Automation Engineer con background en frontend, enfocado en construir software fiable que los equipos puedan lanzar con confianza.',
+        'about.bio2': 'Me especializo en automatización con Playwright y Cypress — cubriendo flujos E2E, validación de contratos API y diseño responsive — todo en TypeScript.',
+        'about.bio3': 'En la parte frontend, trabajo con React y TypeScript para construir interfaces limpias y de alto rendimiento, fáciles de mantener y testear.',
+        'about.bio4': 'Basado en Castellón, España. Abierto a oportunidades remotas en Europa o reubicación.',
+        'about.skills.title': 'Tecnologías Principales',
+        'cta.title': 'Construyamos Software de Calidad',
+        'cta.desc': '¿Buscas un QA Automation Engineer que también entienda el frontend? Hablemos.',
+        'cta.tag1': 'Roles QA Automation',
+        'cta.tag2': 'Frontend + Testing híbrido',
+        'cta.tag3': 'Remoto España / UE',
+        'cta.tag4': 'SDET Junior / Mid',
+        'cta.email': 'Enviar Email',
+        'cta.cv': 'Descargar CV',
+        'contact.label': 'Contacto',
+        'contact.title': 'Hablemos',
+        'contact.desc': '¿Tienes un rol en mente o quieres hablar de un proyecto? Siempre estoy disponible.',
+        'contact.email': 'Enviar Email',
         'footer.text': 'Diseñado y desarrollado con cuidado.',
       }
     };
@@ -907,48 +1391,45 @@
     function applyLang(lang) {
       document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
-        if (translations[lang][key]) el.textContent = translations[lang][key];
+        if (translations[lang][key] !== undefined) el.textContent = translations[lang][key];
       });
       document.documentElement.lang = lang;
       document.getElementById('lang-label').textContent = lang === 'en' ? 'ES' : 'EN';
       currentLang = lang;
     }
 
-    function toggleLang() {
-      applyLang(currentLang === 'en' ? 'es' : 'en');
-    }
+    function toggleLang() { applyLang(currentLang === 'en' ? 'es' : 'en'); }
 
-    // Set current year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Mobile menu toggle
-    function toggleMenu() {
-      document.getElementById('nav').classList.toggle('active');
-    }
+    function toggleMenu() { document.getElementById('nav').classList.toggle('active'); }
 
-    // Close mobile menu when clicking a link
     document.querySelectorAll('#nav a').forEach(link => {
-      link.addEventListener('click', () => {
-        document.getElementById('nav').classList.remove('active');
-      });
+      link.addEventListener('click', () => document.getElementById('nav').classList.remove('active'));
     });
 
-    // Scroll animations
+    // Scroll reveal
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.1 });
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+    }, { threshold: 0.07 });
 
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-    // ============================================
-    // Topographic Background Animation
-    // ============================================
+    // ===== LIGHTBOX =====
+    (function initLightbox() {
+      const overlay = document.createElement('div');
+      overlay.className = 'lightbox-overlay';
+      const img = document.createElement('img');
+      overlay.appendChild(img);
+      document.body.appendChild(overlay);
+      document.querySelectorAll('img[data-lightbox]').forEach(el => {
+        el.addEventListener('click', () => { img.src = el.src; overlay.classList.add('active'); });
+      });
+      overlay.addEventListener('click', () => overlay.classList.remove('active'));
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') overlay.classList.remove('active'); });
+    })();
 
-    // Simplex Noise - Full implementation matching simplex-noise library
+    // ===== TOPOGRAPHIC BACKGROUND =====
     function createNoise2D(random = Math.random) {
       const SQRT3 = Math.sqrt(3);
       const F2 = 0.5 * (SQRT3 - 1);
@@ -957,83 +1438,40 @@
       const GRAD2 = [
         [1, 0], [-1, 0], [0, 1], [0, -1],
         [1, 1], [-1, 1], [1, -1], [-1, -1]
-      ].map(([x, y]) => {
-        const len = Math.sqrt(x * x + y * y);
-        return [x / len, y / len];
-      });
+      ].map(([x, y]) => { const len = Math.sqrt(x*x + y*y); return [x/len, y/len]; });
 
       const perm = new Uint8Array(512);
       const permGrad2 = new Array(512);
-
       const p = new Uint8Array(256);
       for (let i = 0; i < 256; i++) p[i] = i;
-
-      for (let i = 255; i > 0; i--) {
-        const j = Math.floor(random() * (i + 1));
-        [p[i], p[j]] = [p[j], p[i]];
-      }
-
-      for (let i = 0; i < 512; i++) {
-        perm[i] = p[i & 255];
-        permGrad2[i] = GRAD2[perm[i] % 8];
-      }
+      for (let i = 255; i > 0; i--) { const j = Math.floor(random() * (i+1)); [p[i], p[j]] = [p[j], p[i]]; }
+      for (let i = 0; i < 512; i++) { perm[i] = p[i & 255]; permGrad2[i] = GRAD2[perm[i] % 8]; }
 
       return function noise2D(x, y) {
         let n0 = 0, n1 = 0, n2 = 0;
-
         const s = (x + y) * F2;
-        const i = Math.floor(x + s);
-        const j = Math.floor(y + s);
-
+        const i = Math.floor(x + s), j = Math.floor(y + s);
         const t = (i + j) * G2;
-        const X0 = i - t;
-        const Y0 = j - t;
-        const x0 = x - X0;
-        const y0 = y - Y0;
-
-        const i1 = x0 > y0 ? 1 : 0;
-        const j1 = x0 > y0 ? 0 : 1;
-
-        const x1 = x0 - i1 + G2;
-        const y1 = y0 - j1 + G2;
-        const x2 = x0 - 1 + 2 * G2;
-        const y2 = y0 - 1 + 2 * G2;
-
-        const ii = i & 255;
-        const jj = j & 255;
-
-        let t0 = 0.5 - x0 * x0 - y0 * y0;
-        if (t0 > 0) {
-          const g0 = permGrad2[ii + perm[jj]];
-          t0 *= t0;
-          n0 = t0 * t0 * (g0[0] * x0 + g0[1] * y0);
-        }
-
-        let t1 = 0.5 - x1 * x1 - y1 * y1;
-        if (t1 > 0) {
-          const g1 = permGrad2[ii + i1 + perm[jj + j1]];
-          t1 *= t1;
-          n1 = t1 * t1 * (g1[0] * x1 + g1[1] * y1);
-        }
-
-        let t2 = 0.5 - x2 * x2 - y2 * y2;
-        if (t2 > 0) {
-          const g2 = permGrad2[ii + 1 + perm[jj + 1]];
-          t2 *= t2;
-          n2 = t2 * t2 * (g2[0] * x2 + g2[1] * y2);
-        }
-
+        const X0 = i - t, Y0 = j - t;
+        const x0 = x - X0, y0 = y - Y0;
+        const i1 = x0 > y0 ? 1 : 0, j1 = x0 > y0 ? 0 : 1;
+        const x1 = x0 - i1 + G2, y1 = y0 - j1 + G2;
+        const x2 = x0 - 1 + 2*G2, y2 = y0 - 1 + 2*G2;
+        const ii = i & 255, jj = j & 255;
+        let t0 = 0.5 - x0*x0 - y0*y0;
+        if (t0 > 0) { const g0 = permGrad2[ii + perm[jj]]; t0 *= t0; n0 = t0*t0*(g0[0]*x0 + g0[1]*y0); }
+        let t1 = 0.5 - x1*x1 - y1*y1;
+        if (t1 > 0) { const g1 = permGrad2[ii+i1 + perm[jj+j1]]; t1 *= t1; n1 = t1*t1*(g1[0]*x1 + g1[1]*y1); }
+        let t2 = 0.5 - x2*x2 - y2*y2;
+        if (t2 > 0) { const g2 = permGrad2[ii+1 + perm[jj+1]]; t2 *= t2; n2 = t2*t2*(g2[0]*x2 + g2[1]*y2); }
         return 70 * (n0 + n1 + n2);
       };
     }
 
-    
     function createTopographicRenderer(canvas) {
       const ctx = canvas.getContext('2d');
       const noise2D = createNoise2D();
-
-      let animationId = null;
-      let time = 0;
+      let animationId = null, time = 0;
 
       const config = {
         scale: 0.003,
@@ -1059,7 +1497,6 @@
         const cols = Math.ceil(width / config.cellSize) + 1;
         const rows = Math.ceil(height / config.cellSize) + 1;
         const field = [];
-
         for (let y = 0; y < rows; y++) {
           field[y] = [];
           for (let x = 0; x < cols; x++) {
@@ -1071,227 +1508,110 @@
         return { field, cols, rows };
       }
 
-      function lerp(a, b, t) {
-        return a + (b - a) * t;
-      }
+      function lerp(a, b, t) { return a + (b - a) * t; }
 
       function getContourSegments(field, cols, rows, threshold) {
         const segments = [];
-
         for (let y = 0; y < rows - 1; y++) {
           for (let x = 0; x < cols - 1; x++) {
-            const tl = field[y][x];
-            const tr = field[y][x + 1];
-            const br = field[y + 1][x + 1];
-            const bl = field[y + 1][x];
-
-            const tlAbove = tl >= threshold;
-            const trAbove = tr >= threshold;
-            const brAbove = br >= threshold;
-            const blAbove = bl >= threshold;
-
-            const caseIndex = (tlAbove ? 8 : 0) | (trAbove ? 4 : 0) | (brAbove ? 2 : 0) | (blAbove ? 1 : 0);
-
+            const tl = field[y][x], tr = field[y][x+1];
+            const br = field[y+1][x+1], bl = field[y+1][x];
+            const caseIndex = ((tl >= threshold) ? 8 : 0) | ((tr >= threshold) ? 4 : 0) |
+                              ((br >= threshold) ? 2 : 0) | ((bl >= threshold) ? 1 : 0);
             if (caseIndex === 0 || caseIndex === 15) continue;
-
-            const px = x * config.cellSize;
-            const py = y * config.cellSize;
-            const cs = config.cellSize;
-
-            const topT = (threshold - tl) / (tr - tl);
-            const rightT = (threshold - tr) / (br - tr);
+            const px = x * config.cellSize, py = y * config.cellSize, cs = config.cellSize;
+            const topT    = (threshold - tl) / (tr - tl);
+            const rightT  = (threshold - tr) / (br - tr);
             const bottomT = (threshold - bl) / (br - bl);
-            const leftT = (threshold - tl) / (bl - tl);
-
-            const top = { x: px + lerp(0, cs, topT), y: py };
-            const right = { x: px + cs, y: py + lerp(0, cs, rightT) };
+            const leftT   = (threshold - tl) / (bl - tl);
+            const top    = { x: px + lerp(0, cs, topT),    y: py };
+            const right  = { x: px + cs,                   y: py + lerp(0, cs, rightT) };
             const bottom = { x: px + lerp(0, cs, bottomT), y: py + cs };
-            const left = { x: px, y: py + lerp(0, cs, leftT) };
-
+            const left   = { x: px,                        y: py + lerp(0, cs, leftT) };
             switch (caseIndex) {
               case 1: case 14: segments.push([left, bottom]); break;
               case 2: case 13: segments.push([bottom, right]); break;
               case 3: case 12: segments.push([left, right]); break;
               case 4: case 11: segments.push([top, right]); break;
-              case 5:
-                segments.push([left, top]);
-                segments.push([bottom, right]);
-                break;
+              case 5: segments.push([left, top]); segments.push([bottom, right]); break;
               case 6: case 9: segments.push([top, bottom]); break;
               case 7: case 8: segments.push([left, top]); break;
-              case 10:
-                segments.push([top, right]);
-                segments.push([left, bottom]);
-                break;
+              case 10: segments.push([top, right]); segments.push([left, bottom]); break;
             }
           }
         }
         return segments;
       }
 
-      // Connect segments into continuous paths
       function connectSegments(segments) {
-        if (segments.length === 0) return [];
-
-        const paths = [];
-        const used = new Set();
-        const tolerance = 0.5;
-
-        function pointsEqual(p1, p2) {
-          return Math.abs(p1.x - p2.x) < tolerance && Math.abs(p1.y - p2.y) < tolerance;
-        }
-
-        function findConnected(point, excludeIdx) {
+        if (!segments.length) return [];
+        const paths = [], used = new Set(), tol = 0.5;
+        function eq(p1, p2) { return Math.abs(p1.x-p2.x) < tol && Math.abs(p1.y-p2.y) < tol; }
+        function findNext(point) {
           for (let i = 0; i < segments.length; i++) {
-            if (used.has(i) || i === excludeIdx) continue;
-            const [start, end] = segments[i];
-            if (pointsEqual(point, start)) return { idx: i, point: end, reverse: false };
-            if (pointsEqual(point, end)) return { idx: i, point: start, reverse: true };
+            if (used.has(i)) continue;
+            if (eq(point, segments[i][0])) return { idx: i, point: segments[i][1] };
+            if (eq(point, segments[i][1])) return { idx: i, point: segments[i][0] };
           }
           return null;
         }
-
         for (let i = 0; i < segments.length; i++) {
           if (used.has(i)) continue;
-
           const path = [segments[i][0], segments[i][1]];
           used.add(i);
-
-          let next = findConnected(path[path.length - 1], -1);
-          while (next) {
-            used.add(next.idx);
-            path.push(next.point);
-            next = findConnected(path[path.length - 1], -1);
-          }
-
-          let prev = findConnected(path[0], -1);
-          while (prev) {
-            used.add(prev.idx);
-            path.unshift(prev.point);
-            prev = findConnected(path[0], -1);
-          }
-
-          if (path.length >= 2) {
-            paths.push(path);
-          }
+          let next = findNext(path[path.length-1]);
+          while (next) { used.add(next.idx); path.push(next.point); next = findNext(path[path.length-1]); }
+          let prev = findNext(path[0]);
+          while (prev) { used.add(prev.idx); path.unshift(prev.point); prev = findNext(path[0]); }
+          if (path.length >= 2) paths.push(path);
         }
-
         return paths;
       }
 
-      function drawSmoothPath(ctx, points) {
-        if (points.length < 2) return;
-
-        if (points.length === 2) {
-          ctx.moveTo(points[0].x, points[0].y);
-          ctx.lineTo(points[1].x, points[1].y);
-          return;
+      function drawSmoothPath(ctx, pts) {
+        if (pts.length < 2) return;
+        ctx.moveTo(pts[0].x, pts[0].y);
+        if (pts.length === 2) { ctx.lineTo(pts[1].x, pts[1].y); return; }
+        for (let i = 1; i < pts.length - 2; i++) {
+          ctx.quadraticCurveTo(pts[i].x, pts[i].y, (pts[i].x+pts[i+1].x)/2, (pts[i].y+pts[i+1].y)/2);
         }
-
-        ctx.moveTo(points[0].x, points[0].y);
-
-        if (points.length === 3) {
-          const xc = (points[0].x + points[2].x) / 2;
-          const yc = (points[0].y + points[2].y) / 2;
-          ctx.quadraticCurveTo(points[1].x, points[1].y, xc, yc);
-          ctx.quadraticCurveTo(points[1].x, points[1].y, points[2].x, points[2].y);
-          return;
-        }
-
-        for (let i = 1; i < points.length - 2; i++) {
-          const xc = (points[i].x + points[i + 1].x) / 2;
-          const yc = (points[i].y + points[i + 1].y) / 2;
-          ctx.quadraticCurveTo(points[i].x, points[i].y, xc, yc);
-        }
-
-        const n = points.length - 1;
-        ctx.quadraticCurveTo(
-          points[n - 1].x, points[n - 1].y,
-          points[n].x, points[n].y
-        );
+        const n = pts.length - 1;
+        ctx.quadraticCurveTo(pts[n-1].x, pts[n-1].y, pts[n].x, pts[n].y);
       }
 
       function render() {
-        const width = canvas.width / (window.devicePixelRatio || 1);
-        const height = canvas.height / (window.devicePixelRatio || 1);
-
+        const dpr = window.devicePixelRatio || 1;
+        const width = canvas.width / dpr, height = canvas.height / dpr;
         ctx.clearRect(0, 0, width, height);
-
         const { field, cols, rows } = generateNoiseField(width, height, time);
-
         config.levels.forEach((level, i) => {
           const opacity = config.baseOpacity * (1 - i * 0.15);
-          ctx.strokeStyle = `rgba(${config.color.r}, ${config.color.g}, ${config.color.b}, ${opacity})`;
+          ctx.strokeStyle = `rgba(${config.color.r},${config.color.g},${config.color.b},${opacity})`;
           ctx.lineWidth = config.lineWidth;
           ctx.lineCap = 'round';
           ctx.lineJoin = 'round';
-
           const segments = getContourSegments(field, cols, rows, level);
           const paths = connectSegments(segments);
-
           ctx.beginPath();
-          paths.forEach(path => {
-            drawSmoothPath(ctx, path);
-          });
+          paths.forEach(path => drawSmoothPath(ctx, path));
           ctx.stroke();
         });
-
         time += config.animationSpeed;
         animationId = requestAnimationFrame(render);
       }
 
-      function start() {
-        resize();
-        window.addEventListener('resize', resize);
-        render();
-      }
-
-      function stop() {
-        if (animationId) {
-          cancelAnimationFrame(animationId);
-        }
-        window.removeEventListener('resize', resize);
-      }
-
-      return { start, stop, resize };
+      return {
+        start() { resize(); window.addEventListener('resize', resize); render(); },
+        stop()  { if (animationId) cancelAnimationFrame(animationId); window.removeEventListener('resize', resize); }
+      };
     }
 
-    // Initialize topographic background
-    (function initTopographicBackground() {
+    (function initTopographic() {
       const canvas = document.getElementById('topographic-canvas');
       if (!canvas) return;
-
-      // Skip on mobile for performance
-      const isMobile = window.matchMedia('(max-width: 768px)').matches;
-      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-      if (isMobile || prefersReducedMotion) {
-        return;
-      }
-
-      const renderer = createTopographicRenderer(canvas);
-      renderer.start();
-    })();
-
-    (function initLightbox() {
-      const overlay = document.createElement('div');
-      overlay.className = 'lightbox-overlay';
-      const img = document.createElement('img');
-      overlay.appendChild(img);
-      document.body.appendChild(overlay);
-
-      document.querySelectorAll('img[data-lightbox]').forEach(el => {
-        el.addEventListener('click', () => {
-          img.src = el.src;
-          overlay.classList.add('active');
-        });
-      });
-
-      overlay.addEventListener('click', () => overlay.classList.remove('active'));
-
-      document.addEventListener('keydown', e => {
-        if (e.key === 'Escape') overlay.classList.remove('active');
-      });
+      if (window.matchMedia('(max-width: 768px)').matches) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      createTopographicRenderer(canvas).start();
     })();
   </script>
 </body>
