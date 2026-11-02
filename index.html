@@ -1044,7 +1044,7 @@
             </span>
           </div>
           <h3>JobFy v2</h3>
-          <p data-i18n="proj.jobfy2.desc">Full-stack job dashboard (TypeScript monorepo with React, Node.js, PostgreSQL, Prisma and Docker) with 83 automated tests: 37 backend tests with Jest and Supertest, 29 frontend component tests and 17 end-to-end tests, wired into a GitHub Actions pipeline (typecheck, lint, tests, E2E and Docker build).</p>
+          <p data-i18n="proj.jobfy2.desc">Full-stack job dashboard (TypeScript monorepo with React, Node.js, PostgreSQL, Prisma and Docker) with 72 automated tests in a GitHub Actions pipeline (43 backend tests with Jest and Supertest, 29 frontend component tests), plus a separate 55-test Playwright + TypeScript E2E suite that found and fixed three bugs.</p>
           <div class="tech-stack">
             <span class="tech-badge">TypeScript</span>
             <span class="tech-badge">PostgreSQL</span>
@@ -1073,7 +1073,7 @@
         </div>
         <div class="project-content">
           <h3>FinByt</h3>
-          <p data-i18n="proj.finbyt.desc">Full-stack investment portfolio dashboard managing crypto, stocks and ETFs with live CoinGecko prices. JWT auth, full CRUD, interactive P/L charts — TypeScript end-to-end.</p>
+          <p data-i18n="proj.finbyt.desc">Full-stack investment portfolio dashboard managing crypto, stocks and ETFs with live CoinGecko prices. JWT auth, full CRUD, interactive P/L charts. React + Express + SQLite.</p>
           <p style="font-size:0.78rem;color:var(--text-muted);margin-bottom:1rem;">Demo: <code style="background:var(--bg-secondary);padding:0.15rem 0.4rem;border-radius:4px;color:var(--accent);font-size:0.73rem">demo@finbyt.app</code> / <code style="background:var(--bg-secondary);padding:0.15rem 0.4rem;border-radius:4px;color:var(--accent);font-size:0.73rem">demo123456</code></p>
           <div class="tech-stack">
             <span class="tech-badge">React</span>
@@ -1085,7 +1085,7 @@
             <span class="tech-badge">CoinGecko API</span>
           </div>
           <div class="project-links">
-            <a href="https://github.com/EduardMilitaruG/crypto-portfolio-dashboard" target="_blank" rel="noopener">
+            <a href="https://github.com/EduardMilitaruG/FinByt" target="_blank" rel="noopener">
               <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
               GitHub
             </a>
@@ -1110,7 +1110,7 @@
       <div class="about-text">
         <p data-i18n="about.bio1">I test software before it reaches users: end-to-end automation with Playwright and TypeScript, API validation with Postman and test data with SQL. I come from development, so I understand the code I test.</p>
         <p data-i18n="about.bio2">At OpenMS I built frontend features (React, TypeScript) and Node.js endpoints for three public-administration web apps, including the one for the Montanejos town council. I validated the endpoints with Postman before deployment and prepared test data with SQL on PostgreSQL. I also commissioned an IoT buoy system over LoRaWAN, validating communication in low-coverage areas.</p>
-        <p data-i18n="about.bio3">On GitHub: JobFy v2, a full-stack app covered by 83 automated tests, and a warehouse order simulator with fault injection and a SQL diagnostic runbook.</p>
+        <p data-i18n="about.bio3">On GitHub: JobFy v2, a full-stack app with 72 tests in CI and a 55-test Playwright E2E suite, and a warehouse order simulator with fault injection and a SQL diagnostic runbook.</p>
         <p data-i18n="about.bio4">Based in Castellón, Spain. Spanish, Romanian and English. Driving licence, open to travel and to relocating within Europe.</p>
       </div>
       <div class="skills-section">
@@ -1225,15 +1225,15 @@
         'flag.badge': 'Commissioning project',
         'qa.badge': 'QA & testing project',
         'proj.warehouse.desc': 'Simulates a warehouse order pipeline (received, picking, packing, shipping, delivered) with a state machine that rejects invalid transitions, PostgreSQL, structured logs and configurable fault injection. The README documents the diagnostic loop I would run during a go-live: spot the symptom in the metrics, find stuck orders with SQL, read the transition history and the logs, and confirm the root cause.',
-        'proj.jobfy2.desc': 'Full-stack job dashboard (TypeScript monorepo with React, Node.js, PostgreSQL, Prisma and Docker) with 83 automated tests: 37 backend tests with Jest and Supertest, 29 frontend component tests and 17 end-to-end tests, wired into a GitHub Actions pipeline (typecheck, lint, tests, E2E and Docker build).',
-        'proj.finbyt.desc': 'Full-stack investment portfolio dashboard managing crypto, stocks and ETFs with live CoinGecko prices. JWT auth, full CRUD, interactive P/L charts — TypeScript end-to-end.',
+        'proj.jobfy2.desc': 'Full-stack job dashboard (TypeScript monorepo with React, Node.js, PostgreSQL, Prisma and Docker) with 72 automated tests in a GitHub Actions pipeline (43 backend tests with Jest and Supertest, 29 frontend component tests), plus a separate 55-test Playwright + TypeScript E2E suite that found and fixed three bugs.',
+        'proj.finbyt.desc': 'Full-stack investment portfolio dashboard managing crypto, stocks and ETFs with live CoinGecko prices. JWT auth, full CRUD, interactive P/L charts. React + Express + SQLite.',
         'link.github': 'View on GitHub',
         'about.label': 'Background',
         'about.title': 'About Me',
         'about.subtitle': 'QA and test automation, with a web development background.',
         'about.bio1': "I test software before it reaches users: end-to-end automation with Playwright and TypeScript, API validation with Postman and test data with SQL. I come from development, so I understand the code I test.",
         'about.bio2': 'At OpenMS I built frontend features (React, TypeScript) and Node.js endpoints for three public-administration web apps, including the one for the Montanejos town council. I validated the endpoints with Postman before deployment and prepared test data with SQL on PostgreSQL. I also commissioned an IoT buoy system over LoRaWAN, validating communication in low-coverage areas.',
-        'about.bio3': "On GitHub: JobFy v2, a full-stack app covered by 83 automated tests, and a warehouse order simulator with fault injection and a SQL diagnostic runbook.",
+        'about.bio3': "On GitHub: JobFy v2, a full-stack app with 72 tests in CI and a 55-test Playwright E2E suite, and a warehouse order simulator with fault injection and a SQL diagnostic runbook.",
         'about.bio4': 'Based in Castellón, Spain. Spanish, Romanian and English. Driving licence, open to travel and to relocating within Europe.',
         'about.skills.title': 'Core Technologies',
         'cta.title': 'Looking for a QA or test automation profile?',
@@ -1286,15 +1286,15 @@
         'flag.badge': 'Proyecto de puesta en marcha',
         'qa.badge': 'Proyecto de QA y testing',
         'proj.warehouse.desc': 'Simula el flujo de pedidos de un almacén (recibido, picking, embalaje, envío, entregado) con una máquina de estados que rechaza transiciones inválidas, PostgreSQL, logs estructurados e inyección de fallos configurable. El README documenta el proceso de diagnóstico que seguiría en una puesta en marcha: detectar el síntoma en las métricas, localizar pedidos atascados con SQL, revisar el historial de transiciones y los logs, y confirmar la causa raíz.',
-        'proj.jobfy2.desc': 'Dashboard de empleo full-stack (monorepo TypeScript con React, Node.js, PostgreSQL, Prisma y Docker) con 83 pruebas automatizadas: 37 de backend con Jest y Supertest, 29 de componentes frontend y 17 E2E, integradas en un pipeline de GitHub Actions (typecheck, lint, tests, E2E y build de Docker).',
-        'proj.finbyt.desc': 'Dashboard full-stack para gestionar inversiones en criptomonedas, acciones y ETFs con precios en tiempo real de CoinGecko. Auth JWT, CRUD completo, gráficos P/L interactivos — TypeScript end-to-end.',
+        'proj.jobfy2.desc': 'Dashboard de empleo full-stack (monorepo TypeScript con React, Node.js, PostgreSQL, Prisma y Docker) con 72 pruebas automatizadas en un pipeline de GitHub Actions (43 de backend con Jest y Supertest, 29 de componentes frontend), más una suite E2E aparte de 55 pruebas con Playwright y TypeScript que encontró y corrigió tres bugs.',
+        'proj.finbyt.desc': 'Dashboard full-stack para gestionar inversiones en criptomonedas, acciones y ETFs con precios en tiempo real de CoinGecko. Auth JWT, CRUD completo, gráficos P/L interactivos. React + Express + SQLite.',
         'link.github': 'Ver en GitHub',
         'about.label': 'Perfil',
         'about.title': 'Sobre Mí',
         'about.subtitle': 'QA y automatización de pruebas, con base en desarrollo web.',
         'about.bio1': 'Pruebo software antes de que llegue al usuario: automatización E2E con Playwright y TypeScript, validación de APIs con Postman y datos de prueba con SQL. Vengo del desarrollo, así que entiendo el código que pruebo.',
         'about.bio2': 'En OpenMS desarrollé funcionalidades frontend (React, TypeScript) y endpoints en Node.js para tres aplicaciones web de administración pública, entre ellas la del Ayuntamiento de Montanejos. Validé los endpoints con Postman antes del despliegue y preparé datos de prueba con SQL sobre PostgreSQL. También puse en marcha un sistema IoT de boyas con LoRaWAN, validando la comunicación en zonas de baja cobertura.',
-        'about.bio3': 'En GitHub: JobFy v2, una aplicación full-stack cubierta por 83 pruebas automatizadas, y un simulador de pedidos de almacén con inyección de fallos y una guía de diagnóstico con SQL.',
+        'about.bio3': 'En GitHub: JobFy v2, una aplicación full-stack con 72 pruebas en CI y una suite E2E de 55 pruebas con Playwright, y un simulador de pedidos de almacén con inyección de fallos y una guía de diagnóstico con SQL.',
         'about.bio4': 'Vivo en Castellón. Español, rumano e inglés. Carné B, disponible para viajar y para reubicarme en Europa.',
         'about.skills.title': 'Tecnologías Principales',
         'cta.title': '¿Buscas un perfil de QA o automatización de pruebas?',
