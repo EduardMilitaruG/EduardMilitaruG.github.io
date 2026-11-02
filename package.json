@@ -1,0 +1,25 @@
+{
+  "name": "eduardmilitarug-portfolio",
+  "private": true,
+  "type": "module",
+  "description": "Portfolio site and its Playwright end-to-end suite",
+  "scripts": {
+    "serve": "serve -l 4173 .",
+    "test": "playwright test --project=chromium --project=firefox --project=webkit --project=mobile-chrome --project=mobile-safari --project=tablet",
+    "test:chromium": "playwright test --project=chromium",
+    "test:mobile": "playwright test --project=mobile-chrome --project=mobile-safari",
+    "test:smoke": "playwright test e2e/tests/smoke.spec.js",
+    "test:a11y": "playwright test e2e/tests/accessibility/",
+    "test:visual": "playwright test --project=visual",
+    "test:visual:update": "docker run --rm -v \"$PWD\":/work -v /work/node_modules -w /work mcr.microsoft.com/playwright:v1.58.0-noble sh -c \"npm ci && npx playwright test --project=visual --update-snapshots\"",
+    "test:perf": "playwright test e2e/tests/performance/",
+    "test:seo": "playwright test e2e/tests/seo/",
+    "test:live": "BASE_URL=https://eduardmilitarug.github.io/ playwright test e2e/tests/smoke.spec.js",
+    "report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
+    "@playwright/test": "^1.58.0",
+    "serve": "^14.2.6"
+  }
+}

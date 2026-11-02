@@ -26,7 +26,7 @@
       --bg-card-hover: #1c1c20;
       --text-primary: #fafafa;
       --text-secondary: #a1a1aa;
-      --text-muted: #71717a;
+      --text-muted: #82828b;
       --accent: #3b82f6;
       --accent-hover: #60a5fa;
       --accent-subtle: rgba(59, 130, 246, 0.1);
@@ -488,15 +488,18 @@
     .project-image { width: 100%; height: 200px; background: var(--bg-secondary); overflow: hidden; }
     .project-image--tall { height: 260px; }
 
-    .project-image img {
+    .project-image img,
+    .project-image video {
+      display: block;
       width: 100%;
       height: 100%;
       object-fit: cover;
       transition: transform 0.4s ease;
     }
 
-    .project-card:hover .project-image img { transform: scale(1.04); }
-    .project-image img[data-lightbox] { cursor: zoom-in; }
+    .project-card:hover .project-image img,
+    .project-card:hover .project-image video { transform: scale(1.04); }
+    .project-image [data-lightbox] { cursor: zoom-in; }
 
     .project-content {
       padding: 1.625rem;
@@ -594,7 +597,8 @@
 
     .lightbox-overlay.active { display: flex; }
 
-    .lightbox-overlay img {
+    .lightbox-overlay img,
+    .lightbox-overlay video {
       max-width: 92vw;
       max-height: 88vh;
       object-fit: contain;
@@ -856,7 +860,7 @@
         <a href="#contact" data-i18n="nav.contact">Contact</a>
       </nav>
       <div class="header-actions">
-        <button class="lang-toggle" onclick="toggleLang()" aria-label="Toggle language"><span id="lang-label">ES</span></button>
+        <button class="lang-toggle" onclick="toggleLang()" aria-label="ES, switch to Spanish"><span id="lang-label">ES</span></button>
         <button class="mobile-menu-btn" onclick="toggleMenu()" aria-label="Menu">
           <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/>
@@ -1034,7 +1038,7 @@
       <!-- JobFy v2 -->
       <div class="project-card">
         <div class="project-image project-image--tall">
-          <img src="jobfy-demo.gif" alt="JobFy v2 job dashboard demo" data-lightbox loading="lazy">
+          <video src="jobfy-demo.mp4" poster="jobfy-demo-poster.jpg" aria-label="JobFy v2 job dashboard demo" data-lightbox autoplay muted loop playsinline preload="metadata"></video>
         </div>
         <div class="project-content">
           <div class="project-badges">
@@ -1077,7 +1081,7 @@
           <p style="font-size:0.78rem;color:var(--text-muted);margin-bottom:1rem;">Demo: <code style="background:var(--bg-secondary);padding:0.15rem 0.4rem;border-radius:4px;color:var(--accent);font-size:0.73rem">demo@finbyt.app</code> / <code style="background:var(--bg-secondary);padding:0.15rem 0.4rem;border-radius:4px;color:var(--accent);font-size:0.73rem">demo123456</code></p>
           <div class="tech-stack">
             <span class="tech-badge">React</span>
-            <span class="tech-badge">TypeScript</span>
+            <span class="tech-badge">JavaScript</span>
             <span class="tech-badge">Node.js</span>
             <span class="tech-badge">Express</span>
             <span class="tech-badge">SQLite</span>
@@ -1322,6 +1326,9 @@
       });
       document.documentElement.lang = lang;
       document.getElementById('lang-label').textContent = lang === 'en' ? 'ES' : 'EN';
+      // The accessible name must contain the visible label (WCAG 2.5.3)
+      document.querySelector('.lang-toggle').setAttribute('aria-label',
+        lang === 'en' ? 'ES, switch to Spanish' : 'EN, cambiar a inglés');
       currentLang = lang;
     }
 
@@ -1346,14 +1353,20 @@
     (function initLightbox() {
       const overlay = document.createElement('div');
       overlay.className = 'lightbox-overlay';
-      const img = document.createElement('img');
-      overlay.appendChild(img);
       document.body.appendChild(overlay);
-      document.querySelectorAll('img[data-lightbox]').forEach(el => {
-        el.addEventListener('click', () => { img.src = el.src; overlay.classList.add('active'); });
+      const close = () => { overlay.classList.remove('active'); overlay.replaceChildren(); };
+      document.querySelectorAll('[data-lightbox]').forEach(el => {
+        el.addEventListener('click', () => {
+          // Videos get a playing copy; images get a plain <img>
+          const big = el.tagName === 'VIDEO' ? el.cloneNode() : document.createElement('img');
+          if (big.tagName === 'IMG') big.src = el.src;
+          overlay.replaceChildren(big);
+          overlay.classList.add('active');
+          if (big.tagName === 'VIDEO') big.play().catch(() => {});
+        });
       });
-      overlay.addEventListener('click', () => overlay.classList.remove('active'));
-      document.addEventListener('keydown', e => { if (e.key === 'Escape') overlay.classList.remove('active'); });
+      overlay.addEventListener('click', close);
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
     })();
 
     // ===== TOPOGRAPHIC BACKGROUND =====
