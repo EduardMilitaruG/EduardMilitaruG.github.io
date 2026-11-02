@@ -15,20 +15,19 @@ jobs:
     name: E2E (${{ matrix.project }})
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    # Browsers come preinstalled in the image; ubuntu-latest (26.04) is newer than Playwright 1.58 supports
+    container: mcr.microsoft.com/playwright:v1.58.0-noble
     strategy:
       fail-fast: false
       matrix:
         project: [chromium, firefox, webkit, mobile-chrome, mobile-safari, tablet]
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
       - run: npm ci
-      - run: npx playwright install --with-deps
       - name: Run suite against this commit (served locally)
         run: npx playwright test --project=${{ matrix.project }}
+        env:
+          HOME: /root
       - uses: actions/upload-artifact@v4
         if: failure()
         with:
@@ -61,17 +60,14 @@ jobs:
     name: Smoke test (live site)
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    container: mcr.microsoft.com/playwright:v1.58.0-noble
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
       - run: npm ci
-      - run: npx playwright install --with-deps chromium
       - name: Wait for GitHub Pages to publish this commit
         if: github.event_name == 'push'
         run: sleep 90
       - run: npx playwright test e2e/tests/smoke.spec.js e2e/tests/sections/projects.spec.js --project=chromium
         env:
           BASE_URL: https://eduardmilitarug.github.io/
+          HOME: /root
