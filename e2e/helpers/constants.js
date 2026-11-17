@@ -14,8 +14,8 @@ export const NAV_LINKS = [
 // `page` is a case study or demo hosted on this site (used while a repository is private).
 export const PROJECTS = [
   { title: 'Warehouse Order Simulator', github: 'https://github.com/EduardMilitaruG/warehouse-simulator' },
-  { title: 'Helpdesk API Quality', page: 'projects/helpdesk-api-quality/', pageLabel: 'Case Study' },
-  { title: 'flaky-hunter', demo: 'projects/flaky-hunter/' },
+  { title: 'Helpdesk API Quality', github: 'https://github.com/EduardMilitaruG/helpdesk-api-quality', page: 'projects/helpdesk-api-quality/', pageLabel: 'Case Study' },
+  { title: 'flaky-hunter', github: 'https://github.com/EduardMilitaruG/flaky-hunter', demo: 'projects/flaky-hunter/' },
   {
     title: 'JobFy v2',
     github: 'https://github.com/EduardMilitaruG/JobFy-v2',
