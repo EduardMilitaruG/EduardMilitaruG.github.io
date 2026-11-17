@@ -1035,6 +1035,67 @@
         </div>
       </div>
 
+      <!-- Helpdesk API quality -->
+      <div class="project-card">
+        <div class="project-image">
+          <img src="helpdesk-api.jpg" alt="Helpdesk API case study: 131 tests, 1,605 fuzzing cases, k6 and ZAP results" loading="lazy">
+        </div>
+        <div class="project-content">
+          <div class="project-badges">
+            <span class="badge-flagship">
+              <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <span data-i18n="qa.badge">QA &amp; testing project</span>
+            </span>
+          </div>
+          <h3>Helpdesk API Quality</h3>
+          <p data-i18n="proj.helpdesk.desc">IT helpdesk ticketing REST API (roles, status workflow, SLA deadlines, ETag concurrency) tested in seven layers: 131 Vitest tests with property-based checks, real PostgreSQL integration, OpenAPI contract and OWASP API security tests, plus Schemathesis fuzzing, k6 load budgets and an OWASP ZAP scan in CI. The layers found and fixed 11 real defects.</p>
+          <div class="tech-stack">
+            <span class="tech-badge">TypeScript</span>
+            <span class="tech-badge">PostgreSQL</span>
+            <span class="tech-badge">OpenAPI</span>
+            <span class="tech-badge">Schemathesis</span>
+            <span class="tech-badge">k6</span>
+            <span class="tech-badge">OWASP ZAP</span>
+          </div>
+          <div class="project-links">
+            <a href="projects/helpdesk-api-quality/" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg>
+              <span data-i18n="link.casestudy">Case Study</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- flaky-hunter -->
+      <div class="project-card">
+        <div class="project-image">
+          <img src="flaky-hunter.jpg" alt="flaky-hunter dashboard scoring flaky tests across 30 CI runs" loading="lazy">
+        </div>
+        <div class="project-content">
+          <div class="project-badges">
+            <span class="badge-flagship">
+              <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <span data-i18n="tool.badge">QA tooling project</span>
+            </span>
+          </div>
+          <h3>flaky-hunter</h3>
+          <p data-i18n="proj.flaky.desc">CLI and GitHub Action that reads JUnit XML and Playwright JSON reports from many CI runs, scores each test for flakiness, separates real regressions from flaky tests, groups failures by root cause and publishes a self-contained HTML dashboard. 84 Vitest tests (99% coverage) and 16 Playwright tests; CI runs it on its own test results.</p>
+          <div class="tech-stack">
+            <span class="tech-badge">TypeScript</span>
+            <span class="tech-badge">Node.js</span>
+            <span class="tech-badge">Vitest</span>
+            <span class="tech-badge">Playwright</span>
+            <span class="tech-badge">GitHub Actions</span>
+          </div>
+          <div class="project-links">
+            <a href="projects/flaky-hunter/" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              Live Demo
+            </a>
+          </div>
+        </div>
+      </div>
+
       <!-- JobFy v2 -->
       <div class="project-card">
         <div class="project-image project-image--tall">
@@ -1232,6 +1293,10 @@
         'proj.jobfy2.desc': 'Full-stack job dashboard (TypeScript monorepo with React, Node.js, PostgreSQL, Prisma and Docker) with 88 automated tests in a GitHub Actions pipeline (59 backend tests with Jest and Supertest, 29 frontend component tests), plus a separate 75-test Playwright + TypeScript E2E and API suite that found and fixed twelve bugs.',
         'proj.finbyt.desc': 'Full-stack investment portfolio dashboard managing crypto, stocks and ETFs with live CoinGecko prices. JWT auth, full CRUD, interactive P/L charts. React + Express + SQLite.',
         'link.github': 'View on GitHub',
+        'link.casestudy': 'Case Study',
+        'tool.badge': 'QA tooling project',
+        'proj.helpdesk.desc': 'IT helpdesk ticketing REST API (roles, status workflow, SLA deadlines, ETag concurrency) tested in seven layers: 131 Vitest tests with property-based checks, real PostgreSQL integration, OpenAPI contract and OWASP API security tests, plus Schemathesis fuzzing, k6 load budgets and an OWASP ZAP scan in CI. The layers found and fixed 11 real defects.',
+        'proj.flaky.desc': 'CLI and GitHub Action that reads JUnit XML and Playwright JSON reports from many CI runs, scores each test for flakiness, separates real regressions from flaky tests, groups failures by root cause and publishes a self-contained HTML dashboard. 84 Vitest tests (99% coverage) and 16 Playwright tests; CI runs it on its own test results.',
         'about.label': 'Background',
         'about.title': 'About Me',
         'about.subtitle': 'QA and test automation, with a web development background.',
@@ -1293,6 +1358,10 @@
         'proj.jobfy2.desc': 'Dashboard de empleo full-stack (monorepo TypeScript con React, Node.js, PostgreSQL, Prisma y Docker) con 88 pruebas automatizadas en un pipeline de GitHub Actions (59 de backend con Jest y Supertest, 29 de componentes frontend), más una suite E2E y de API aparte de 75 pruebas con Playwright y TypeScript que encontró y corrigió doce bugs.',
         'proj.finbyt.desc': 'Dashboard full-stack para gestionar inversiones en criptomonedas, acciones y ETFs con precios en tiempo real de CoinGecko. Auth JWT, CRUD completo, gráficos P/L interactivos. React + Express + SQLite.',
         'link.github': 'Ver en GitHub',
+        'link.casestudy': 'Caso de estudio',
+        'tool.badge': 'Herramienta de QA',
+        'proj.helpdesk.desc': 'API REST de tickets de soporte IT (roles, flujo de estados, plazos SLA, concurrencia con ETag) probada en siete capas: 131 pruebas con Vitest y pruebas basadas en propiedades, integración con PostgreSQL real, pruebas de contrato OpenAPI y de seguridad OWASP API, además de fuzzing con Schemathesis, presupuestos de carga con k6 y un escaneo OWASP ZAP en CI. Las capas encontraron y corrigieron 11 defectos reales.',
+        'proj.flaky.desc': 'CLI y GitHub Action que lee informes JUnit XML y JSON de Playwright de muchas ejecuciones de CI, puntúa la inestabilidad de cada prueba, separa las regresiones reales de las pruebas inestables, agrupa los fallos por causa raíz y publica un dashboard HTML autocontenido. 84 pruebas con Vitest (99% de cobertura) y 16 con Playwright; el CI lo ejecuta sobre sus propios resultados.',
         'about.label': 'Perfil',
         'about.title': 'Sobre Mí',
         'about.subtitle': 'QA y automatización de pruebas, con base en desarrollo web.',

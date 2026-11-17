@@ -25,14 +25,29 @@ test.describe('Projects Section', () => {
   })
 
   for (const project of PROJECTS) {
-    test(`${project.title} links to its repository${project.demo ? ' and live demo' : ''}`, async ({ readyPage: page }) => {
+    const parts = [project.github && 'its repository', project.page && 'its case study', project.demo && 'its live demo'].filter(Boolean)
+    test(`${project.title} links to ${parts.join(' and ')}`, async ({ readyPage: page }) => {
       const card = page.locator(sel.PROJECT_CARDS).filter({ has: page.locator('h3', { hasText: project.title }) })
-      await expect(card.locator(`a[href="${project.github}"]`)).toBeAttached()
+      if (project.github) {
+        await expect(card.locator(`a[href="${project.github}"]`)).toBeAttached()
+      }
+      if (project.page) {
+        await expect(card.locator(`a[href="${project.page}"]`)).toContainText(project.pageLabel)
+      }
       if (project.demo) {
         await expect(card.locator(`a[href="${project.demo}"]`)).toContainText('Live Demo')
       }
     })
   }
+
+  // Case studies and demos hosted on this site must be published with the page.
+  test('project pages hosted on this site load', async ({ request }) => {
+    for (const path of PROJECTS.flatMap(p => [p.page, p.demo]).filter(u => u && !u.startsWith('http'))) {
+      const res = await request.get(path)
+      expect(res.status(), path).toBe(200)
+      expect(await res.text()).toContain('<title>')
+    }
+  })
 
   test('external project links open in a new tab with rel="noopener"', async ({ readyPage: page }) => {
     const externalLinks = page.locator(sel.PROJECT_LINKS)
@@ -69,7 +84,7 @@ test.describe('Projects Section', () => {
   // private repo shows up here instead of as a 404 for a recruiter.
   test('linked GitHub repositories are reachable', async ({ request }) => {
     test.skip(!!process.env.OFFLINE, 'needs network')
-    for (const { github } of PROJECTS) {
+    for (const { github } of PROJECTS.filter(p => p.github)) {
       const res = await request.head(github)
       expect(res.status(), github).toBe(200)
     }

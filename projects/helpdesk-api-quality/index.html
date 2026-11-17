@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Helpdesk API: quality case study | Eduard Militaru</title>
+<meta name="description" content="A helpdesk ticketing REST API tested in seven layers: property-based tests, real-database integration, OpenAPI contract tests, OWASP security tests, Schemathesis fuzzing, k6 load and OWASP ZAP.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a0b;--bg2:#111113;--card:#18181b;--text:#fafafa;--text2:#a1a1aa;--muted:#82828b;--accent:#3b82f6;--green:#22c55e;--amber:#f59e0b;--border:#27272a;--r:12px}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 Inter,system-ui,sans-serif}
+a{color:var(--accent)}
+main{max-width:980px;margin:0 auto;padding:40px 16px 64px}
+h1,h2,h3{font-family:'Space Grotesk',sans-serif;line-height:1.2}
+h1{font-size:clamp(28px,5vw,42px);margin:8px 0 12px}
+h2{font-size:22px;margin:48px 0 14px}
+.back{font-size:14px;color:var(--text2);text-decoration:none}
+.lead{color:var(--text2);font-size:18px;max-width:760px}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
+.tag{font:500 12px 'JetBrains Mono',monospace;border:1px solid var(--border);background:var(--bg2);padding:4px 10px;border-radius:999px;color:var(--text2)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:28px 0}
+.stat{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px}
+.stat b{display:block;font:700 26px 'Space Grotesk',sans-serif;color:var(--green)}
+.stat span{color:var(--text2);font-size:13px}
+.layers{display:grid;gap:10px}
+.layer{display:grid;grid-template-columns:44px 1fr auto;gap:14px;align-items:start;background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:14px 16px}
+.layer .n{font:700 18px 'Space Grotesk',sans-serif;color:var(--accent);background:rgba(59,130,246,.1);border-radius:8px;text-align:center;padding:6px 0}
+.layer h3{margin:0 0 4px;font-size:16px}
+.layer p{margin:0;color:var(--text2);font-size:14px}
+.layer .tool{font:500 12px 'JetBrains Mono',monospace;color:var(--muted);white-space:nowrap}
+.table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:var(--r)}
+table{width:100%;border-collapse:collapse;font-size:14px;min-width:620px}
+th,td{padding:10px 12px;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}
+th{background:var(--bg2);color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.05em}
+tr:last-child td{border-bottom:0}
+.by{font:500 12px 'JetBrains Mono',monospace;color:var(--amber);white-space:nowrap}
+code{font-family:'JetBrains Mono',monospace;font-size:.9em;background:var(--bg2);padding:1px 6px;border-radius:5px}
+pre{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:16px;overflow-x:auto;font:13px/1.55 'JetBrains Mono',monospace;color:var(--text2)}
+.pass{color:var(--green)}
+ul{color:var(--text2);padding-left:20px}
+li{margin:6px 0}
+footer{color:var(--muted);font-size:13px;margin-top:56px;border-top:1px solid var(--border);padding-top:20px}
+@media (max-width:600px){.layer{grid-template-columns:36px 1fr}.layer .tool{grid-column:2}}
+</style>
+</head>
+<body>
+<main>
+  <a class="back" href="../../#projects">← Back to portfolio</a>
+  <h1>Helpdesk API: an API quality case study</h1>
+  <p class="lead">An IT helpdesk ticketing REST API that I built and then tested in seven layers. The API is deliberately realistic, with roles, a status workflow, SLA deadlines and optimistic concurrency, because those are the places where real bugs hide. Along the way the layers found <strong>11 real defects</strong>, and each one now has a regression test.</p>
+  <div class="tags">
+    <span class="tag">TypeScript</span><span class="tag">Express 5</span><span class="tag">PostgreSQL 18</span><span class="tag">OpenAPI 3.0</span><span class="tag">Vitest</span><span class="tag">fast-check</span><span class="tag">Schemathesis</span><span class="tag">k6</span><span class="tag">OWASP ZAP</span><span class="tag">Docker</span><span class="tag">GitHub Actions</span>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><b>131</b><span>automated tests, 98% line coverage</span></div>
+    <div class="stat"><b>1,605</b><span>Schemathesis cases, 0 failures</span></div>
+    <div class="stat"><b>~8 ms</b><span>k6 p95 latency (budget 300 ms)</span></div>
+    <div class="stat"><b>0</b><span>ZAP alerts rated Low or above</span></div>
+    <div class="stat"><b>11</b><span>defects found and fixed</span></div>
+  </div>
+
+  <h2>What the API does</h2>
+  <ul>
+    <li><strong>Roles:</strong> requesters open tickets about their own problems; agents triage and resolve them.</li>
+    <li><strong>Workflow:</strong> <code>open → in_progress → waiting_on_customer → resolved → closed</code>, with role rules (a requester can cancel, reply, accept or reopen, never resolve).</li>
+    <li><strong>SLA:</strong> deadline from priority (urgent 4h, high 8h, normal 24h, low 72h), frozen at resolution.</li>
+    <li><strong>Concurrency:</strong> ETags on every ticket; edits need <code>If-Match</code> (428 if missing, 412 if stale).</li>
+    <li><strong>Privacy:</strong> other people's tickets return <strong>404, not 403</strong>, so ticket ids cannot be probed; internal agent notes never reach requesters.</li>
+  </ul>
+
+  <h2>Seven quality layers</h2>
+  <div class="layers">
+    <div class="layer"><div class="n">1</div><div><h3>Static checks</h3><p>Types compile and the OpenAPI spec passes Spectral with a custom ruleset (every secured operation documents 401, response arrays are bounded).</p></div><div class="tool">tsc · Spectral</div></div>
+    <div class="layer"><div class="n">2</div><div><h3>Unit and property-based</h3><p>Workflow invariants hold for any input: nothing leaves <code>closed</code>, no self-transitions, a requester can never do more than an agent, <code>closed</code> is reachable from every status, and a higher priority never gets a later deadline.</p></div><div class="tool">Vitest · fast-check</div></div>
+    <div class="layer"><div class="n">3</div><div><h3>Integration on real PostgreSQL</h3><p>Filters, pagination, LIKE escaping, the audit trail and race conditions: 10 agents resolve the same ticket at once and exactly one wins. Migrations stay safe when several replicas boot at the same time.</p></div><div class="tool">Vitest · Supertest</div></div>
+    <div class="layer"><div class="n">4</div><div><h3>Contract</h3><p>Every route is in the spec and vice versa. Every response is validated against the spec at runtime in tests, and a deliberately drifted spec proves the guard turns drift into failures.</p></div><div class="tool">express-openapi-validator</div></div>
+    <div class="layer"><div class="n">5</div><div><h3>Security (OWASP API Top 10)</h3><p>BOLA/IDOR on all 6 ticket routes, JWT <code>alg=none</code>, tampered and expired tokens, mass assignment, SQL injection, user enumeration, brute-force rate limiting, security headers, no stack traces.</p></div><div class="tool">Vitest · Supertest</div></div>
+    <div class="layer"><div class="n">6</div><div><h3>Property-based fuzzing</h3><p>Generated requests in coverage, fuzzing and stateful phases. Checks that the server never returns 500, valid requests are accepted, invalid ones are rejected, and responses match the contract.</p></div><div class="tool">Schemathesis</div></div>
+    <div class="layer"><div class="n">7</div><div><h3>Load and DAST</h3><p>k6 runs a mixed scenario (15 requesters + 5 agents) with p95, p99 and error budgets. OWASP ZAP runs an authenticated API scan driven by the spec, and the build fails on any alert rated Low or above.</p></div><div class="tool">k6 · OWASP ZAP</div></div>
+  </div>
+
+  <h2>Defects found, and which layer found them</h2>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>#</th><th>Defect</th><th>Found by</th><th>Fix</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Invalid <code>nullable</code> + <code>allOf</code> in the spec made <strong>every request return 500</strong> in the Docker build</td><td class="by">Container smoke test</td><td>Rewrote the schema; Spectral runs first in CI</td></tr>
+      <tr><td>2</td><td>A <strong>NUL byte</strong> in a title or note crashed the PostgreSQL insert, causing a <strong>500</strong></td><td class="by">Schemathesis</td><td>Spec blocks NUL bytes; PG error 22021 maps to 400 as a safety net</td></tr>
+      <tr><td>3</td><td><strong>Body type coercion:</strong> <code>{"description": false}</code> was stored as the string "false"</td><td class="by">Schemathesis</td><td>Body coercion off, query coercion kept</td></tr>
+      <tr><td>4</td><td>Searching for an <strong>emoji</strong> was rejected with 400 by the request validator</td><td class="by">Schemathesis</td><td><code>allowReserved</code> on the search parameter</td></tr>
+      <tr><td>5</td><td>The spec accepted <code>assignee</code> values that the server rejected</td><td class="by">Schemathesis</td><td>Exact pattern in the spec</td></tr>
+      <tr><td>6</td><td><code>If-Match</code> was documented as optional but the server required it</td><td class="by">Schemathesis</td><td>Required; a missing header still returns 428</td></tr>
+      <tr><td>7</td><td>405 responses had no <code>Allow</code> header (RFC 9110)</td><td class="by">Schemathesis</td><td>Allowed methods forwarded</td></tr>
+      <tr><td>8</td><td>415 responses were undocumented on 5 operations</td><td class="by">Schemathesis</td><td>Documented</td></tr>
+      <tr><td>9</td><td>Assigning to a non-agent returned 400; it is a semantic error, so 422</td><td class="by">Schemathesis</td><td>422 Unprocessable Content</td></tr>
+      <tr><td>10</td><td>k6 counted the <em>expected</em> 409 (two agents grabbing the same ticket) as errors</td><td class="by">k6 thresholds</td><td>409 declared as an expected status</td></tr>
+      <tr><td>11</td><td>Authenticated responses could be cached by browsers and proxies</td><td class="by">OWASP ZAP</td><td><code>Cache-Control: no-store</code></td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h2>The pipeline</h2>
+<pre><span class="pass">✓</span> static     tsc + Spectral (custom rules)
+<span class="pass">✓</span> tests      131 Vitest tests on a Postgres service container, coverage gate 90%
+   ├─ <span class="pass">✓</span> fuzz   Schemathesis --checks all, stateful        (fresh Docker stack)
+   ├─ <span class="pass">✓</span> load   k6: p95 &lt; 300 ms, p99 &lt; 800 ms, errors &lt; 1%  (fresh Docker stack)
+   └─ <span class="pass">✓</span> dast   OWASP ZAP API scan, gate on Low+            (fresh Docker stack)</pre>
+  <p style="color:var(--text2)">Every job publishes its report as an artifact (JUnit, coverage, Schemathesis, k6 summary, ZAP HTML), and a weekly scheduled run catches dependency drift. The JUnit artifact feeds my other project, <a href="../flaky-hunter/">flaky-hunter</a>, which flags flaky tests across CI runs.</p>
+
+  <h2>Design decisions I can walk you through</h2>
+  <ul>
+    <li><strong>404 instead of 403</strong> for other people's tickets: a 403 confirms that the ticket exists.</li>
+    <li><strong>Row locks plus ETags:</strong> <code>SELECT … FOR UPDATE</code> serialises transitions, and ETags protect edits across a person's read-think-write cycle.</li>
+    <li><strong>Response validation on in tests, off in production:</strong> contract drift is caught where it is cheap, with no per-request cost in production.</li>
+    <li><strong>Equal-time login failures:</strong> unknown emails still run a bcrypt comparison, so timing does not reveal which accounts exist.</li>
+    <li><strong>Constraints in the database too:</strong> a bug in the API still cannot write an invalid status.</li>
+  </ul>
+
+  <footer>Eduard Militaru · QA &amp; Test Automation · <a href="../../">eduardmilitarug.github.io</a></footer>
+</main>
+</body>
+</html>
