@@ -147,14 +147,16 @@ const es: Dict = {
   },
   stack: {
     title: 'Stack<br><em>y herramientas.</em>',
-    lead: 'Lo que uso cada semana para construir, probar y desplegar.',
+    lead: 'Lo que uso de verdad: cada elemento sale de las dependencias, Dockerfiles y CI de mis propios proyectos.',
     groups: {
       testing: 'Testing y QA',
-      systems: 'Sistemas y DevOps',
-      programming: 'Programación',
-      frameworks: 'Frameworks',
-      other: 'Otros',
+      backend: 'Backend y datos',
+      frontend: 'Frontend',
+      languages: 'Lenguajes',
+      devops: 'DevOps e infra',
+      ai: 'IA y automatización',
     },
+    source: '// Fuente: package.json, requirements.txt, docker-compose y workflows de más de 20 repos míos. Pasa el ratón por una herramienta para ver dónde la usé.',
   },
   log: {
     title: 'Registro<br><em>de visitas.</em>',

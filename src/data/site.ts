@@ -73,16 +73,77 @@ export const STATS = [
 ] as const;
 
 export const MARQUEE = [
-  'Playwright', 'TypeScript', 'API testing', 'OpenAPI contracts', 'Schemathesis fuzzing', 'k6 load',
-  'OWASP ZAP', 'PostgreSQL', 'Docker', 'GitHub Actions', 'Linux', 'Root-cause analysis', 'LoRaWAN / IoT',
-];
+  'Playwright', 'TypeScript', 'Vitest', 'OpenAPI', 'k6', 'OWASP ZAP', 'PostgreSQL', 'Docker',
+  'GitHub Actions', 'React', 'Node.js', 'Python', 'Supabase', 'Linux', 'Claude Code',
+] as const;
 
-export const STACK = {
-  testing: ['Playwright', 'Jest', 'Vitest', 'Supertest', 'React Testing Library', 'Postman', 'OpenAPI contract tests', 'fast-check', 'Schemathesis', 'k6', 'OWASP ZAP', 'Visual regression'],
-  systems: ['Linux', 'Docker', 'Git', 'GitHub Actions', 'PostgreSQL', 'SQLite', 'SQL', 'Log analysis'],
-  programming: ['TypeScript', 'JavaScript', 'Python', 'Java', 'SQL'],
-  frameworks: ['React', 'Node.js', 'Express', 'Prisma', 'FastAPI', 'Astro'],
-  other: ['LoRaWAN / IoT', 'n8n', 'Figma'],
-} as const;
+/*
+ * Stack & tools, collected from the package.json / requirements.txt / docker-compose / CI files of my
+ * own projects (JobFy v2, helpdesk-api-quality, flaky-hunter, FlipScout, archive-scout, Dossier,
+ * warehouse-simulator, FinByt, Atlas, this site...). Nothing here is a wish list.
+ * `where` lists the projects that use it (shown as a tooltip).
+ */
+export type StackItem = { name: string; where: string };
+export const STACK: Record<'testing' | 'backend' | 'frontend' | 'languages' | 'devops' | 'ai', StackItem[]> = {
+  testing: [
+    { name: 'Playwright', where: 'JobFy, Dossier, flaky-hunter, Atlas, this site' },
+    { name: 'Vitest', where: 'helpdesk-api-quality, flaky-hunter, Dossier, warehouse-simulator, FinByt' },
+    { name: 'Jest', where: 'JobFy v2 backend and frontend' },
+    { name: 'Supertest', where: 'helpdesk-api-quality, JobFy v2, warehouse-simulator, FinByt' },
+    { name: 'Testing Library', where: 'JobFy v2, Dossier, Atlas' },
+    { name: 'Cypress', where: 'JobFy v2 (with cypress-axe)' },
+    { name: 'axe-core · a11y', where: 'JobFy v2, Dossier' },
+    { name: 'OpenAPI', where: 'helpdesk-api-quality: Spectral lint + AJV contract tests' },
+    { name: 'fast-check', where: 'helpdesk-api-quality: property-based tests' },
+    { name: 'Schemathesis', where: 'helpdesk-api-quality: API fuzzing' },
+    { name: 'k6', where: 'helpdesk-api-quality: load tests' },
+    { name: 'OWASP ZAP', where: 'helpdesk-api-quality: baseline security scan' },
+    { name: 'Postman', where: 'Manual API exploration' },
+  ],
+  backend: [
+    { name: 'Node.js', where: 'Most of my backends' },
+    { name: 'Express', where: 'helpdesk-api-quality, JobFy v2, warehouse-simulator, FinByt' },
+    { name: 'FastAPI', where: 'FlipScout, JobFy (v1)' },
+    { name: 'PostgreSQL', where: 'helpdesk-api-quality, JobFy v2, Dossier, warehouse-simulator' },
+    { name: 'SQLite', where: 'FinByt, Dossier' },
+    { name: 'Prisma', where: 'JobFy v2, Dossier' },
+    { name: 'Supabase', where: "Atlas, this site's visitor log" },
+    { name: 'Zod', where: 'JobFy v2, Dossier, Atlas' },
+    { name: 'Pino', where: 'helpdesk-api-quality, JobFy v2, warehouse-simulator' },
+  ],
+  frontend: [
+    { name: 'React', where: 'JobFy, Dossier, FinByt, FlipScout, archive-scout, Atlas' },
+    { name: 'Next.js', where: 'Dossier, Atlas, archive-scout' },
+    { name: 'Vite', where: 'JobFy, FinByt, FlipScout' },
+    { name: 'Tailwind CSS', where: 'FlipScout, Dossier, Atlas, archive-scout' },
+    { name: 'Astro', where: 'This site' },
+    { name: 'Electron', where: 'Dossier desktop app' },
+  ],
+  languages: [
+    { name: 'TypeScript', where: '12 packages across my projects' },
+    { name: 'JavaScript', where: 'Everywhere' },
+    { name: 'Python', where: 'FlipScout, archive-scout, JobFy (v1)' },
+    { name: 'SQL', where: 'PostgreSQL / SQLite, test data and debugging' },
+    { name: 'Bash', where: 'CI scripts, Linux administration' },
+    { name: 'Java', where: 'DAM studies' },
+  ],
+  devops: [
+    { name: 'Docker', where: 'helpdesk-api-quality, JobFy v2, Dossier, warehouse-simulator' },
+    { name: 'GitHub Actions', where: 'CI on every repo: test matrices, deploys, scheduled runs' },
+    { name: 'Linux', where: 'Servers, SMR' },
+    { name: 'Git', where: 'Everything' },
+    { name: 'Vercel', where: 'FlipScout dashboard' },
+    { name: 'Railway', where: 'FlipScout API' },
+    { name: 'GitHub Pages', where: 'This site' },
+  ],
+  ai: [
+    { name: 'Claude Code', where: 'Agent Army, daily pair programming' },
+    { name: 'Anthropic SDK', where: 'Dossier' },
+    { name: 'MCP servers', where: 'Dossier, Agent Army' },
+    { name: 'Ollama', where: 'Dossier (local models)' },
+    { name: 'Telegram & Discord bots', where: 'archive-scout alerts' },
+    { name: 'Web scraping', where: 'BeautifulSoup, Cheerio, curl_cffi' },
+  ],
+};
 
 export const HOBBIES = ['chess', 'art', 'cars', 'gym', 'hardware', 'house'] as const;

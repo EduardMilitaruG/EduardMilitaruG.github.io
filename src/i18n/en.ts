@@ -145,14 +145,16 @@ const en = {
   },
   stack: {
     title: 'Stack<br><em>&amp; tools.</em>',
-    lead: 'What I use every week to build, test and ship.',
+    lead: 'What I actually use: every item comes from the dependencies, Dockerfiles and CI of my own projects.',
     groups: {
       testing: 'Testing & QA',
-      systems: 'Systems & DevOps',
-      programming: 'Programming',
-      frameworks: 'Frameworks',
-      other: 'Other',
+      backend: 'Backend & data',
+      frontend: 'Frontend',
+      languages: 'Languages',
+      devops: 'DevOps & infra',
+      ai: 'AI & automation',
     },
+    source: '// Source: package.json, requirements.txt, docker-compose and workflow files across 20+ of my repos. Hover a tool to see where I used it.',
   },
   log: {
     title: 'Visitor<br><em>log.</em>',

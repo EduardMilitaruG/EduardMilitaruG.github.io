@@ -87,6 +87,8 @@ test('respects prefers-reduced-motion', async ({ page }) => {
 });
 
 test('visitor log works offline', async ({ page }) => {
+  // Never write test marks to the real database.
+  await page.route(/supabase\.co/, (route) => route.abort());
   await page.goto('#log');
   const total = page.locator('[data-log-total]');
   await expect(total).toHaveText('0000000');

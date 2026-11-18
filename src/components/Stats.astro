@@ -1,6 +1,7 @@
 ---
 import { t, type Lang } from '../i18n';
 import { STATS, MARQUEE } from '../data/site';
+import TechIcon from './TechIcon.astro';
 interface Props { lang: Lang }
 const d = t(Astro.props.lang);
 const items = [...MARQUEE, ...MARQUEE];
@@ -8,7 +9,7 @@ const items = [...MARQUEE, ...MARQUEE];
 
 <div class="marquee" aria-hidden="true">
   <div class="marquee-track">
-    {items.map((m) => <span class="marquee-item">{m}</span>)}
+    {items.map((m) => <span class="marquee-item"><TechIcon name={m} size={18} />{m}</span>)}
   </div>
 </div>
 
@@ -29,8 +30,12 @@ const items = [...MARQUEE, ...MARQUEE];
   .marquee { overflow: hidden; border-top: 1px solid var(--border); background: var(--surface); }
   .marquee-track { display: flex; width: max-content; animation: marquee 42s linear infinite; }
   .marquee:hover .marquee-track { animation-play-state: paused; }
-  .marquee-item { display: inline-flex; align-items: center; gap: 14px; padding: 9px 20px; font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--sub); white-space: nowrap; }
-  .marquee-item::after { content: ''; width: 5px; height: 5px; background: var(--accent); }
+  .marquee-item { display: inline-flex; align-items: center; gap: 10px; padding: 11px 26px 11px 0; font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--sub); white-space: nowrap; }
+  .marquee-item::after { content: ''; width: 4px; height: 4px; margin-left: 16px; background: var(--dim); }
+  /* Logos sit in grey and light up in their brand colour while the strip is hovered */
+  .marquee-item :global(.tech-icon:not(.tech-icon--none)) { color: var(--sub); transition: color 0.35s var(--ease); }
+  .marquee:hover .marquee-item :global(.tech-icon:not(.tech-icon--none)) { color: var(--brand, currentColor); }
+  .marquee { mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
   @keyframes marquee { to { transform: translateX(-50%); } }
 
   .stats { display: grid; grid-template-columns: repeat(4, 1fr); padding-inline: 0; }

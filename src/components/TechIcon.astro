@@ -1,0 +1,14 @@
+---
+import { TECH, techColor } from '../data/tech';
+interface Props { name: string; size?: number; mono?: boolean }
+const { name, size = 16, mono = false } = Astro.props;
+const tech = TECH[name];
+---
+{tech
+  ? <svg class="tech-icon" viewBox={tech.viewBox ?? '0 0 24 24'} width={size} height={size} aria-hidden="true" style={mono ? undefined : `--brand:${techColor(tech)}`}><path d={tech.path} fill="currentColor" /></svg>
+  : <span class="tech-icon tech-icon--none" aria-hidden="true"></span>}
+
+<style>
+  .tech-icon { flex-shrink: 0; display: block; color: var(--brand, currentColor); }
+  .tech-icon--none { width: 6px; height: 6px; background: var(--accent); margin-inline: 5px; }
+</style>

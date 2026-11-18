@@ -12,9 +12,9 @@ const d = t(Astro.props.lang);
       <p class="section-lead">{d.experience.lead}</p>
     </header>
 
-    <ol class="timeline">
+    <ol class="timeline" data-draw>
       {d.experience.items.map((job, i) => (
-        <li class:list={['job', i === 0 && 'is-first']} data-reveal>
+        <li class:list={['job', i === 0 && 'is-first']} data-reveal style={`--d:${(d.experience.items.length - 1 - i) * 0.14}s`}>
           <div class="job-when">
             <span class="dot" aria-hidden="true"></span>
             <span class="mono dates">{job.dates}</span>
@@ -48,7 +48,11 @@ const d = t(Astro.props.lang);
 
 <style>
   .timeline { list-style: none; margin: 0; padding: 0; position: relative; }
-  .timeline::before { content: ''; position: absolute; left: 5px; top: 8px; bottom: 8px; width: 1px; background: linear-gradient(var(--accent), var(--border) 30%); }
+  /* The line starts in the accent at the oldest job (bottom), fades as it climbs, and is drawn upwards on scroll */
+  .timeline::before { content: ''; position: absolute; left: 5px; top: 8px; bottom: 8px; width: 1px; background: linear-gradient(to top, var(--accent), var(--border) 70%); transform-origin: bottom; }
+  :global(.js) .timeline[data-draw]::before { transform: scaleY(0); transition: transform 1.6s var(--ease); }
+  :global(.js) .timeline[data-draw].is-in::before { transform: none; }
+  @media (prefers-reduced-motion: reduce) { :global(.js) .timeline[data-draw]::before { transform: none; transition: none; } }
   .job { display: grid; grid-template-columns: minmax(180px, 0.32fr) 1fr; gap: clamp(12px, 3vw, 48px); padding: clamp(18px, 2.4vw, 28px) 0 clamp(18px, 2.4vw, 28px) 28px; border-bottom: 1px solid var(--border); position: relative; }
   .job:last-child { border-bottom: 0; }
   .job-when { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }

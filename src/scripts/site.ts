@@ -60,7 +60,7 @@ function initLangLinks() {
 }
 
 function initReveal() {
-  const els = document.querySelectorAll<HTMLElement>('[data-reveal]');
+  const els = document.querySelectorAll<HTMLElement>('[data-reveal], [data-draw]');
   if (!('IntersectionObserver' in window) || reduceMotion()) {
     els.forEach((el) => el.classList.add('is-in'));
     return;

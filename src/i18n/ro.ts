@@ -147,14 +147,16 @@ const ro: Dict = {
   },
   stack: {
     title: 'Stack<br><em>și unelte.</em>',
-    lead: 'Ce folosesc în fiecare săptămână ca să construiesc, să testez și să livrez.',
+    lead: 'Ce folosesc cu adevărat: fiecare element vine din dependențele, Dockerfile-urile și CI-ul proiectelor mele.',
     groups: {
       testing: 'Testare și QA',
-      systems: 'Sisteme și DevOps',
-      programming: 'Programare',
-      frameworks: 'Framework-uri',
-      other: 'Altele',
+      backend: 'Backend și date',
+      frontend: 'Frontend',
+      languages: 'Limbaje',
+      devops: 'DevOps și infra',
+      ai: 'AI și automatizare',
     },
+    source: '// Sursă: package.json, requirements.txt, docker-compose și workflow-uri din peste 20 de repo-uri ale mele. Treci cu mouse-ul peste o unealtă ca să vezi unde am folosit-o.',
   },
   log: {
     title: 'Registru<br><em>de vizite.</em>',
