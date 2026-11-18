@@ -16,6 +16,7 @@ export const PROJECTS = [
   { title: 'Warehouse Order Simulator', github: 'https://github.com/EduardMilitaruG/warehouse-simulator' },
   { title: 'Helpdesk API Quality', page: 'projects/helpdesk-api-quality/', pageLabel: 'Case Study' },
   { title: 'flaky-hunter', demo: 'projects/flaky-hunter/' },
+  { title: 'Agent Army', github: 'https://github.com/EduardMilitaruG/agent-army' },
   {
     title: 'JobFy v2',
     github: 'https://github.com/EduardMilitaruG/JobFy-v2',
