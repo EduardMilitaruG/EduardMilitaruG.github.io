@@ -1,49 +1,53 @@
-# eduardmilitarug.github.io
+# Eduard Militaru · Portfolio
 
-[![E2E](https://github.com/EduardMilitaruG/EduardMilitaruG.github.io/actions/workflows/e2e.yml/badge.svg)](https://github.com/EduardMilitaruG/EduardMilitaruG.github.io/actions/workflows/e2e.yml)
+Personal portfolio of a junior **QA Automation & IT Support** engineer, live at
+**https://eduardmilitarug.github.io/**.
 
-My portfolio site ([eduardmilitarug.github.io](https://eduardmilitarug.github.io)) and the Playwright suite that tests it.
+Built with [Astro](https://astro.build) in a "Terminal Editorial" design: near-black hairline
+grid, Barlow Condensed numbers, Share Tech Mono labels, one hot accent the visitor can switch
+(orange / amber / blue). Available in English, Spanish and Romanian.
 
-The site is a single static `index.html` with an English/Spanish toggle. The suite runs on every push and pull request against that commit, served locally, and once a day against the live site.
+## Highlights
 
-## Test suite
+- **Static and fast**: Astro ships almost no JavaScript; images are converted to responsive WebP at build time.
+- **Fluid layout**: `clamp()` type scale, container-query headline, hairline bands, sticky blurred nav,
+  page zoom on 2000px+ screens, breakpoints from 1120px down to 420px, tested at 360px.
+- **Motion with manners**: scroll reveals and the test-runner replay use IntersectionObserver and turn
+  off completely under `prefers-reduced-motion`.
+- **Tested like a product**: the runner in the hero replays the real suite in `tests/portfolio.spec.ts`,
+  which CI runs on Chromium, Firefox, WebKit and a mobile viewport before every deploy.
+- **Visitor log**: optional shared counter on Supabase (REST, no SDK, row-level security); without
+  configuration it counts per browser.
 
-98 functional tests run in 6 browser configurations (Chromium, Firefox, WebKit, Pixel 5, iPhone 13, iPad), plus 9 visual regression screenshots: 597 test runs per pipeline.
-
-| Area | Tests | What it checks |
-|---|---:|---|
-| `sections/` | 42 | Copy, CTAs, project cards and their links, CV download, contact links, demo video + lightbox |
-| `responsive/` | 20 | Layout and hamburger menu at mobile, tablet and desktop widths, no horizontal overflow |
-| `accessibility/` | 17 | axe-core WCAG 2.1 AA audit, landmarks, heading order, ARIA labels, keyboard focus |
-| `performance/` | 6 | Load time, LCP, CLS and a 5 MB page-weight budget |
-| `seo/` | 5 | Title, description, `lang`, Open Graph tags |
-| `i18n/` | 4 | Language toggle round trip, every `data-i18n` key translated in both languages |
-| `smoke` | 4 | HTTP 200, no console errors, all sections render |
-| `visual/` | 9 | Pixel comparison of each section, desktop and mobile |
+## Run it
 
 ```bash
 npm ci
-npx playwright install
-npm test                  # all 6 browser projects, against a local server
-npm run test:chromium     # one browser
-npm run test:live         # smoke tests against the deployed site
-npm run test:visual       # Linux only; see below
+npm run dev        # http://localhost:4321/
+npm test           # builds, serves the production build and runs Playwright
 ```
 
-### Visual baselines
+## Visitor log (optional)
 
-Font rendering differs between operating systems, so the screenshots are only compared on Linux, inside the same Playwright Docker image locally and in CI. The animated background canvas is hidden and the demo video is frozen on its first frame before each screenshot. To update the baselines after an intended design change:
+1. Create a Supabase project and run [`supabase/schema.sql`](supabase/schema.sql) in its SQL editor.
+2. In the GitHub repo, add the repository **variables** `PUBLIC_SUPABASE_URL` and
+   `PUBLIC_SUPABASE_ANON_KEY` (the anon/publishable key is public by design; RLS protects the table).
+3. Push to `main`: the deploy build picks them up. Locally, copy `.env.example` to `.env`.
 
-```bash
-npm run test:visual:update
+## Deploy
+
+`.github/workflows/ci.yml` runs the Playwright matrix on every push and pull request, and on `main`
+builds the site and deploys it to GitHub Pages (Settings → Pages → Source: **GitHub Actions**).
+
+## Structure
+
 ```
-
-### Bugs the suite found
-
-| Finding | Fix |
-|---|---|
-| Page weighed 10.7 MB, failing the 5 MB budget, because the JobFy demo was a 10.5 MB GIF | Converted to a 640 KB MP4 with a poster frame; lightbox now supports video |
-| `--text-muted` (#71717a) had 4.09:1 contrast on the page background, below WCAG AA's 4.5:1 | Raised to #82828b (5.2:1 on the page background, 4.65:1 on cards) |
-| The language button showed "ES" but was announced as "Toggle language" (WCAG 2.5.3 Label in Name) | Accessible name now starts with the visible label and updates with the language |
-
-This suite started in the [Portfolio](https://github.com/EduardMilitaruG/Portfolio) repo, where it ran against `/` of the domain. That is this site, not the React app in that repo, so it moved here to sit next to the page it tests.
+src/
+  components/   Hero, Runner, Stats, Projects, Experience, Beyond, Stack, VisitorLog, Contact, Nav, Footer
+  i18n/         en.ts (source of truth), es.ts, ro.ts
+  data/site.ts  projects, links, stats (with where each number comes from), stack
+  layouts/      Base (head, nav, footer), Case (case-study pages)
+  pages/        /, /es/, /ro/, /projects/helpdesk-api-quality/, /projects/flaky-hunter/
+public/         CV, favicon, social image, flaky-hunter demo dashboard
+tests/          Playwright suite
+```

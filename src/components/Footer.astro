@@ -1,0 +1,53 @@
+---
+import { t, url, home, type Lang } from '../i18n';
+import { LINKS } from '../data/site';
+
+interface Props { lang: Lang; isHome: boolean }
+const { lang, isHome } = Astro.props;
+const d = t(lang);
+const base = isHome ? '' : home(lang);
+const sections = [
+  ['projects', d.nav.projects], ['experience', d.nav.experience], ['beyond', d.nav.beyond],
+  ['stack', d.nav.stack], ['log', d.nav.log], ['contact', d.nav.contact],
+];
+const year = new Date().getFullYear();
+---
+
+<footer class="foot band">
+  <div class="wrap foot-in">
+    <div class="foot-brand">
+      <div class="foot-mark display" aria-hidden="true">Militaru</div>
+      <p class="meta">{d.footer.built}<br />{d.footer.tested}</p>
+      <div class="barcode" aria-hidden="true"></div>
+      <div class="meta foot-code" aria-hidden="true">EM-PORTFOLIO-{year}</div>
+    </div>
+    <nav class="foot-col" aria-label={d.footer.sections}>
+      <span class="label">{d.footer.sections}</span>
+      {sections.map(([id, label], i) => <a href={`${base}#${id}`}><span class="num">{String(i + 1).padStart(2, '0')}</span> {label}</a>)}
+    </nav>
+    <nav class="foot-col" aria-label={d.footer.connect}>
+      <span class="label">{d.footer.connect}</span>
+      <a href={`mailto:${LINKS.email}`}>Email ↗</a>
+      <a href={LINKS.linkedin} rel="noopener" target="_blank">LinkedIn ↗</a>
+      <a href={LINKS.github} rel="noopener" target="_blank">GitHub ↗</a>
+      <a href={url(LINKS.cv)} download>CV (PDF) ↓</a>
+    </nav>
+  </div>
+  <div class="wrap foot-bottom">
+    <span>© {year} Gheorghe Eduard Militaru</span>
+    <span>Castellón de la Plana · ES</span>
+  </div>
+</footer>
+
+<style>
+  .foot-in { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: clamp(28px, 5vw, 72px); padding-block: clamp(48px, 6vw, 80px) 36px; }
+  .foot-mark { font-size: clamp(56px, 9vw, 132px); color: var(--panel); line-height: 0.8; margin-bottom: 18px; -webkit-text-stroke: 1px var(--border); }
+  .foot-brand .meta { line-height: 1.7; margin: 0 0 16px; }
+  .foot-code { font-size: 8px; letter-spacing: var(--track); margin-top: 4px; color: var(--dim); }
+  .foot-col { display: flex; flex-direction: column; gap: 10px; }
+  .foot-col .label { margin-bottom: 6px; }
+  .foot-col a { font-size: 14px; color: var(--sub); transition: color 0.2s var(--ease), transform 0.3s var(--ease); width: fit-content; }
+  .foot-col a:hover { color: var(--white); transform: translateX(3px); }
+  .foot-bottom { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding-block: 16px 22px; border-top: 1px solid var(--border); font-family: var(--f-mono); font-size: 9.5px; letter-spacing: var(--track); text-transform: uppercase; color: var(--muted); }
+  @media (width <= 768px) { .foot-in { grid-template-columns: 1fr 1fr; } .foot-brand { grid-column: 1 / -1; } }
+</style>

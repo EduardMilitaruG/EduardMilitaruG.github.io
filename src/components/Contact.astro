@@ -1,0 +1,59 @@
+---
+import { t, url, type Lang } from '../i18n';
+import { LINKS } from '../data/site';
+interface Props { lang: Lang }
+const d = t(Astro.props.lang);
+const rows = [
+  { k: d.contact.email, v: LINKS.email, href: `mailto:${LINKS.email}` },
+  { k: 'LinkedIn', v: 'in/eduardmilitaru', href: LINKS.linkedin, ext: true },
+  { k: 'GitHub', v: 'EduardMilitaruG', href: LINKS.github, ext: true },
+  { k: 'CV', v: 'Eduard_Militaru_CV_EN.pdf', href: url(LINKS.cv), dl: true },
+];
+---
+
+<section class="band contact cross-matrix" id="contact">
+  <div class="wrap section">
+    <div class="contact-grid">
+      <div data-reveal>
+        <span class="section-num">06</span>
+        <h2 class="contact-title display" set:html={d.contact.title} />
+        <p class="contact-lead">{d.contact.lead}</p>
+        <a class="btn btn-primary big-cta" href={`mailto:${LINKS.email}`}>{LINKS.email} →</a>
+      </div>
+      <div class="contact-card" data-reveal style="--d:.1s">
+        <ul>
+          {rows.map((r) => (
+            <li>
+              <a href={r.href} target={r.ext ? '_blank' : undefined} rel={r.ext ? 'noopener' : undefined} download={r.dl ? '' : undefined}>
+                <span class="label">{r.k}</span>
+                <span class="row-v">{r.v}</span>
+                <span class="row-go" aria-hidden="true">{r.dl ? '↓' : '↗'}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+        <div class="contact-foot">
+          <span class="status">{d.contact.availability}</span>
+          <span class="meta">{d.contact.location}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(28px, 5vw, 80px); align-items: end; }
+  .contact-title { margin: 12px 0 18px; font-size: clamp(64px, 10vw + 8px, 168px); color: var(--white); line-height: 0.82; }
+  .contact-title :global(em) { font-style: normal; color: var(--accent); }
+  .contact-lead { max-width: 46ch; margin: 0 0 26px; color: var(--sub); font-size: var(--t-lead); }
+  .big-cta { font-size: 12.5px; padding: 16px 22px; white-space: normal; overflow-wrap: anywhere; text-align: left; }
+  .contact-card { border: 1px solid var(--border); background: var(--surface); }
+  .contact-card ul { list-style: none; margin: 0; padding: 0; }
+  .contact-card a { display: grid; grid-template-columns: 90px 1fr 20px; gap: 12px; align-items: center; padding: 16px 18px; border-bottom: 1px solid var(--border); transition: background 0.3s var(--ease), padding 0.3s var(--ease); }
+  .contact-card a:hover { background: var(--hover); padding-left: 24px; }
+  .row-v { color: var(--white); font-size: 15px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .row-go { color: var(--accent); justify-self: end; }
+  .contact-foot { display: flex; flex-direction: column; gap: 8px; padding: 16px 18px; }
+  @media (width <= 900px) { .contact-grid { grid-template-columns: 1fr; } }
+  @media (width <= 420px) { .contact-card a { grid-template-columns: 1fr 20px; } .contact-card .label { grid-column: 1 / -1; } }
+</style>

@@ -1,0 +1,56 @@
+---
+import { t, type Lang } from '../i18n';
+import { STATS, MARQUEE } from '../data/site';
+interface Props { lang: Lang }
+const d = t(Astro.props.lang);
+const items = [...MARQUEE, ...MARQUEE];
+---
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    {items.map((m) => <span class="marquee-item">{m}</span>)}
+  </div>
+</div>
+
+<section class="band stats-band" aria-label="Key numbers">
+  <div class="wrap stats">
+    {STATS.map((s, i) => (
+      <div class:list={['cell', s.tone === 'fill' && 'is-fill']} data-reveal style={`--d:${i * 0.06}s`}>
+        <span class="num">{String(i + 1).padStart(2, '0')}</span>
+        <span class="label">{d.stats[i].label}</span>
+        <span class:list={['big', 'display', s.tone === 'accent' && 'accent', s.tone === 'green' && 'c-green', s.tone === 'white' && 'c-white']}>{s.value}</span>
+        <span class="meta">{d.stats[i].sub}</span>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .marquee { overflow: hidden; border-top: 1px solid var(--border); background: var(--surface); }
+  .marquee-track { display: flex; width: max-content; animation: marquee 42s linear infinite; }
+  .marquee:hover .marquee-track { animation-play-state: paused; }
+  .marquee-item { display: inline-flex; align-items: center; gap: 14px; padding: 9px 20px; font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--sub); white-space: nowrap; }
+  .marquee-item::after { content: ''; width: 5px; height: 5px; background: var(--accent); }
+  @keyframes marquee { to { transform: translateX(-50%); } }
+
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); padding-inline: 0; }
+  .cell { position: relative; display: flex; flex-direction: column; padding: 18px clamp(16px, 2vw, 26px) 16px; border-right: 1px solid var(--border); overflow: hidden; min-width: 0; }
+  .cell:last-child { border-right: 0; }
+  .cell::before { content: ''; position: absolute; inset: 0; opacity: 0.3; pointer-events: none; background-image: radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px); background-size: 14px 14px; }
+  .cell > * { position: relative; }
+  .cell .num { margin-bottom: 4px; }
+  .big { font-size: var(--t-stat); margin: 6px 0 4px; }
+  .cell .meta { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .cell.is-fill { background: var(--blue); }
+  .cell.is-fill::before { display: none; }
+  .cell.is-fill .num { color: rgba(255,255,255,0.5); }
+  .cell.is-fill .label { color: rgba(255,255,255,0.65); }
+  .cell.is-fill .big { color: #fff; }
+  .cell.is-fill .meta { color: rgba(255,255,255,0.6); }
+  @media (width <= 900px) {
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .cell:nth-child(2) { border-right: 0; }
+    .cell:nth-child(-n + 2) { border-bottom: 1px solid var(--border); }
+    .cell .meta { white-space: normal; }
+  }
+</style>

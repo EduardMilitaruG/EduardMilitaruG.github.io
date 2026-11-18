@@ -1,0 +1,86 @@
+---
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { t, url, home, LANGS, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+  title?: string;
+  description?: string;
+  /** Where the language switcher points for each language (defaults to the home pages). */
+  alternates?: Partial<Record<Lang, string>>;
+  /** Section links in the nav point to the home page when not on it. */
+  isHome?: boolean;
+}
+
+const { lang, title, description, alternates = {}, isHome = true } = Astro.props;
+const d = t(lang);
+const pageTitle = title ?? d.meta.title;
+const pageDesc = description ?? d.meta.description;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ogImage = new URL(url('/og-image.jpg'), Astro.site).href;
+const alt = Object.fromEntries(LANGS.map((l) => [l, alternates[l] ?? home(l)])) as Record<Lang, string>;
+const ogLocale = { en: 'en_US', es: 'es_ES', ro: 'ro_RO' }[lang];
+---
+
+<!doctype html>
+<html lang={lang} data-accent="orange">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDesc} />
+    <meta name="author" content="Eduard Militaru" />
+    <meta name="theme-color" content="#0a0a0a" />
+    <link rel="canonical" href={canonical} />
+    {isHome && LANGS.map((l) => <link rel="alternate" hreflang={l} href={new URL(alt[l], Astro.site).href} />)}
+    {isHome && <link rel="alternate" hreflang="x-default" href={new URL(alt.en, Astro.site).href} />}
+    <link rel="icon" href={url('/favicon.svg')} type="image/svg+xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDesc} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content={ogLocale} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDesc} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=Share+Tech+Mono&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    />
+
+    <!-- Runs before paint: restores the visitor's accent and flags JS for reveal animations. -->
+    <script is:inline>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add('js');
+        try {
+          var a = localStorage.getItem('em-accent');
+          if (a === 'orange' || a === 'amber' || a === 'blue') d.dataset.accent = a;
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="skip" href="#main">{d.skip}</a>
+    <Nav lang={lang} alternates={alt} isHome={isHome} />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer lang={lang} isHome={isHome} />
+
+    <script>
+      import { initSite } from '../scripts/site';
+      initSite();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,93 @@
+---
+import { Image } from 'astro:assets';
+import photo from '../assets/eduard.png';
+import Runner from './Runner.astro';
+import { t, url, type Lang } from '../i18n';
+import { LINKS } from '../data/site';
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const d = t(lang);
+---
+
+<section class="band hero" id="top">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="label hero-kicker" data-reveal>{d.hero.kicker}</p>
+
+      <div class="id-row" data-reveal style="--d:.05s">
+        <figure class="photo ticks">
+          <span class="tick tl"></span><span class="tick tr"></span><span class="tick bl"></span><span class="tick br"></span>
+          <Image src={photo} alt={d.hero.photoAlt} width={176} height={176} densities={[1, 2]} loading="eager" fetchpriority="high" format="png" />
+        </figure>
+        <div class="id-text">
+          <h1 class="name display">{d.hero.name}</h1>
+          <p class="role">{d.hero.role}</p>
+          <p class="status avail">{d.hero.available}</p>
+        </div>
+      </div>
+
+      <p class="headline display" data-reveal style="--d:.1s" aria-label={`${d.hero.line1} ${d.hero.words[0]}`}>
+        <span class="hl-1" aria-hidden="true">{d.hero.line1}</span>
+        <span class="hl-2" aria-hidden="true">
+          {/* Every phrase sits invisibly in the same grid cell, so the box is as tall as the longest one and nothing below moves while typing. */}
+          {d.hero.words.map((w) => <span class="ghost">{w}</span>)}
+          <span class="live"><span class="accent" data-typed={JSON.stringify(d.hero.words)}>{d.hero.words[0]}</span><span class="caret"></span></span>
+        </span>
+      </p>
+
+      <p class="intro" data-reveal style="--d:.15s">{d.hero.intro}</p>
+
+      <div class="ctas" data-reveal style="--d:.2s">
+        <a class="btn btn-primary" href={LINKS.linkedin} target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+          {d.hero.linkedin} →
+        </a>
+        <a class="btn" href={url(LINKS.cv)} download>{d.hero.cv} ↓</a>
+        <a class="btn btn-ghost" href={LINKS.github} target="_blank" rel="noopener">{d.hero.github} ↗</a>
+      </div>
+    </div>
+
+    <div class="hero-side" data-reveal style="--d:.15s">
+      <Runner lang={lang} />
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero { background: radial-gradient(1200px 500px at 85% -10%, var(--accent-soft), transparent 70%); }
+  .hero > .wrap { position: relative; }
+  .hero-grid { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr); gap: clamp(28px, 4vw, 64px); padding-block: clamp(36px, 5vw, 72px) clamp(40px, 5vw, 76px); align-items: start; }
+  .hero-kicker { margin: 0 0 22px; }
+
+  .id-row { display: flex; align-items: center; gap: clamp(16px, 2vw, 26px); margin-bottom: clamp(24px, 3vw, 40px); }
+  .photo { margin: 0; flex-shrink: 0; width: clamp(104px, 11vw, 160px); aspect-ratio: 1; border: 1px solid var(--line); background: radial-gradient(circle at 50% 38%, var(--accent-soft), transparent 70%), var(--panel); overflow: hidden; }
+  .photo :global(img) { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; filter: grayscale(0.25) contrast(1.05); transition: filter 0.6s var(--ease); }
+  .photo:hover :global(img) { filter: none; }
+  .id-text { min-width: 0; }
+  .name { margin: 0; font-size: clamp(34px, 3.4vw + 10px, 58px); color: var(--white); }
+  .role { margin: 6px 0 10px; font-family: var(--f-mono); font-size: clamp(11px, 0.4vw + 9px, 13px); letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
+  .avail { font-size: 10px; }
+
+  .hero-copy { container-type: inline-size; min-width: 0; }
+  .headline { margin: 0 0 clamp(18px, 2.4vw, 28px); font-size: min(var(--t-hero), 15.5cqi); color: var(--white); overflow-wrap: anywhere; }
+  /* Romanian has the longest single word ("utilizatorilor.") */
+  :global(:root:lang(ro)) .headline { font-size: min(var(--t-hero), 13.5cqi); }
+  .headline > span { display: block; }
+  .headline > .hl-2 { display: grid; }
+  .headline > .hl-2 > span { grid-area: 1 / 1; }
+  .ghost { visibility: hidden; padding-right: 0.14em; }
+  .caret { display: inline-block; width: 0.08em; height: 0.78em; margin-left: 0.06em; background: var(--accent); vertical-align: -0.02em; animation: blink 1s steps(1) infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  .intro { max-width: 58ch; margin: 0 0 clamp(22px, 3vw, 34px); font-size: var(--t-lead); color: var(--sub); text-wrap: pretty; }
+  .ctas { display: flex; flex-wrap: wrap; gap: 10px; }
+
+  @media (width <= 1024px) {
+    .hero-grid { grid-template-columns: 1fr; }
+  }
+  @media (width <= 420px) {
+    .id-row { align-items: flex-start; }
+    .ctas .btn { flex: 1 1 100%; }
+  }
+</style>

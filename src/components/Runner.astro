@@ -1,0 +1,75 @@
+---
+import { t, type Lang } from '../i18n';
+interface Props { lang: Lang }
+const d = t(Astro.props.lang);
+const n = d.runner.tests.length;
+const projects = ['chromium', 'firefox', 'webkit', 'mobile'];
+---
+
+<div class="runner reg" data-runner>
+  <div class="runner-head">
+    <span class="comment">spec</span>
+    <span class="mono runner-spec">{d.runner.spec}</span>
+    <span class="runner-count mono"><span data-count>{n}</span>/{n}</span>
+  </div>
+  <div class="runner-bar" aria-hidden="true"><span data-progress style="--p:1"></span></div>
+  <div class="runner-sub meta">
+    <span>{d.runner.engine}</span>
+    <span class="runner-tags">{projects.map((p) => <span>{p}</span>)}</span>
+  </div>
+
+  <ol class="runner-lines">
+    {d.runner.tests.map((name, i) => (
+      <li class="step is-run is-pass" data-step>
+        <span class="st" aria-hidden="true"><span class="st-wait">····</span><span class="st-run">RUN</span><span class="st-pass">PASS</span></span>
+        <span class="step-name"><span class="step-n">{String(i + 1).padStart(2, '0')}</span> {name}</span>
+      </li>
+    ))}
+  </ol>
+
+  <div class="runner-summary is-in" data-summary>
+    <div class="sum-big display"><span class="c-green">{n}</span><span class="c-muted">/</span>{n}</div>
+    <div class="sum-text">
+      <span class="badge badge-green">✓ {d.runner.summary}</span>
+      <span class="meta">0 flaky · 0 skipped</span>
+    </div>
+    <button class="btn btn-ghost replay" type="button" data-replay>↻ {d.runner.replay}</button>
+  </div>
+  <p class="runner-caption meta">{d.runner.caption}</p>
+</div>
+
+<style>
+  .runner { border: 1px solid var(--border); background: var(--surface); position: relative; overflow: hidden; }
+  .runner::after { content: ''; position: absolute; inset: 0; pointer-events: none; background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px); background-size: 14px 14px; mask-image: linear-gradient(180deg, transparent 40%, #000); }
+  .runner-head { display: flex; align-items: center; gap: 12px; padding: 12px 16px 12px 30px; border-bottom: 1px solid var(--border); }
+  .runner-spec { font-size: 12px; color: var(--white); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .runner-count { margin-left: auto; font-size: 12px; color: var(--green); }
+  .runner-bar { height: 2px; background: var(--border); }
+  .runner-bar span { display: block; height: 100%; background: var(--green); transform: scaleX(var(--p, 0)); transform-origin: left; transition: transform 0.4s var(--ease); }
+  .runner-sub { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; padding: 10px 16px; border-bottom: 1px solid var(--border); font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; }
+  .runner-tags { display: inline-flex; gap: 6px; }
+  .runner-tags span { padding: 1px 5px; border: 1px solid var(--line); color: var(--sub); }
+
+  .runner-lines { list-style: none; margin: 0; padding: 8px 0; position: relative; z-index: 1; }
+  .step { display: grid; grid-template-columns: 48px 1fr; gap: 12px; align-items: baseline; padding: 7px 16px; font-family: var(--f-mono); font-size: clamp(11.5px, 0.25vw + 10.5px, 13px); color: var(--dim); transition: color 0.3s var(--ease), background 0.3s var(--ease); }
+  .step.is-run { color: var(--text); }
+  .step.is-run:not(.is-pass) { background: var(--accent-soft); }
+  .step-n { color: var(--dim); margin-right: 4px; }
+  .st { position: relative; display: inline-grid; font-size: 10px; letter-spacing: 0.08em; }
+  .st > span { grid-area: 1 / 1; padding: 1px 0; text-align: center; transition: opacity 0.2s; }
+  .st-wait { color: var(--dim); }
+  .st-run { opacity: 0; color: var(--accent); }
+  .st-pass { opacity: 0; color: #000; background: var(--green); }
+  .step.is-run .st-wait { opacity: 0; }
+  .step.is-run .st-run { opacity: 1; }
+  .step.is-pass .st-run { opacity: 0; }
+  .step.is-pass .st-pass { opacity: 1; }
+
+  .runner-summary { display: flex; align-items: center; gap: 16px; padding: 14px 16px; border-top: 1px dashed var(--border); position: relative; z-index: 1; opacity: 0.25; transition: opacity 0.5s var(--ease); }
+  .runner-summary.is-in { opacity: 1; }
+  .sum-big { font-size: clamp(40px, 3vw + 18px, 60px); color: var(--white); }
+  .sum-text { display: flex; flex-direction: column; gap: 6px; }
+  .replay { margin-left: auto; min-height: 34px; padding: 6px 12px; }
+  .runner-caption { margin: 0; padding: 10px 16px 14px; border-top: 1px solid var(--border); font-size: 10.5px; position: relative; z-index: 1; }
+  @media (width <= 420px) { .runner-tags { display: none; } .sum-big { font-size: 40px; } }
+</style>

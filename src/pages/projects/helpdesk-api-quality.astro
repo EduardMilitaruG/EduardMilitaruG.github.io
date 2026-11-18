@@ -1,0 +1,104 @@
+---
+import Case from '../../layouts/Case.astro';
+
+const layers = [
+  ['Static checks', 'Types compile and the OpenAPI spec passes Spectral with a custom ruleset (every secured operation documents 401, response arrays are bounded).', 'tsc · Spectral'],
+  ['Unit & property-based', 'Workflow invariants hold for any input: nothing leaves <code>closed</code>, no self-transitions, a requester can never do more than an agent, <code>closed</code> is reachable from every status, and a higher priority never gets a later deadline.', 'Vitest · fast-check'],
+  ['Integration on real PostgreSQL', 'Filters, pagination, LIKE escaping, the audit trail and race conditions: 10 agents resolve the same ticket at once and exactly one wins. Migrations stay safe when several replicas boot at the same time.', 'Vitest · Supertest'],
+  ['Contract', 'Every route is in the spec and vice versa. Every response is validated against the spec at runtime in tests, and a deliberately drifted spec proves the guard turns drift into failures.', 'express-openapi-validator'],
+  ['Security (OWASP API Top 10)', 'BOLA/IDOR on all 6 ticket routes, JWT <code>alg=none</code>, tampered and expired tokens, mass assignment, SQL injection, user enumeration, brute-force rate limiting, security headers, no stack traces.', 'Vitest · Supertest'],
+  ['Property-based fuzzing', 'Generated requests in coverage, fuzzing and stateful phases: the server never returns 500, valid requests are accepted, invalid ones rejected, and responses match the contract.', 'Schemathesis'],
+  ['Load & DAST', 'k6 runs a mixed scenario (15 requesters + 5 agents) with p95, p99 and error budgets. OWASP ZAP runs an authenticated API scan driven by the spec; the build fails on any alert rated Low or above.', 'k6 · OWASP ZAP'],
+];
+
+const defects = [
+  ['Invalid <code>nullable</code> + <code>allOf</code> in the spec made <b>every request return 500</b> in the Docker build', 'Container smoke test', 'Rewrote the schema; Spectral runs first in CI'],
+  ['A <b>NUL byte</b> in a title or note crashed the PostgreSQL insert (500)', 'Schemathesis', 'Spec blocks NUL bytes; PG error 22021 maps to 400 as a safety net'],
+  ['Body type coercion: <code>{"description": false}</code> was stored as the string "false"', 'Schemathesis', 'Body coercion off, query coercion kept'],
+  ['Searching for an <b>emoji</b> was rejected with 400 by the request validator', 'Schemathesis', '<code>allowReserved</code> on the search parameter'],
+  ['The spec accepted <code>assignee</code> values that the server rejected', 'Schemathesis', 'Exact pattern in the spec'],
+  ['<code>If-Match</code> was documented as optional but the server required it', 'Schemathesis', 'Required; a missing header still returns 428'],
+  ['405 responses had no <code>Allow</code> header (RFC 9110)', 'Schemathesis', 'Allowed methods forwarded'],
+  ['415 responses were undocumented on 5 operations', 'Schemathesis', 'Documented'],
+  ['Assigning to a non-agent returned 400; it is a semantic error, so 422', 'Schemathesis', '422 Unprocessable Content'],
+  ['k6 counted the <b>expected</b> 409 (two agents grabbing the same ticket) as errors', 'k6 thresholds', '409 declared as an expected status'],
+  ['Authenticated responses could be cached by browsers and proxies', 'OWASP ZAP', '<code>Cache-Control: no-store</code>'],
+];
+
+const pipeline = `✓ static     tsc + Spectral (custom rules)
+✓ tests      131 Vitest tests on a Postgres service container, coverage gate 90%
+├─ ✓ fuzz    Schemathesis --checks all, stateful          (fresh Docker stack)
+├─ ✓ load    k6: p95 < 300 ms, p99 < 800 ms, errors < 1%  (fresh Docker stack)
+└─ ✓ dast    OWASP ZAP API scan, gate on Low+              (fresh Docker stack)`;
+---
+
+<Case
+  title="Helpdesk API Quality"
+  category="API quality · case study"
+  description="An IT helpdesk ticketing REST API tested in seven layers: Vitest, property-based tests, real PostgreSQL, OpenAPI contract, OWASP API security, Schemathesis fuzzing, k6 and OWASP ZAP."
+  lead="An IT helpdesk ticketing REST API that I built and then tested in seven layers. It is deliberately realistic, with roles, a status workflow, SLA deadlines and optimistic concurrency, because those are the places where real bugs hide. Along the way the layers found <b>11 real defects</b>, and each one now has a regression test."
+  tags={['TypeScript', 'Express 5', 'PostgreSQL 18', 'OpenAPI 3.0', 'Vitest', 'fast-check', 'Schemathesis', 'k6', 'OWASP ZAP', 'Docker', 'GitHub Actions']}
+  stats={[
+    { value: '131', label: 'automated tests · 98% line coverage', tone: 'accent' },
+    { value: '1,605', label: 'Schemathesis cases · 0 failures', tone: 'green' },
+    { value: '~8 ms', label: 'k6 p95 latency (budget 300 ms)', tone: 'fill' },
+    { value: '0', label: 'ZAP alerts rated Low or above' },
+    { value: '11', label: 'defects found and fixed', tone: 'accent' },
+  ]}
+>
+  <section class="band"><div class="wrap cs">
+    <h2><span class="n">01</span>What the API does</h2>
+    <ul class="facts">
+      <li><b>Roles</b><span>Requesters open tickets about their own problems; agents triage and resolve them.</span></li>
+      <li><b>Workflow</b><span><code>open → in_progress → waiting_on_customer → resolved → closed</code>, with role rules: a requester can cancel, reply, accept or reopen, never resolve.</span></li>
+      <li><b>SLA</b><span>Deadline from priority (urgent 4h, high 8h, normal 24h, low 72h), frozen at resolution.</span></li>
+      <li><b>Concurrency</b><span>ETags on every ticket; edits need <code>If-Match</code> (428 if missing, 412 if stale).</span></li>
+      <li><b>Privacy</b><span>Other people's tickets return <b>404, not 403</b>, so ticket ids cannot be probed; internal agent notes never reach requesters.</span></li>
+    </ul>
+  </div></section>
+
+  <section class="band"><div class="wrap cs">
+    <h2><span class="n">02</span>Seven quality layers</h2>
+    <ol class="layers">
+      {layers.map(([name, text, tools], i) => (
+        <li>
+          <span class="ln">{String(i + 1).padStart(2, '0')}</span>
+          <h3>{name}</h3>
+          <p set:html={text} />
+          <span class="badge">{tools}</span>
+        </li>
+      ))}
+    </ol>
+  </div></section>
+
+  <section class="band"><div class="wrap cs">
+    <h2><span class="n">03</span>Defects found, and which layer found them</h2>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>#</th><th>Defect</th><th>Found by</th><th>Fix</th></tr></thead>
+        <tbody>
+          {defects.map(([defect, by, fix], i) => (
+            <tr><td>{String(i + 1).padStart(2, '0')}</td><td set:html={defect} /><td><span class="badge">{by}</span></td><td set:html={fix} /></tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div></section>
+
+  <section class="band"><div class="wrap cs">
+    <h2><span class="n">04</span>The pipeline</h2>
+    <pre><code>{pipeline}</code></pre>
+    <p>Every job publishes its report as an artifact (JUnit, coverage, Schemathesis, k6 summary, ZAP HTML), and a weekly scheduled run catches dependency drift. The JUnit artifact feeds my other project, <a class="accent" href={`${import.meta.env.BASE_URL}projects/flaky-hunter/`}>flaky-hunter</a>, which flags flaky tests across CI runs.</p>
+  </div></section>
+
+  <section class="band"><div class="wrap cs">
+    <h2><span class="n">05</span>Design decisions I can walk you through</h2>
+    <ul class="facts">
+      <li><b>404 over 403</b><span>For other people's tickets: a 403 would confirm that the ticket exists.</span></li>
+      <li><b>Row locks + ETags</b><span><code>SELECT … FOR UPDATE</code> serialises transitions, and ETags protect edits across a person's read-think-write cycle.</span></li>
+      <li><b>Validation in tests</b><span>Response validation is on in tests and off in production: contract drift is caught where it is cheap, with no per-request cost in production.</span></li>
+      <li><b>Equal-time login</b><span>Unknown emails still run a bcrypt comparison, so timing does not reveal which accounts exist.</span></li>
+      <li><b>DB constraints</b><span>A bug in the API still cannot write an invalid status.</span></li>
+    </ul>
+  </div></section>
+</Case>

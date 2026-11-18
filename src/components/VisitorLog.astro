@@ -1,0 +1,70 @@
+---
+import { t, type Lang } from '../i18n';
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const d = t(lang);
+const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL ?? '';
+const supabaseKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY ?? '';
+---
+
+<section class="band" id="log">
+  <div class="wrap section log-wrap">
+    <header class="section-head" data-reveal>
+      <span class="section-num">05</span>
+      <h2 class="section-title" set:html={d.log.title} />
+      <p class="section-lead">{d.log.lead}</p>
+    </header>
+
+    <div
+      class="board reg dot-matrix"
+      data-reveal
+      data-log
+      data-url={supabaseUrl}
+      data-key={supabaseKey}
+      data-lang={lang}
+      data-msg-live={d.log.live}
+      data-msg-offline={d.log.offline}
+      data-msg-thanks={d.log.thanks}
+      data-msg-limit={d.log.limit}
+      data-msg-error={d.log.error}
+    >
+      <div class="board-head">
+        <span class="status" data-log-mode>{supabaseUrl ? d.log.live : d.log.offline}</span>
+        <span class="num">EM-LOG-01</span>
+      </div>
+      <div class="board-main">
+        <div class="counter">
+          <span class="label">{d.log.total}</span>
+          <output class="digits display" data-log-total aria-live="polite">0000000</output>
+        </div>
+        <div class="board-side">
+          <button class="btn btn-primary clock-in" type="button" data-log-btn>⏱ {d.log.button}</button>
+          <span class="meta">{d.log.yours}: <b class="c-white" data-log-mine>0</b> / 3</span>
+          <span class="meta msg" data-log-msg role="status"></span>
+        </div>
+      </div>
+      <div class="board-foot">
+        <div class="barcode" aria-hidden="true"></div>
+        <span class="meta" data-log-stamp>--</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { initVisitorLog } from '../scripts/visitor-log';
+  initVisitorLog();
+</script>
+
+<style>
+  .board { border: 1px solid var(--border); background-color: var(--surface); }
+  .board-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 18px 12px 32px; border-bottom: 1px solid var(--border); }
+  .board-main { display: grid; grid-template-columns: 1fr auto; gap: clamp(20px, 4vw, 56px); align-items: end; padding: clamp(20px, 3vw, 36px) clamp(18px, 3vw, 36px); }
+  .counter { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+  .digits { font-size: clamp(56px, 9vw, 150px); color: var(--white); letter-spacing: 0.02em; line-height: 0.85; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+  .board-side { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; min-width: 220px; }
+  .clock-in { font-size: 12px; padding: 14px 22px; }
+  .msg { min-height: 1.2em; color: var(--accent); }
+  .board-foot { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 18px; border-top: 1px dashed var(--border); }
+  @media (width <= 720px) { .board-main { grid-template-columns: 1fr; } .board-side { min-width: 0; } }
+</style>

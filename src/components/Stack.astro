@@ -1,0 +1,46 @@
+---
+import { t, type Lang } from '../i18n';
+import { STACK } from '../data/site';
+interface Props { lang: Lang }
+const d = t(Astro.props.lang);
+const groups = Object.entries(STACK) as [keyof typeof STACK, readonly string[]][];
+---
+
+<section class="band" id="stack">
+  <div class="wrap section">
+    <header class="section-head" data-reveal>
+      <span class="section-num">04</span>
+      <h2 class="section-title" set:html={d.stack.title} />
+      <p class="section-lead">{d.stack.lead}</p>
+    </header>
+
+    <div class="stack-grid">
+      {groups.map(([key, items], i) => (
+        <div class:list={['group', key === 'testing' && 'is-main']} data-reveal style={`--d:${i * 0.05}s`}>
+          <div class="group-head">
+            <span class="comment">{d.stack.groups[key]}</span>
+            <span class="num">{String(items.length).padStart(2, '0')}</span>
+          </div>
+          <ul>
+            {items.map((s) => <li>{s}</li>)}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .stack-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) repeat(2, minmax(0, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  .group { background: var(--surface); padding: 18px 20px 22px; min-width: 0; }
+  .group.is-main { grid-row: span 2; background: linear-gradient(180deg, var(--accent-soft), var(--surface) 55%); }
+  .group-head { display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 12px; margin-bottom: 12px; border-bottom: 1px solid var(--border); }
+  .group ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+  .group li { padding: 5px 9px; border: 1px solid var(--line); font-size: 13px; color: var(--text); transition: border-color 0.25s var(--ease), color 0.25s var(--ease); }
+  .group li:hover { border-color: var(--accent); color: var(--white); }
+  .group.is-main ul { flex-direction: column; flex-wrap: nowrap; gap: 0; }
+  .group.is-main li { border: 0; border-bottom: 1px dashed var(--border); padding: 9px 0; font-family: var(--f-display); font-weight: 700; font-size: clamp(18px, 0.6vw + 14px, 22px); text-transform: uppercase; letter-spacing: 0.01em; }
+  .group.is-main li:hover { color: var(--accent); }
+  @media (width <= 1024px) { .stack-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (width <= 560px) { .stack-grid { grid-template-columns: 1fr; } .group.is-main { grid-row: auto; } }
+</style>

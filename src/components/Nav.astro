@@ -1,0 +1,132 @@
+---
+import { t, url, home, LANGS, LANG_LABEL, LANG_NAME, type Lang } from '../i18n';
+import { LINKS } from '../data/site';
+
+interface Props { lang: Lang; alternates: Record<Lang, string>; isHome: boolean }
+const { lang, alternates, isHome } = Astro.props;
+const d = t(lang);
+const base = isHome ? '' : home(lang);
+const sections = [
+  { id: 'projects', label: d.nav.projects },
+  { id: 'experience', label: d.nav.experience },
+  { id: 'beyond', label: d.nav.beyond },
+  { id: 'stack', label: d.nav.stack },
+  { id: 'log', label: d.nav.log },
+  { id: 'contact', label: d.nav.contact },
+];
+const accents = [
+  { id: 'orange', name: 'Orange' },
+  { id: 'amber', name: 'Amber' },
+  { id: 'blue', name: 'Blue' },
+];
+---
+
+<div class="topbar" aria-hidden="true">
+  <div class="topbar-in">
+    <span><b class="accent">▶ EM-TERMINAL</b><span class="sep">·</span>v1.0<span class="sep">·</span><span data-clock>--:--:--</span> CET</span>
+    <span class="topbar-right"><span class="hide-sm">{d.topbar.location}</span><span class="status">{d.topbar.status}</span></span>
+  </div>
+</div>
+
+<header class="nav" data-nav>
+  <div class="nav-in">
+    <a class="brand" href={home(lang)} aria-label="Eduard Militaru, home">
+      <span class="logo">EM</span>
+      <span class="brand-text">
+        <span class="brand-name">Militaru</span>
+        <span class="brand-sub">QA · IT Support</span>
+      </span>
+    </a>
+
+    <nav class="nav-links" id="nav-links" aria-label="Sections">
+      <ol>
+        {sections.map((s, i) => (
+          <li><a href={`${base}#${s.id}`} data-section-link={s.id}><span class="n">{String(i + 1).padStart(2, '0')}</span>{s.label}</a></li>
+        ))}
+      </ol>
+      <div class="nav-controls">
+        <div class="accent-switch" role="group" aria-label={d.nav.accent}>
+          {accents.map((a) => (
+            <button type="button" class:list={['swatch', `sw-${a.id}`]} data-accent-set={a.id} aria-pressed={a.id === 'orange' ? 'true' : 'false'} title={a.name}>
+              <span class="sr-only">{a.name}</span>
+            </button>
+          ))}
+        </div>
+        <div class="lang-switch" role="group" aria-label={d.nav.language}>
+          {LANGS.map((l) => (
+            <a href={alternates[l]} hreflang={l} lang={l} aria-current={l === lang ? 'true' : undefined} title={LANG_NAME[l]} data-lang-link>{LANG_LABEL[l]}</a>
+          ))}
+        </div>
+        <a class="btn btn-primary nav-cv" href={url(LINKS.cv)} download>{d.nav.cv} ↓</a>
+      </div>
+    </nav>
+
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav-links" data-menu-btn data-open-label={d.nav.menu} data-close-label={d.nav.close}>
+      <span class="menu-bars" aria-hidden="true"><i></i><i></i></span>
+      <span class="sr-only" data-menu-label>{d.nav.menu}</span>
+    </button>
+  </div>
+</header>
+
+<style>
+  .topbar { border-bottom: 1px solid var(--border); font-family: var(--f-mono); font-size: 10.5px; letter-spacing: 0.08em; color: var(--muted); text-transform: uppercase; }
+  .topbar-in { max-width: var(--maxw); margin-inline: auto; padding: 0 var(--gutter); height: 30px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .topbar b { font-weight: 400; }
+  .sep { margin: 0 9px; color: var(--dim); }
+  .topbar-right { display: inline-flex; gap: 18px; align-items: center; }
+
+  .nav { position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--border); background: rgba(var(--bg-rgb), 0.82); backdrop-filter: blur(14px) saturate(140%); -webkit-backdrop-filter: blur(14px) saturate(140%); }
+  .nav-in { max-width: var(--maxw); margin-inline: auto; padding: 0 var(--gutter); height: var(--nav-h); display: flex; align-items: center; gap: 20px; }
+  .brand { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+  .logo { display: grid; place-items: center; width: 30px; height: 30px; background: var(--accent); color: var(--accent-ink); font-family: var(--f-display); font-weight: 900; font-size: 14px; letter-spacing: 0.02em; transition: background 0.3s var(--ease); }
+  .brand-text { display: flex; flex-direction: column; line-height: 1; gap: 3px; }
+  .brand-name { font-family: var(--f-display); font-weight: 900; font-size: 19px; text-transform: uppercase; letter-spacing: 0.02em; color: var(--white); }
+  .brand-sub { font-family: var(--f-mono); font-size: 9px; letter-spacing: var(--track); color: var(--muted); text-transform: uppercase; }
+
+  .nav-links { flex: 1; display: flex; align-items: center; justify-content: space-between; gap: 16px; min-width: 0; }
+  .nav-links ol { list-style: none; margin: 0 auto; padding: 0; display: flex; gap: clamp(10px, 1.6vw, 26px); }
+  .nav-links ol a { display: inline-flex; align-items: baseline; gap: 6px; padding: 6px 0; font-size: 12.5px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--sub); position: relative; transition: color 0.25s var(--ease); white-space: nowrap; }
+  .nav-links ol a .n { font-family: var(--f-mono); font-size: 9px; color: var(--dim); transition: color 0.25s var(--ease); }
+  .nav-links ol a::after { content: ''; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform 0.4s var(--ease); }
+  .nav-links ol a:hover, .nav-links ol a.is-current { color: var(--white); }
+  .nav-links ol a:hover .n, .nav-links ol a.is-current .n { color: var(--accent); }
+  .nav-links ol a:hover::after, .nav-links ol a.is-current::after { transform: scaleX(1); }
+
+  .nav-controls { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+  .accent-switch { display: flex; gap: 5px; padding: 5px; border: 1px solid var(--border); }
+  .swatch { width: 14px; height: 14px; border: 0; padding: 0; cursor: pointer; position: relative; transition: transform 0.25s var(--ease-pop); }
+  .swatch:hover { transform: scale(1.15); }
+  .sw-orange { background: var(--orange); } .sw-amber { background: var(--amber); } .sw-blue { background: var(--blue); }
+  .swatch[aria-pressed='true']::after { content: ''; position: absolute; inset: -4px; border: 1px solid var(--white); }
+  .lang-switch { display: flex; border: 1px solid var(--border); }
+  .lang-switch a { padding: 6px 8px; font-family: var(--f-mono); font-size: 10.5px; letter-spacing: 0.1em; color: var(--muted); transition: color 0.2s, background 0.2s; }
+  .lang-switch a + a { border-left: 1px solid var(--border); }
+  .lang-switch a:hover { color: var(--white); }
+  .lang-switch a[aria-current='true'] { color: var(--accent-ink); background: var(--accent); }
+  .nav-cv { min-height: 32px; padding: 6px 12px; }
+
+  .menu-btn { display: none; margin-left: auto; width: 42px; height: 42px; border: 1px solid var(--border); background: var(--panel); cursor: pointer; place-items: center; }
+  .menu-bars { display: grid; gap: 6px; width: 18px; }
+  .menu-bars i { display: block; height: 1.5px; background: var(--white); transition: transform 0.35s var(--ease); }
+  .menu-btn[aria-expanded='true'] .menu-bars i:first-child { transform: translateY(3.75px) rotate(45deg); }
+  .menu-btn[aria-expanded='true'] .menu-bars i:last-child { transform: translateY(-3.75px) rotate(-45deg); }
+
+  @media (width <= 1120px) { .brand-text { display: none; } }
+  @media (width <= 960px) {
+    .menu-btn { display: grid; }
+    .nav-links {
+      position: absolute; top: 100%; left: 0; right: 0; max-height: calc(100dvh - var(--nav-h)); overflow-y: auto;
+      flex-direction: column; align-items: stretch; gap: 0; padding: 8px var(--gutter) 24px;
+      background: rgba(var(--bg-rgb), 0.97); backdrop-filter: blur(14px); border-bottom: 1px solid var(--border);
+      opacity: 0; visibility: hidden; transform: translateY(-8px); transition: opacity 0.35s var(--ease), transform 0.35s var(--ease), visibility 0.35s;
+    }
+    .nav.is-open .nav-links { opacity: 1; visibility: visible; transform: none; }
+    .nav-links ol { flex-direction: column; gap: 0; margin: 0; }
+    .nav-links ol a { display: flex; padding: 14px 0; border-bottom: 1px solid var(--border); font-family: var(--f-display); font-weight: 900; font-size: 30px; letter-spacing: 0.01em; color: var(--white); }
+    .nav-links ol a .n { font-size: 11px; }
+    .nav-links ol a::after { display: none; }
+    .nav-controls { padding-top: 18px; flex-wrap: wrap; }
+    .brand-text { display: flex; }
+  }
+  @media (width <= 520px) { .hide-sm { display: none; } }
+</style>

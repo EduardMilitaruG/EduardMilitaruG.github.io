@@ -1,0 +1,68 @@
+---
+import { t, type Lang } from '../i18n';
+import { HOBBIES } from '../data/site';
+interface Props { lang: Lang }
+const d = t(Astro.props.lang);
+
+/* Each hobby gets a small CSS/SVG motif until real photos and videos arrive. */
+const motifs: Record<(typeof HOBBIES)[number], string> = {
+  chess: `<svg viewBox="0 0 80 80" aria-hidden="true">${Array.from({ length: 16 }, (_, k) => {
+    const x = (k % 4) * 20, y = Math.floor(k / 4) * 20;
+    return (k + Math.floor(k / 4)) % 2 ? `<rect x="${x}" y="${y}" width="20" height="20" fill="currentColor"/>` : '';
+  }).join('')}</svg>`,
+  art: `<svg viewBox="0 0 80 80" aria-hidden="true"><circle cx="30" cy="34" r="20" fill="none" stroke="currentColor" stroke-width="2"/><rect x="36" y="30" width="32" height="32" fill="currentColor" opacity=".55"/><path d="M8 72 L40 18 L72 72 Z" fill="none" stroke="currentColor" stroke-width="1"/></svg>`,
+  cars: `<svg viewBox="0 0 80 80" aria-hidden="true"><circle cx="40" cy="40" r="30" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="40" cy="40" r="6" fill="currentColor"/>${Array.from({ length: 9 }, (_, k) => {
+    const a = (-210 + k * 30) * Math.PI / 180;
+    return `<line x1="${40 + 22 * Math.cos(a)}" y1="${40 + 22 * Math.sin(a)}" x2="${40 + 28 * Math.cos(a)}" y2="${40 + 28 * Math.sin(a)}" stroke="currentColor" stroke-width="2"/>`;
+  }).join('')}<line x1="40" y1="40" x2="62" y2="26" stroke="currentColor" stroke-width="3"/></svg>`,
+  gym: `<svg viewBox="0 0 80 80" aria-hidden="true"><rect x="6" y="28" width="8" height="24" fill="currentColor"/><rect x="16" y="22" width="8" height="36" fill="currentColor"/><rect x="24" y="38" width="32" height="4" fill="currentColor"/><rect x="56" y="22" width="8" height="36" fill="currentColor"/><rect x="66" y="28" width="8" height="24" fill="currentColor"/></svg>`,
+  hardware: `<svg viewBox="0 0 80 80" aria-hidden="true"><rect x="22" y="22" width="36" height="36" fill="none" stroke="currentColor" stroke-width="2"/><rect x="32" y="32" width="16" height="16" fill="currentColor"/>${[28, 36, 44, 52].map((p) => `<line x1="${p}" y1="10" x2="${p}" y2="22" stroke="currentColor" stroke-width="2"/><line x1="${p}" y1="58" x2="${p}" y2="70" stroke="currentColor" stroke-width="2"/><line x1="10" y1="${p}" x2="22" y2="${p}" stroke="currentColor" stroke-width="2"/><line x1="58" y1="${p}" x2="70" y2="${p}" stroke="currentColor" stroke-width="2"/>`).join('')}</svg>`,
+  house: `<svg viewBox="0 0 80 80" aria-hidden="true">${[14, 22, 34, 18, 28, 40, 24, 32, 16, 26].map((h, k) => `<rect class="eq" style="--i:${k}" x="${4 + k * 7.4}" y="${60 - h}" width="5" height="${h}" fill="currentColor"/>`).join('')}<rect x="4" y="64" width="72" height="2" fill="currentColor" opacity=".4"/></svg>`,
+};
+---
+
+<section class="band" id="beyond">
+  <div class="wrap section">
+    <header class="section-head" data-reveal>
+      <span class="section-num">03</span>
+      <h2 class="section-title" set:html={d.beyond.title} />
+      <p class="section-lead">{d.beyond.lead}</p>
+    </header>
+
+    <ul class="tiles">
+      {HOBBIES.map((h, i) => (
+        <li class="tile" data-reveal style={`--d:${(i % 3) * 0.06}s`}>
+          <div class="tile-media cross-matrix">
+            <span class="corner tl">+</span><span class="corner tr">+</span><span class="corner bl">+</span><span class="corner br">+</span>
+            <div class="motif" set:html={motifs[h]} />
+            <span class="pending meta">// {d.beyond.pending}</span>
+          </div>
+          <div class="tile-body">
+            <span class="num">{String(i + 1).padStart(2, '0')}</span>
+            <h3 class="tile-name display">{d.beyond.items[h].name}</h3>
+            <p class="tile-line">{d.beyond.items[h].line}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .tiles { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  .tile { background: var(--surface); display: flex; flex-direction: column; min-width: 0; }
+  .tile-media { position: relative; aspect-ratio: 4 / 3; display: grid; place-items: center; border-bottom: 1px solid var(--border); overflow: hidden; }
+  .corner { position: absolute; font-family: var(--f-mono); font-size: 12px; color: var(--dim); line-height: 1; }
+  .corner.tl { top: 8px; left: 10px; } .corner.tr { top: 8px; right: 10px; } .corner.bl { bottom: 8px; left: 10px; } .corner.br { bottom: 8px; right: 10px; }
+  .motif { width: clamp(64px, 7vw, 96px); color: var(--line); transition: color 0.5s var(--ease), transform 0.8s var(--ease); }
+  .tile:hover .motif { color: var(--accent); transform: scale(1.08) rotate(-2deg); }
+  .motif :global(.eq) { transform-box: fill-box; transform-origin: bottom; }
+  .tile:hover .motif :global(.eq) { animation: eq 0.9s var(--ease) infinite alternate; animation-delay: calc(var(--i) * -0.13s); }
+  @keyframes eq { from { transform: scaleY(0.35); } to { transform: scaleY(1); } }
+  .pending { position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); font-size: 9px; letter-spacing: var(--track); text-transform: uppercase; color: var(--dim); white-space: nowrap; }
+  .tile-body { padding: 16px 18px 20px; }
+  .tile-name { margin: 6px 0 6px; font-size: clamp(24px, 1.4vw + 14px, 32px); color: var(--white); }
+  .tile-line { margin: 0; color: var(--sub); font-size: 14px; }
+  @media (width <= 960px) { .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (width <= 480px) { .tiles { grid-template-columns: 1fr; } .tile-media { aspect-ratio: 16 / 9; } }
+</style>

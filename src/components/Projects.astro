@@ -1,0 +1,105 @@
+---
+import { Image } from 'astro:assets';
+import { t, url, type Lang } from '../i18n';
+import { PROJECTS, ALSO } from '../data/site';
+interface Props { lang: Lang }
+const d = t(Astro.props.lang);
+const linkLabel = { github: d.projects.github, case: d.projects.case, demo: d.projects.demo };
+const linkIcon = { github: '↗', case: '→', demo: '↗' };
+---
+
+<section class="band" id="projects">
+  <div class="wrap section">
+    <header class="section-head" data-reveal>
+      <span class="section-num">01</span>
+      <h2 class="section-title" set:html={d.projects.title} />
+      <p class="section-lead">{d.projects.lead}</p>
+    </header>
+
+    <div class="grid">
+      {PROJECTS.map((p, i) => {
+        const txt = d.projects.items[p.slug];
+        const primary = p.links[0];
+        return (
+          <article class="card" data-reveal style={`--d:${(i % 2) * 0.08}s`}>
+            <a class="media ticks" href={primary.internal ? url(primary.href) : primary.href} target={primary.internal ? undefined : '_blank'} rel={primary.internal ? undefined : 'noopener'} tabindex="-1" aria-hidden="true">
+              <span class="tick tl"></span><span class="tick tr"></span><span class="tick bl"></span><span class="tick br"></span>
+              <Image src={p.image} alt="" widths={[480, 760, 1100]} sizes="(width <= 900px) 100vw, 50vw" quality={78} />
+              <span class="media-stat"><b class="display">{p.stat.value}</b><span class="label">{p.stat.label}</span></span>
+            </a>
+            <div class="body">
+              <div class="card-top">
+                <span class="num">{String(i + 1).padStart(2, '0')} / {String(PROJECTS.length).padStart(2, '0')}</span>
+                <span class="comment">{txt.category}</span>
+              </div>
+              <h3 class="card-title display">{p.title}</h3>
+              <p class="desc">{txt.desc}</p>
+              <ul class="tags" aria-label="Tech">
+                {p.tags.map((tag) => <li class="badge">{tag}</li>)}
+              </ul>
+              <div class="links">
+                {p.links.map((l, j) => (
+                  <a class:list={['btn', j === 0 ? 'btn-primary' : 'btn-ghost']} href={l.internal ? url(l.href) : l.href} target={l.internal ? undefined : '_blank'} rel={l.internal ? undefined : 'noopener'}>
+                    {linkLabel[l.kind]} {linkIcon[l.kind]}
+                    <span class="sr-only">: {p.title}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+
+    <div class="also" data-reveal>
+      <span class="label">{d.projects.alsoTitle}</span>
+      <ul>
+        {ALSO.map((a, i) => (
+          <li>
+            <a href={a.href} target="_blank" rel="noopener">
+              <span class="num">{String(i + 5).padStart(2, '0')}</span>
+              <span class="also-title">{a.title}</span>
+              <span class="also-desc">{d.projects.also[a.key]}</span>
+              <span class="also-go" aria-hidden="true">↗</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  .card { display: flex; flex-direction: column; background: var(--surface); min-width: 0; transition: background 0.4s var(--ease); }
+  .card:hover { background: #121212; }
+  .media { position: relative; display: block; aspect-ratio: 16 / 10; overflow: hidden; border-bottom: 1px solid var(--border); background: var(--panel); }
+  .media :global(img) { width: 100%; height: 100%; object-fit: cover; object-position: top left; filter: saturate(0.85) brightness(0.85); transform: scale(1.001); transition: transform 1.1s var(--ease), filter 0.6s var(--ease); }
+  .card:hover .media :global(img) { transform: scale(1.04); filter: none; }
+  .media .tick { opacity: 0; transition: opacity 0.4s var(--ease); }
+  .card:hover .media .tick { opacity: 1; }
+  .media-stat { position: absolute; left: 0; bottom: 0; display: flex; align-items: baseline; gap: 8px; padding: 8px 14px; background: var(--accent); color: var(--accent-ink); }
+  .media-stat b { font-size: 26px; line-height: 1; }
+  .media-stat .label { color: inherit; opacity: 0.75; }
+
+  .body { display: flex; flex-direction: column; flex: 1; padding: clamp(18px, 2.2vw, 30px); }
+  .card-top { display: flex; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
+  .card-title { margin: 0 0 12px; font-size: var(--t-h3); color: var(--white); }
+  .desc { margin: 0 0 18px; color: var(--sub); font-size: 14.5px; text-wrap: pretty; }
+  .tags { list-style: none; margin: 0 0 20px; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+  .links { margin-top: auto; display: flex; flex-wrap: wrap; gap: 8px; }
+
+  .also { margin-top: clamp(28px, 4vw, 48px); }
+  .also ul { list-style: none; margin: 12px 0 0; padding: 0; border-top: 1px solid var(--border); }
+  .also a { display: grid; grid-template-columns: 34px minmax(140px, 0.6fr) 1.4fr 20px; gap: 14px; align-items: baseline; padding: 14px 4px; border-bottom: 1px solid var(--border); transition: background 0.3s var(--ease), padding 0.3s var(--ease); }
+  .also a:hover { background: var(--hover); padding-left: 12px; }
+  .also-title { font-family: var(--f-display); font-weight: 900; font-size: 22px; text-transform: uppercase; color: var(--white); line-height: 1; }
+  .also-desc { color: var(--sub); font-size: 13.5px; }
+  .also-go { color: var(--accent); justify-self: end; }
+
+  @media (width <= 900px) { .grid { grid-template-columns: 1fr; } }
+  @media (width <= 640px) {
+    .also a { grid-template-columns: 28px 1fr 18px; }
+    .also-desc { grid-column: 2 / 3; grid-row: 2; }
+  }
+</style>

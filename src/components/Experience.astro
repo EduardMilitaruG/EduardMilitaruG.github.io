@@ -1,0 +1,77 @@
+---
+import { t, type Lang } from '../i18n';
+interface Props { lang: Lang }
+const d = t(Astro.props.lang);
+---
+
+<section class="band" id="experience">
+  <div class="wrap section">
+    <header class="section-head" data-reveal>
+      <span class="section-num">02</span>
+      <h2 class="section-title" set:html={d.experience.title} />
+      <p class="section-lead">{d.experience.lead}</p>
+    </header>
+
+    <ol class="timeline">
+      {d.experience.items.map((job, i) => (
+        <li class:list={['job', i === 0 && 'is-first']} data-reveal>
+          <div class="job-when">
+            <span class="dot" aria-hidden="true"></span>
+            <span class="mono dates">{job.dates}</span>
+          </div>
+          <div class="job-body">
+            <h3 class="job-role">{job.role}</h3>
+            <p class="job-org label">{job.org}</p>
+            <ul class="job-points">
+              {job.bullets.map((b) => <li>{b}</li>)}
+            </ul>
+          </div>
+        </li>
+      ))}
+    </ol>
+
+    <div class="edu" data-reveal>
+      <span class="comment">{d.experience.eduTitle}</span>
+      <div class="edu-grid">
+        {d.experience.edu.map((e) => (
+          <div class="ticket">
+            <div class="ticket-main">
+              <span class="label">{e.full}</span>
+            </div>
+            <div class="ticket-stub"><span class="display edu-code">{e.name}</span></div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .timeline { list-style: none; margin: 0; padding: 0; position: relative; }
+  .timeline::before { content: ''; position: absolute; left: 5px; top: 8px; bottom: 8px; width: 1px; background: linear-gradient(var(--accent), var(--border) 30%); }
+  .job { display: grid; grid-template-columns: minmax(180px, 0.32fr) 1fr; gap: clamp(12px, 3vw, 48px); padding: clamp(18px, 2.4vw, 28px) 0 clamp(18px, 2.4vw, 28px) 28px; border-bottom: 1px solid var(--border); position: relative; }
+  .job:last-child { border-bottom: 0; }
+  .job-when { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+  .dot { position: absolute; left: 0; top: calc(clamp(18px, 2.4vw, 28px) + 5px); width: 11px; height: 11px; border: 1px solid var(--line); background: var(--bg); transition: background 0.3s, border-color 0.3s; }
+  .job.is-first .dot, .job:hover .dot { background: var(--accent); border-color: var(--accent); }
+  .dates { font-size: 12px; color: var(--sub); letter-spacing: 0.06em; }
+  .job-role { margin: 0 0 6px; font-size: clamp(18px, 0.9vw + 13px, 24px); font-weight: 600; color: var(--white); line-height: 1.25; }
+  .job-org { margin: 0 0 12px; color: var(--accent); }
+  .job-points { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+  .job-points li { position: relative; padding-left: 18px; color: var(--sub); font-size: 14.5px; }
+  .job-points li::before { content: '→'; position: absolute; left: 0; color: var(--dim); font-family: var(--f-mono); }
+
+  .edu { margin-top: clamp(32px, 4vw, 56px); }
+  .edu-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 14px; }
+  .ticket { display: grid; grid-template-columns: 1fr auto; border: 1px solid var(--border); background: var(--surface); }
+  .ticket-main { padding: 18px; display: flex; align-items: center; }
+  .ticket-main .label { color: var(--text); font-size: 11px; line-height: 1.6; }
+  .ticket-stub { padding: 14px 22px; border-left: 2px dashed var(--border); display: grid; place-items: center; }
+  .edu-code { font-size: clamp(34px, 2vw + 20px, 48px); color: var(--accent); }
+
+  @media (width <= 720px) {
+    .job { grid-template-columns: 1fr; }
+    .job-when { flex-direction: row; flex-wrap: wrap; align-items: center; }
+    .edu-grid { grid-template-columns: 1fr; }
+  }
+</style>
